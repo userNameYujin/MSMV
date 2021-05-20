@@ -10,6 +10,10 @@ passportConfig();
 const MySQLStore = require('express-mysql-session')(session);
 dotenv.config();
 
+const joinRouter = require('./routes/join');
+const authRouter = require('./routes/auth');
+
+
 const options ={
   host: process.env.DB_HOST,
   port: process.env.DB_PORT,
@@ -38,7 +42,8 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-
+app.use('/auth',authRouter);
+app.use('/join',joinRouter);
 
 
 app.use((req, res, next) => {
