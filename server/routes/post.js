@@ -16,7 +16,7 @@ router.post('/review/write', async(req,res,next)=> {
       next(error);
     }
     
-    db.query(`select * from table where movieCd = ?`, [movieCd],
+    db.query(`select * from review where movieCd = ?`, [movieCd],
        (err, result) => {
        console.log(result);
        res.status(200),send({code: 200, result: result})
