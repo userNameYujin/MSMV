@@ -5,7 +5,7 @@ const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const app = express();
 const passport = require('passport');
-const passportConfig = require('./lib/passport');
+const passportConfig = require('./passport');
 passportConfig();
 const MySQLStore = require('express-mysql-session')(session);
 dotenv.config();
@@ -18,7 +18,7 @@ const options ={
   host: process.env.DB_HOST,
   port: process.env.DB_PORT,
   user: process.env.DB_USERNAME,
-  password: process.env.DB_DATABASE,
+  password: process.env.DB_PASSWORD,
   database: process.env.DB_DATABASE
 }
 const sessionStore = new MySQLStore(options);
