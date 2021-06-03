@@ -9,17 +9,27 @@ router.post('/review/write', async(req,res,next)=> {
   const rate = req.body.rate;
   const movieCd = req.body.movieCd;
 
-  await db.query(`INSERT into review(contents, commenter, rate, movieCd) values (?, ?, ?, ?)`, [
+  await db.query('INSERT INTO review(contents, commenter, rate, movieCd) values (?, ?, ?, ?)', [
     contents, commenter, rate, movieCd
   ], (error, result) =>{
     if(error) {
       next(error);
     }
     
-    db.query(`select * from table where movieCd = ?`, [movieCd],
+    db.query('SELECT * FROM review WHERE movieCd = ?', [movieCd],
        (err, result) => {
        console.log(result);
-       res.status(200),send({code: 200, result: result})
+       res.status(200),send({code: 200, result: result}) // 201 vs 200?
       });
   });
 })
+
+router.post('/', function(req, res){
+  db.query('select contents, created, updated, rate, nickname from review left join users on review.commenter = users.user_id WHERE movieCd = ?'), [movieCd],
+  (err, result)=>{
+    console.log(result);
+    res.status(200), send({code:200, result:result})
+  }
+})
+
+module.exports = router;
