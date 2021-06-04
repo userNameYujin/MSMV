@@ -1,17 +1,34 @@
-import React from 'react';
-import {Link} from 'react-router-dom';
+import axios from 'axios';
+import React, { useState } from 'react';
+import { useHistory } from 'react-router';
+import store from '../store';
+import LoginPresenter from './LoginPresenter';
 
-class Login extends React.Component {
-  render () {
-    return (
-      <div>
-        <input placeholder="id"></input>
-        <input placeholder="pw"></input>
-        <button>Login</button>
-        <Link to ="join"><button>Join</button></Link>
-      </div>
-    )
-  }
-}
+const LoginContainer = () => {
+  const [id, setId] = useState();
+  const [password, setPassword] = useState();
+  const props = { id, password };
+  const history = useHistory();
 
-export default Login;
+  const onChange = (e) => {
+    const elementId = e.target.id;
+    const { value } = e.target;
+    if (elementId === 'id') setId(value);
+    else if (elementId === 'password') setPassword(value);
+  };
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    await axios
+      .post(`${process.env.REACT_APP_SERVER_URL}auth/login`, { id, password })
+      .then((response) => {
+        store.dispatch({ type: 'LOGIN', user: response.data.data });
+        history.push({ pathname: '/' });
+      })
+      .catch((error) => window.alert(error.response.data.message));
+  };
+
+  return <LoginPresenter onChange={onChange} {...props} onSubmit={onSubmit} />;
+};
+
+export default LoginContainer;
