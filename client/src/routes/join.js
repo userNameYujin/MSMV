@@ -96,7 +96,7 @@ const JoinContainer = () => {
 
   const requestJoin = async () => {
     await axios
-      .post(`${process.env.REACT_APP_SERVER_URL}/join`, { id, password, nickname })
+      .post(`${process.env.REACT_APP_SERVER_URL}join`, { id, password, nickname })
       .then(async (response) => {
         await store.dispatch({ type: 'LOGIN', user: response.data.dataValues });
         window.alert('정상적으로 회원가입 되었습니다!');
