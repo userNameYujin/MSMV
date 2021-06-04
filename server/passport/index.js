@@ -7,14 +7,14 @@ module.exports = () =>{
         done(null, user.id);
       });
     
-      passport.deserializeUser(function (id, done) {
-        db.query('SELECT id, user_id, nickname FROM users WHERE id=?', [id], function (err, result) {
-          if (err) {
-            throw err;
-          }
-          done(null, result[0]);
-        });
+    passport.deserializeUser(function (id, done) {
+      db.query('SELECT id, user_id, nickname FROM users WHERE id=?', [id], function (err, result) {
+        if (err) {
+          throw err;
+        }
+        done(null, result[0]);
       });
+    });
     
-      local();
+    local();
 }
