@@ -27,9 +27,21 @@ router.post('/review/write', async(req,res,next)=> {
 router.post('/', function(req, res){
   db.query('select contents, created, updated, rate, nickname from review left join users on review.commenter = users.user_id WHERE movieCd = ?'), [movieCd],
   (err, result)=>{
+    if(error){
+      next(error);
+    }
     console.log(result);
     res.status(200), send({code:200, result:result})
   }
+})
+
+router.post('/review/modify', (req, res, next) => {
+
+}) //modify? update?
+
+
+router.get('/review/delete', (req, res, next) => {
+  
 })
 
 module.exports = router;
