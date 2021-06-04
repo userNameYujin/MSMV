@@ -44,4 +44,6 @@ router.get('/review/delete', (req, res, next) => {
   
 })
 
+//todaymovie / moviecount테이블
+
 module.exports = router;
