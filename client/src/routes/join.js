@@ -10,6 +10,8 @@ const JoinContainer = () => {
   const [password, setPassword] = useState();
   const [passwordCheck, setPasswordCheck] = useState();
 
+  let errcode = 0; // 
+
   const history = useHistory();
 
   const props = { id, nickname, password, passwordCheck };
@@ -25,15 +27,25 @@ const JoinContainer = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-
+    errcode = 0;
     //비밀번호 일치 여부 확인
     if (!isPasswordSame()) return window.alert('비밀번호가 서로 같지 않습니다.');
 
     //id 중복확인
-    await isIdAvailable();
+    errcode = await isIdAvailable();
+    switch (errcode) { 
+      case 200 : break;
+      case 400 : return window.alert('이미 사용중인 아이디입니다.');
+      default : return window.alert('아이디: 오류가 발생하였습니다.');
+    }
 
     //nickname 중복확인
-    await isNicknameAvailable();
+    errcode = await (isNicknameAvailable());
+    switch (errcode) { 
+      case (200) : break;
+      case (400) : return window.alert('이미 사용중인 닉네임입니다.');
+      default : return window.alert('닉네임: 오류가 발생하였습니다.');
+    }
 
     //회원가입 요청
     await requestJoin();
@@ -44,33 +56,42 @@ const JoinContainer = () => {
   };
 
   const isIdAvailable = async () => {
+    let errcode;
     await axios
       .post(`${process.env.REACT_APP_SERVER_URL}join/id`, { id })
       .then((response) => {
         // 정상
-        if (response.data.code === 200) return 1;
+        if (response.data.code === 200)
+          errcode = 200;
       })
       .catch((err) => {
         // 중복
-        if (err.response.data.code === 400) return window.alert('이미 사용중인 아이디입니다.');
-        //오류
-        else return window.alert('오류가 발생하였습니다.');
+        if (err.response.data.code === 400)
+          errcode = 400;
+        else
+          errcode = 0;
       });
+      return errcode;
   };
 
   const isNicknameAvailable = async () => {
+    let errcode;
     await axios
       .post(`${process.env.REACT_APP_SERVER_URL}join/nick`, { nickname })
       .then((response) => {
         // 정상
-        if (response.data.code === 200) return 1;
+        if (response.data.code === 200)
+          errcode = 200;
       })
       .catch((err) => {
         // 중복
-        if (err.response.data.code === 400) return window.alert('이미 사용중인 닉네임입니다.');
+        if (err.response.data.code === 400)
+          errcode = 400;
         //오류
-        else return window.alert('오류가 발생하였습니다.');
+        else 
+          errcode = 0;
       });
+      return errcode;
   };
 
   const requestJoin = async () => {
