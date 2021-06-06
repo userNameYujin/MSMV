@@ -37,7 +37,6 @@ router.post('/', function(req, res){
 })
 
 
-
 router.post('/review/update', async(req, res, next) => {
   console.log("Update review");
   const id = req.body.id;
