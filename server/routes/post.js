@@ -36,6 +36,7 @@ router.post('/', function(req, res){
   }
 })
 
+
 router.post('/review/update', async(req, res, next) => {
   console.log("Update review");
   const id = req.body.id;
@@ -78,6 +79,15 @@ router.get('/detail', function(req, res, next){
   });
 })
 
-//자정에 todaymovie로 테이블 복사 후 moviecount테이블초기화
+//자정에 todaymovie로 테이블 복사 후 moviecount테이블초기화 -> mysql 내 이벤트 스케쥴러 COPYmoviecount
 //main에 todaymovie 출력
+get('/', function(req, res){
+  db.query('SELECT * FROM todaymovie ORDER BY count DESC LIMIT 10', function(error, movierank){
+    if(error){
+      throw(error);
+    }
+    
+    console.log(movierank);
+  })
+})
 module.exports = router;
