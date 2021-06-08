@@ -55,8 +55,8 @@ router.get('/review/delete', (req, res, next) => {
 
 //detail 페이지 링크?
 //moviecount테이블
-router.get('/detail', function(req, res, next){
-  const movieCd = req.params; //아니면 req.body.movieCd??
+get('/:movieCd', function(req, res, next){
+  const movieCd = req.params.movieCd;
   db.query('SELECT movieCd FROM moviecount', function(error, results){
     if(error){
       throw(error);
@@ -77,7 +77,7 @@ router.get('/detail', function(req, res, next){
         }
       })
     }
-  });
+  })
 })
 
 //자정에 todaymovie로 테이블 복사 후 moviecount테이블초기화 -> mysql 내 이벤트 스케쥴러 COPYmoviecount
