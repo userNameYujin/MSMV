@@ -52,8 +52,6 @@ router.get('/review/delete', (req, res, next) => {
   db.query('DELETE FROM review WHERE id = ?', [id]);
 })
 
-
-//detail 페이지 링크?
 //moviecount테이블
 get('/:movieCd', function(req, res, next){
   const movieCd = req.params.movieCd;
