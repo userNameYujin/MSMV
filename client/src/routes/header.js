@@ -15,7 +15,14 @@ const HeaderContainer = () => {
       .catch((error) => console.error(error));
   };
 
-  return <HeaderPresenter user={user} onLogoutClick={onLogoutClick} />;
+  
+
+  const onSearch = (e) => {
+    console.log(e.target.value);
+
+  }
+
+  return <HeaderPresenter user={user} onLogoutClick={onLogoutClick} onSearch={onSearch}/>;
 };
 
 export default HeaderContainer;

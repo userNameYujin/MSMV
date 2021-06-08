@@ -4,6 +4,7 @@ import MainPage from './routes/home';
 import Login from './routes/login';
 import Join from './routes/join';
 import Header from './routes/header';
+import Search from './routes/Search';
 
 import { HashRouter as Router, Route } from 'react-router-dom'; 
 import store from "./store";
@@ -43,6 +44,9 @@ function App() {
           </Route>
           <Route exact path="/join">
             <Join />
+          </Route>
+          <Route exact path="/Search">
+            <Search />
           </Route>
         </Router>
       )}

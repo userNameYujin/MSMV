@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import SearchContainer from './SearchContainer';
 
 const Header = styled.header`
   height: 120px;
@@ -56,7 +57,9 @@ const Titlediv = styled.div`
   align-items: center;
 `;
 
-const HeaderPresenter = ({ user, onLogoutClick }) => {
+
+
+const HeaderPresenter = ({ user, onLogoutClick, onSearch }) => {
   return (
     <Header>
       <Titlediv>
@@ -75,6 +78,7 @@ const HeaderPresenter = ({ user, onLogoutClick }) => {
             <StyledLink to="join">회원가입</StyledLink>
           </>
         )}
+        <SearchContainer onSearch={onSearch}/>
       </Menu>
     </Header>
   );
