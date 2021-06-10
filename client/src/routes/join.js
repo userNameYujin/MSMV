@@ -58,7 +58,7 @@ const JoinContainer = () => {
   const isIdAvailable = async () => {
     let errcode;
     await axios
-      .post(`${process.env.REACT_APP_SERVER_URL}join/id`, { id })
+      .post(`${process.env.REACT_APP_SERVER_URL}/join/id`, { id })
       .then((response) => {
         // 정상
         if (response.data.code === 200)
@@ -77,7 +77,7 @@ const JoinContainer = () => {
   const isNicknameAvailable = async () => {
     let errcode;
     await axios
-      .post(`${process.env.REACT_APP_SERVER_URL}join/nick`, { nickname })
+      .post(`${process.env.REACT_APP_SERVER_URL}/join/nick`, { nickname })
       .then((response) => {
         // 정상
         if (response.data.code === 200)
@@ -96,7 +96,7 @@ const JoinContainer = () => {
 
   const requestJoin = async () => {
     await axios
-      .post(`${process.env.REACT_APP_SERVER_URL}join`, { id, password, nickname })
+      .post(`${process.env.REACT_APP_SERVER_URL}/join`, { id, password, nickname })
       .then(async (response) => {
         await store.dispatch({ type: 'LOGIN', user: response.data.dataValues });
         window.alert('정상적으로 회원가입 되었습니다!');
