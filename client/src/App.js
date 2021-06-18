@@ -5,6 +5,7 @@ import Login from './routes/login';
 import Join from './routes/join';
 import Header from './routes/header';
 import Search from './routes/Search';
+import cors from 'cors';
 
 import { HashRouter as Router, Route } from 'react-router-dom'; 
 import store from "./store";
@@ -26,6 +27,7 @@ function App() {
         setIsLoginChecked(true);
       });
   };
+
 
   useEffect(() => {
     loginCheck();
