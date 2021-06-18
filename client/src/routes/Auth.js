@@ -4,7 +4,7 @@ import { useHistory } from 'react-router';
 import store from '../store';
 import LoginPresenter from './LoginPresenter';
 
-const LoginContainer = () => {
+const Auth = () => {
   const [id, setId] = useState();
   const [password, setPassword] = useState();
   const props = { id, password };
@@ -22,7 +22,8 @@ const LoginContainer = () => {
     await axios
       .post(`${process.env.REACT_APP_SERVER_URL}/auth/login`, { id, password })
       .then((response) => {
-        store.dispatch({ type: 'LOGIN', user: response.data.data });
+        console.log(response);
+        store.dispatch({ type: 'LOGIN', user: response.data.result });
         history.push({ pathname: '/' });
       })
       .catch((error) => window.alert(error.response.data.message));
@@ -31,4 +32,4 @@ const LoginContainer = () => {
   return <LoginPresenter onChange={onChange} {...props} onSubmit={onSubmit} />;
 };
 
-export default LoginContainer;
+export default Auth;
