@@ -26,28 +26,25 @@ const Search = () => {
   
   function movieData(searchTitle){
     return axios.get(`http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieList.json?key=${serviceKey}&movieNm=${searchTitle}`).then(response =>{
-      response.header("Access-Control-Allow-Origin", "*");
 
       return response.data
     })
-  
   }
 
   let getMovieList = [];
   for(let i=0; i<10; i++){
-      getName(async function(data){
-        console.log(data[i].openDt);
-          let year = data[i].openDt.split('-')[0];
-          const option = {
-              query : data[i].movieNm,
-              start :1,
-              display:1,
-              yearfrom:year-1,
-              yearto:year,
-              sort :'sim',
-              filter:'small',
-          
-          }
+      getName(async function(data) {
+        //console.log(data[i]);
+        let year = data[i].openDt.split('-')[0];
+        const option = {
+            query : data[i].movieNm,
+            start :1,
+            display:1,
+            yearfrom:year-1,
+            yearto:year,
+            sort :'sim',
+            filter:'small',
+        }
           
           request.get({
               uri: 'https://openapi.naver.com/v1/search/movie.json',
