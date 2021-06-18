@@ -74,8 +74,8 @@ const HeaderPresenter = ({ user, onLogoutClick, onSearch }) => {
           <LogoutButton onClick={onLogoutClick}>로그아웃</LogoutButton>
         ) : (
           <>
-            <StyledLink to="login">로그인</StyledLink>
-            <StyledLink to="join">회원가입</StyledLink>
+            <StyledLink to="Auth">로그인</StyledLink>
+            <StyledLink to="Join">회원가입</StyledLink>
           </>
         )}
         <SearchContainer onSearch={onSearch}/>

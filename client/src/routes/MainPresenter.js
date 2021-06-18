@@ -42,14 +42,14 @@ const ModeToggleButton = styled.button`
   cursor: pointer;
 `;
 
-const MainPagePresenter = () => {
+const MainPresenter = () => {
   return (
     <MainPage>
       <MainDiv>
-        MainDiv
+        Main Page
       </MainDiv>
     </MainPage>
   );
 };
 
-export default MainPagePresenter;
+export default MainPresenter;

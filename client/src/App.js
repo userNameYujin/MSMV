@@ -1,17 +1,15 @@
 import './App.css';
 import React from 'react';
-import MainPage from './routes/home';
-import Login from './routes/login';
-import Join from './routes/join';
-import Header from './routes/header';
+import Main from './routes/Main';
+import Auth from './routes/Auth';
+import Join from './routes/Join';
+import Header from './routes/Header';
 import Search from './routes/Search';
-import cors from 'cors';
 
+import { useEffect, useState } from 'react';
 import { HashRouter as Router, Route } from 'react-router-dom'; 
 import store from "./store";
 import axios from 'axios';
-import { useEffect, useState } from 'react';
-
 
 function App() {
   const [isLoginChecked, setIsLoginChecked] = useState(false);
@@ -39,12 +37,12 @@ function App() {
         <Router className="App">
             <Header />
           <Route exact path="/">
-            <MainPage />
+            <Main />
           </Route>
-          <Route exact path="/login">
-            <Login />
+          <Route exact path="/Auth">
+            <Auth />
           </Route>
-          <Route exact path="/join">
+          <Route exact path="/Join">
             <Join />
           </Route>
           <Route exact path="/Search">
