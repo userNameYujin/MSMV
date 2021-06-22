@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import store from '../store';
+import store from '../../store';
 import HeaderPresenter from './HeaderPresenter';
 
 const HeaderContainer = () => {
@@ -15,7 +15,9 @@ const HeaderContainer = () => {
       .catch((error) => console.error(error));
   };
 
-  return <HeaderPresenter user={user} onLogoutClick={onLogoutClick} />;
+
+
+  return <HeaderPresenter user={user} onLogoutClick={onLogoutClick}/>;
 };
 
 export default HeaderContainer;

@@ -1,20 +1,16 @@
 import axios from 'axios';
 import React, { useState } from 'react';
-import { useHistory } from 'react-router';
 import store from '../store';
+import { useHistory } from 'react-router';
 import JoinPresenter from './JoinPresenter';
 
-const JoinContainer = () => {
+const Join = () => {
   const [id, setId] = useState();
   const [nickname, setNickname] = useState();
   const [password, setPassword] = useState();
   const [passwordCheck, setPasswordCheck] = useState();
-
-  let errcode = 0; // 
-
-  const history = useHistory();
-
   const props = { id, nickname, password, passwordCheck };
+  const history = useHistory();
 
   const onChange = (e) => {
     const elementId = e.target.id;
@@ -27,7 +23,7 @@ const JoinContainer = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    errcode = 0;
+    let errcode = 0;
     //비밀번호 일치 여부 확인
     if (!isPasswordSame()) return window.alert('비밀번호가 서로 같지 않습니다.');
 
@@ -58,7 +54,7 @@ const JoinContainer = () => {
   const isIdAvailable = async () => {
     let errcode;
     await axios
-      .post(`${process.env.REACT_APP_SERVER_URL}join/id`, { id })
+      .post(`${process.env.REACT_APP_SERVER_URL}/join/id`, { id })
       .then((response) => {
         // 정상
         if (response.data.code === 200)
@@ -77,7 +73,7 @@ const JoinContainer = () => {
   const isNicknameAvailable = async () => {
     let errcode;
     await axios
-      .post(`${process.env.REACT_APP_SERVER_URL}join/nick`, { nickname })
+      .post(`${process.env.REACT_APP_SERVER_URL}/join/nick`, { nickname })
       .then((response) => {
         // 정상
         if (response.data.code === 200)
@@ -96,9 +92,11 @@ const JoinContainer = () => {
 
   const requestJoin = async () => {
     await axios
-      .post(`${process.env.REACT_APP_SERVER_URL}join`, { id, password, nickname })
+      .post(`${process.env.REACT_APP_SERVER_URL}/join`, { id, password, nickname })
       .then(async (response) => {
+        console.log("requestJoin"+response);
         await store.dispatch({ type: 'LOGIN', user: response.data.dataValues });
+        console.log(store);
         window.alert('정상적으로 회원가입 되었습니다!');
         history.push({ pathname: '/' });
       })
@@ -108,4 +106,4 @@ const JoinContainer = () => {
   return <JoinPresenter onChange={onChange} onSubmit={onSubmit} {...props} />;
 };
 
-export default JoinContainer;
+export default Join;
