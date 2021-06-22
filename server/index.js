@@ -12,7 +12,7 @@ dotenv.config();
 
 const joinRouter = require('./routes/join');
 const authRouter = require('./routes/auth');
-
+const postRouter = require('./routes/post');
 
 const options ={
   host: process.env.DB_HOST,
@@ -44,7 +44,7 @@ app.use(passport.session());
 
 app.use('/auth',authRouter);
 app.use('/join',joinRouter);
-
+app.use('/post',postRouter);
 
 app.use((req, res, next) => {
   const error =  new Error(`${req.method} ${req.url} 라우터가 없습니다.`);
