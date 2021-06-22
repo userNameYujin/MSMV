@@ -1,8 +1,10 @@
 import React from 'react';
-import MainPresenter from './MainPresenter';
+import MainPresenter from './Presenters/MainPresenter.js'
 
-const Home = () => {
-    return (<MainPresenter/>);
+const Main = () => {
+  return (
+    <MainPresenter/>
+  )
 }
 
-export default Home;
+export default Main;

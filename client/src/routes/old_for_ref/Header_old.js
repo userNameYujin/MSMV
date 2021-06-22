@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import store from '../store';
+import store from '../../store';
 import HeaderPresenter from './HeaderPresenter';
 
 const HeaderContainer = () => {

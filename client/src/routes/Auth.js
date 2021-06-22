@@ -1,35 +1,38 @@
+import React, {useState} from 'react';
 import axios from 'axios';
-import React, { useState } from 'react';
-import { useHistory } from 'react-router';
 import store from '../store';
-import LoginPresenter from './LoginPresenter';
+import { useHistory } from 'react-router';
+
+import AuthPresenter from './Presenters/AuthPresenter';
 
 const Auth = () => {
-  const [id, setId] = useState();
-  const [password, setPassword] = useState();
+  const [id, setId] = useState('');
+  const [password, setPassword] = useState('');  
   const props = { id, password };
   const history = useHistory();
 
   const onChange = (e) => {
-    const elementId = e.target.id;
+    const target = e.target.id;
     const { value } = e.target;
-    if (elementId === 'id') setId(value);
-    else if (elementId === 'password') setPassword(value);
-  };
 
+    if (target === 'id') 
+      setId(value);
+    else if (target === 'password')
+      setPassword(value);
+  }
+  
   const onSubmit = async (e) => {
-    e.preventDefault();
-    await axios
-      .post(`${process.env.REACT_APP_SERVER_URL}/auth/login`, { id, password })
-      .then((response) => {
-        console.log(response);
-        store.dispatch({ type: 'LOGIN', user: response.data.result });
-        history.push({ pathname: '/' });
-      })
-      .catch((error) => window.alert(error.response.data.message));
-  };
+    await axios.post(`${process.env.REACT_APP_SERVER_URL}/auth/login`, {id, password})
+    .then((response) => {
+      store.dispatch({ type : 'LOGIN', user: response.data.result});
+      history.push({pathname : '/'})
+    })
+    .catch((error) => window.alert("아이디와 비밀번호를 확인해주세요."));
+  } 
 
-  return <LoginPresenter onChange={onChange} {...props} onSubmit={onSubmit} />;
-};
+  return (
+    <AuthPresenter onChange={onChange} onSubmit={onSubmit} {...props}/>
+  )
+}
 
 export default Auth;
