@@ -40,23 +40,24 @@ router.post('/', function(req, res){
   }
 })
 
-/*
+
 router.post('/review/update', async(req, res, next) => {
   console.log("Update review");
-  const id = req.body.id;
+  const id = req.user.id;
   await db.query('UPDATE review SET comments = ? WHERE id = ?', [contents, id])
+  res.status(200), send({code:200, result:result});
   //유저 입장에서 자기가 글 쓴 게 몇번인지 알 수 있나?...뭘 받아와야할지....
 })
-*/
 
 
-/*
+
+
 router.get('/review/delete', (req, res, next) => {
   console.log("Delete review");
   const id = req.body.id; //마찬가지
   db.query('DELETE FROM review WHERE id = ?', [id]);
+  res.status(200, send({code:200, message : "리뷰가 삭제되었습니다."}));
 })
-*/
 
 
 /*
