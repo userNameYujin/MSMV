@@ -28,17 +28,7 @@ router.post('/review/write', async(req,res,next)=> {
   });
 })
 
-router.post('/', function(req, res){
-  const movieCd = req.body.movieCd;
-  db.query('select contents, created, updated, rate, nickname from review left join users on review.commenter = users.user_id WHERE movieCd = ?'), [movieCd],
-  (err, result)=>{
-    if(error){
-      next(error);
-    }
-    console.log(result);
-    res.status(200), send({code:200, result:result})
-  }
-})
+
 
 
 router.post('/review/update', async(req, res, next) => {
@@ -60,33 +50,125 @@ router.get('/review/delete', (req, res, next) => {
 })
 
 
-/*
-//moviecount테이블
-router.get('/:movieCd', function(req, res, next){
+
+//moviecount테이블조작, 디테일페이지 영화정보
+
+
+
+router.get('/detail/:movieCd', async function(req, response, next){
   const movieCd = req.params.movieCd;
-  db.query('SELECT movieCd FROM moviecount', function(error, results){
+  await db.query('SELECT movieCd FROM moviecount', async function(error, results){
     if(error){
       throw(error);
     }
-    else if(!results){ //null값
-      db.query('INSERT INTO moviecount(movieCd, count) values (?, ?)', [
+    if(results.length===0){ //null값
+
+      await db.query('INSERT INTO moviecount(movieCd, count) values (?, ?)', [
         movieCd, 1
       ])
       console.log('moviecount 테이블 갱신');
     }
     else{ //moviecount에 해당 영화가 있으면
-      db.query('SELECT count FROM moviecount', function(error2, count){
+      await db.query('SELECT count FROM moviecount', async function(error2, count){
         if(error2){
           throw(error2);
         }
         else{
-          db.query('UPDATE moviecount SET count = ? WHERE movieCd = ?', [count + 1, movieCd]);
+          await db.query('UPDATE moviecount SET count = ? WHERE movieCd = ?', [count[0].count + 1, movieCd]);
         }
       })
     }
+
+    await db.query('select contents, created, updated, rate, nickname from review left join users on review.commenter = users.id WHERE movieCd = ?', 
+    [req.params.movieCd], async (error3, resultR)=>{
+      if(error3){
+        throw(error3)
+      }
+      else{
+
+        const getHTML = async(keyword) => {
+          try{
+              return await axios.get("https://movie.naver.com/movie/bi/mi/basic.nhn?code="+keyword)
+          }catch(err){
+              console.log(err)
+          }
+          
+      }
+
+      const parsing = async(keyword,review, callback) => {
+          const html = await getHTML(keyword);
+          
+          const $ = cheerio.load(html.data); //갖고온 html코드는 data안에 들어온다.
+      //    const $itemList = $(".poster")
+      
+          let item = new Object();
+          let show = false;
+          let title = $(".mv_info").find(`h3>a`).text()
+          if(title.includes('상영중')){
+              title = title.split('상영중')[0];
+              show = true;
+          }else{
+              title = title.substring(0,title.length/2);
+          }
+          let summary = $(".story_area").find(".con_tx").text()
+          let $peopleList = $(".people >ul > li")
+          let people = new Object();
+          let peopleArray = new Array();
+      
+          $peopleList.each((idx,node)=>{
+              const peopleImage = $(node).find("img").attr("src")
+              const peopleName =  $(node).find(".tx_people").text()
+              const peopleJob =$(node).find(".staff").text().trim()
+              people = {
+                  "peopleImage" : peopleImage,
+                  "peopleName" : peopleName,
+                  "peopleJob" : peopleJob,
+              }
+              peopleArray.push(people);
+          })
+          let genre = $(".info_spec").find("span:first").text().trim()
+          let country = $(".info_spec").find("span:eq(1)").text().trim()
+          let time = $(".info_spec").find("span:eq(2)").text().trim()
+          let date = $(".info_spec").find("span:eq(3)").text().trim()
+          let grade = $(".info_spec").find("span:eq(4)").text().trim()
+      
+          grade = grade.replace(/(\r\n\t|\n|\r\t|\t)/gm,"")
+          date = date.replace(/(\r\n\t|\n|\r\t|\t)/gm,"")
+          genre = genre.replace(/(\r\n\t|\n|\r\t|\t)/gm,"")
+      
+          item = {
+              "image": $(".poster").find("img").attr("src"),
+              //"title": $(".mv_info").find(`h3>a`).text(),
+              "title": title,
+              "show" : show,
+              "summary": summary,
+              //"movieCd": keyword,
+              "people" : peopleArray,
+              "genres" : genre,
+              "country" : country,
+              "runningTime" : time,
+              "openDt" : date,
+              "grade" : grade,
+              "review" : review
+          }
+          callback(item);
+      }
+
+      parsing(movieCd,resultR,function(res){
+          //console.log(res);
+          console.log(res)
+          if(res){
+            response.status(200).send({code : 200, result : res});
+          }else{
+            response.status(400).send({code : 400, result : '에러'});
+          }
+      })
+
+      }
+  })
   })
 })
-*/
+
 
 router.get('/boxOffice', function(req, response){
   let movies = new Object();
