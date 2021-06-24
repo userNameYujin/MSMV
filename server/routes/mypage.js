@@ -27,7 +27,7 @@ router.post('/nickModify', async(req, res, next) => {
 router.post('/passwordModify', async (req, res, next) => {
   //비밀번호 확인
   const input_pw = req.body.oldPassword;
-  bcrypt.hash(input_pw, 12, function(err, hash){
+  bcrypt.hash(input_pw, 12, async function(err, hash){
     if(err){
       next(err)
     }
@@ -68,3 +68,5 @@ router.get('/withdraw', async(req, res, next) => {
   await db.query('DELETE users WHERE user_id = ?', [user_id]);
   res.status(200).send({code : 200, message : '회원 탈퇴 완료'});
 })
+
+module.exports = router;
