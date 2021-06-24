@@ -14,16 +14,22 @@ router.post('/review/write', async(req,res,next)=> {
   const movieCd = req.body.movieCd;
 
   await db.query('INSERT INTO review(contents, commenter, rate, movieCd) values (?, ?, ?, ?)', [
-    contents, commenter, rate, movieCd
-  ], (error, result) =>{
+    contents, commenter, rate, movieCd], async (error, result) =>{
     if(error) {
       next(error);
     }
     
-    db.query('SELECT * FROM review WHERE movieCd = ?', [movieCd],
-       (err, result) => {
-       console.log(result);
-       res.status(200),send({code: 200, result: result}) // 201 vs 200?
+    await db.query('SELECT * FROM review WHERE movieCd = ?', [movieCd],
+       (err, result2) => {
+         if(err){
+           next(err);
+         }
+         console.log(result2);
+         if(result2[0]){
+          res.status(200).send({code: 200, result: result2}) 
+         }else{
+           res.status(400).send({code: 400, message: "에러"})
+         }
       });
   });
 })
@@ -33,20 +39,37 @@ router.post('/review/write', async(req,res,next)=> {
 
 router.post('/review/update', async(req, res, next) => {
   console.log("Update review");
-  const id = req.user.id;
-  await db.query('UPDATE review SET comments = ? WHERE id = ?', [contents, id])
-  res.status(200), send({code:200, result:result});
-  //유저 입장에서 자기가 글 쓴 게 몇번인지 알 수 있나?...뭘 받아와야할지....
+  //req.body.id 는 리뷰의 id
+  await db.query('SELECT commenter FROM review WHERE id=?',[req.body.id], async(error,result)=>{
+    if(error){
+      next(error);
+    }
+    if(req.user.id===result[0].commenter){
+      await db.query('UPDATE review SET comments = ? WHERE id = ?', [contents, req.body.id]);
+      res.status(200).send({code:200, result:result});
+    } else{
+      res.status(400).send({code:400, message : "내가 쓴 리뷰가 아닙니다."});
+    }
+  })
+
 })
 
 
 
 
-router.get('/review/delete', (req, res, next) => {
+router.post('/review/delete', async (req, res, next) => {
   console.log("Delete review");
-  const id = req.body.id; //마찬가지
-  db.query('DELETE FROM review WHERE id = ?', [id]);
-  res.status(200, send({code:200, message : "리뷰가 삭제되었습니다."}));
+  await db.query('SELECT commenter FROM review WHERE id=?',[req.body.id], async(error,result)=>{
+    if(error){
+      next(error);
+    }
+    if(req.user.id===result[0].commenter){
+      await db.query('DELETE FROM review WHERE id = ?', [req.body.id]);
+      res.status(200).send({code:200, message : "리뷰가 삭제되었습니다."});
+    } else{
+      res.status(400).send({code:400, message : "내가 쓴 리뷰가 아닙니다."});
+    }
+  })
 })
 
 
@@ -79,7 +102,7 @@ router.get('/detail/:movieCd', async function(req, response, next){
       })
     }
 
-    await db.query('select contents, created, updated, rate, nickname from review left join users on review.commenter = users.id WHERE movieCd = ?', 
+    await db.query('select review.id,contents, created, updated, rate, nickname from review left join users on review.commenter = users.id WHERE movieCd = ?', 
     [req.params.movieCd], async (error3, resultR)=>{
       if(error3){
         throw(error3)
@@ -221,7 +244,7 @@ router.get('/boxOffice', function(req, response){
       
       let movieList = new Array();
       //let movieTT = new Array();
-      
+      let checkLength = result.dailyBoxOfficeList.length;
       for(let i=0; i<result.dailyBoxOfficeList.length; i++){
           let year = result.dailyBoxOfficeList[i].openDt.split('-')[0];
               const option = {
@@ -244,10 +267,9 @@ router.get('/boxOffice', function(req, response){
           }, async function (err, res, body){
               movieData = JSON.parse(body);
               //console.log(movieData);
-              movieData.items[0].rank = result.dailyBoxOfficeList[i].rnum;
-  
-              //console.log(movieData.items[0].rank);
-              let boxOfficeData = { //데이터 골라서 넣기
+              if(movieData.items[0] !== undefined){
+                movieData.items[0].rank = result.dailyBoxOfficeList[i].rnum;
+                let boxOfficeData = { //데이터 골라서 넣기
                   "rank" : movieData.items[0].rank,
                   "name" : movieData.items[0].title,
                   "image" : movieData.items[0].image,
@@ -255,10 +277,17 @@ router.get('/boxOffice', function(req, response){
                   "actor" : movieData.items[0].actor,
                   "movieCd" : movieData.items[0].link.split('code=')[1],
                   "userRating" : movieData.items[0].userRating,
+               }
+              
+                movieList.push(boxOfficeData);
+              } else{
+                checkLength--;
               }
               
-              movieList.push(boxOfficeData);
-              if(movieList.length===10){
+
+              //console.log(movieData.items[0].rank);
+              
+              if(movieList.length===checkLength){
                   movieList.sort(function(a,b){
                       return parseFloat(a.rank)-parseFloat(b.rank)
                   })
