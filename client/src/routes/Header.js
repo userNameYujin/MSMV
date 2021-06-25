@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useState } from 'react';
+import { useHistory, useLocation } from 'react-router';
 import store from '../store';
 import HeaderPresenter from './Presenters/HeaderPresenter'
 
@@ -15,22 +16,32 @@ const Header = () => {
   };
   // check isinlogin
 
-/*   const [SearchCrit, setSearchCrit] = useState();
+  const [searchCrit, setSearchCrit] = useState('title');
+  const props = {searchCrit};
+
+
   const SearchCritCheck = (e) => {
-    setSearchCrit({searchCrit: e.target.value});
+    setSearchCrit(e.target.value);
   };
 
-  useEffect(() => {
-    SearchCritCheck();
-  }, []);
-
-  
-  const SearchClick = async () => {
-    await axios.get(`${process.env.REACT_APP_SERVER_URL}/search/${Searchcrit}`, {withCredentials: true})
-  } */
+  const history = useHistory();
+  const location = useLocation();
+  const SearchClick = () => {
+    if (location.pathname === "/Search") {
+      console.log("push from same");
+      window.history.pushState({searchCrit: searchCrit}, null);
+    }
+    else {
+      console.log("push from other");
+      history.push({
+        pathname: "/Search",
+        state: {searchCrit: searchCrit}
+      }
+    )}
+  } 
 
   return (
-    <HeaderPresenter user={user} LogoutClick={LogoutClick}/*SearchClick={SearchClick}*//>
+    <HeaderPresenter user={user} LogoutClick={LogoutClick} SearchCritCheck={SearchCritCheck} SearchClick={SearchClick}/>
   );
 }
 
