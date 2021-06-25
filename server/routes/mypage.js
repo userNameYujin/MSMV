@@ -29,37 +29,71 @@ router.post('/passwordModify', async (req, res, next) => {
   //비밀번호 확인'
   //console.log("아이디",req.body.id);
   const input_pw = req.body.oldPassword;
-  bcrypt.hash(input_pw, 12, async function(err, hash){
-    if(err){
-      next(err)
-    }
-    else{
-      await db.query('SELECT password FROM users where id = ?', [req.body.id], (pw, err)=>{
-        if(err){
-          throw(err);
+  //compare로 비교{
+  db.query('SELECT password FROM users where id = ?', [req.body.id], function(hash, error){
+    bcrypt.compare(input_pw, hash, function(err, result){
+      if(err){
+        console.log("hash", hash);
+        console.log("bcrypt.compare error");
+        next(err);
+      }
+      else{
+        if(!result){
+          res.status(200).send({code : 400, message : '비밀번호가 일치하지 않습니다.'});
         }
-        else if (pw != hash){
-          res.status(400).send({code : 400, message : '비밀번호가 일치하지 않습니다'});
-        }
-        else if (pw === hash){
-          async(req, res, next) =>{
-            let plain_pw = req.body.newPassword;
-            if(input_pw === plain_pw){
-              res.status(400).send({code : 400, message : '새 비밀번호가 기존 비밀번호와 일치합니다'});
-            }
-            bcrypt.hash(plain_pw, 12, function(err, hash){
-              if(err) next(err);
+        else{
+            const plain_pw = req.body.newPassword;
+            //기존 비밀번호와 일치
+            bcrypt.compare(plain_pw, hash, function(err, result){
+              if(err){
+                next(err);
+              }
+              if(result){
+                res.status(200).send({code : 400, message : '기존 비밀번호와 일치합니다.'});
+              }
               else{
-                db.query('UPDATE users SET password = ? WHERE id = ?', [hash, req.body.id])
+                db.query('UPDATE users SET password = ? where id = ?', [plain_pw, req.body.id], function(err, result){
+                  if(err) next(err);
+                })
                 res.status(200).send({code : 200, message : '비밀번호가 변경되었습니다.'});
               }
             })
           }
         }
       })
-    }
-  })
+    })
 })
+
+  // bcrypt.hash(input_pw, 12, async function(err, hash){
+  //   if(err){
+  //     next(err)
+  //   }
+  //   else{
+  //     await db.query('SELECT password FROM users where id = ?', [req.body.id], (pw, err)=>{
+  //       if(err){
+  //         throw(err);
+  //       }
+  //       else if (pw != hash){
+  //         res.status(400).send({code : 400, message : '비밀번호가 일치하지 않습니다'});
+  //       }
+  //       else if (pw === hash){
+  //         async(req, res, next) =>{
+  //           let plain_pw = req.body.newPassword;
+  //           if(input_pw === plain_pw){
+  //             res.status(400).send({code : 400, message : '새 비밀번호가 기존 비밀번호와 일치합니다'});
+  //           }
+  //           bcrypt.hash(plain_pw, 12, function(err, hash){
+  //             if(err) next(err);
+  //             else{
+  //               db.query('UPDATE users SET password = ? WHERE id = ?', [hash, req.body.id])
+  //               res.status(200).send({code : 200, message : '비밀번호가 변경되었습니다.'});
+  //             }
+  //           })
+  //         }
+  //       }
+  //     })
+  //   }
+  // })
 
 //회원탈퇴
 router.post('/withdraw', async(req, res, next) => {
