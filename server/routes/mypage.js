@@ -4,35 +4,37 @@ const db = require('../lib/db');
 const bcrypt = require('bcrypt');
 
 //닉네임변경
-router.post('/nickModify', async(req, res, next) => {
-  await db.query('SELECT user_id FROM users where nickname = ?', [req.body.nickname], function(error, result){
-    if (error) {
+router.post('/nickModify/:id', async(req, res, next) => {
+  await db.query('SELECT id FROM users where nickname = ?', [req.body.nickname], function(error, result){
+    if (error){
       next(error);
     }
-    if (result.length === 0) {
-      res.status(200).send({code : 200, message: '사용 가능한 닉네임입니다.'});
-      db.query('UPDATE nickname FROM users where user_id = ?;', [req.params.user_id], function(error, result){ //user_id ??
-        if(error){
-          throw(error);
-        }
-      })
+    else if (result.length > 0){
+      res.status(200).send({code : 400, message : '이미 사용 중인 닉네임입니다.'});
     }
     else{
-      res.status(400).send({code : 400, message : '이미 사용 중인 닉네임입니다.'});
+      db.query('UPDATE users SET nickname = ? where id = ?;',[req.body.nickname, req.params.id], function(error2, result2){
+        if (error2){
+          next(error2);
+        }
+        console.log("체크");
+        res.status(200).send({code : 200, message : '닉네임 변경이 완료되었습니다.'});
+      })
     }
   })
 })
 
 //비밀번호 변경
 router.post('/passwordModify', async (req, res, next) => {
-  //비밀번호 확인
+  //비밀번호 확인'
+  //console.log("아이디",req.body.id);
   const input_pw = req.body.oldPassword;
   bcrypt.hash(input_pw, 12, async function(err, hash){
     if(err){
       next(err)
     }
     else{
-      await db.query('SELECT password FROM users where user_id = ?', [req.user.id], (pw, err)=>{
+      await db.query('SELECT password FROM users where id = ?', [req.body.id], (pw, err)=>{
         if(err){
           throw(err);
         }
@@ -48,7 +50,7 @@ router.post('/passwordModify', async (req, res, next) => {
             bcrypt.hash(plain_pw, 12, function(err, hash){
               if(err) next(err);
               else{
-                db.query('UPDATE users SET password = ? WHERE user_id = ?', [hash, req.user.id])
+                db.query('UPDATE users SET password = ? WHERE id = ?', [hash, req.body.id])
                 res.status(200).send({code : 200, message : '비밀번호가 변경되었습니다.'});
               }
             })
@@ -60,13 +62,16 @@ router.post('/passwordModify', async (req, res, next) => {
 })
 
 //회원탈퇴
-router.get('/withdraw', async(req, res, next) => {
-  const user_id = req.params.user_id;
-  if(error){
-    next(error);
-  }
-  await db.query('DELETE users WHERE user_id = ?', [user_id]);
-  res.status(200).send({code : 200, message : '회원 탈퇴 완료'});
+router.post('/withdraw', async(req, res, next) => {
+  const id = req.body.id;
+  await db.query('DELETE FROM users WHERE id = ?', [id], function(err, result){
+    if(err){
+      next(err);
+    }
+    else{
+      res.status(200).send({code : 200, message : '회원 탈퇴 완료'});
+    }
+  })
 })
 
 module.exports = router;
