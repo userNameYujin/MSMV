@@ -6,6 +6,7 @@ import Auth from './routes/Auth.js';
 import Join from './routes/Join.js';
 import Header from './routes/Header.js';
 import Search from './routes/Search.js';
+import Detail from './routes/Detail.js';
 
 import store from "./store";
 import axios from 'axios';
@@ -49,6 +50,9 @@ function App() {
           </Route>
           <Route exact path="/search">
             <Search />
+          </Route>
+          <Route exact path="/detail">
+            <Detail />
           </Route>
         </Router>
       )}

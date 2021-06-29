@@ -9,7 +9,7 @@ const Join = () => {
   const [nickname, setNickname] = useState('');
   const [password, setPassword] = useState('');
   const [passwordCheck, setPasswordCheck] = useState('');
-  const props = {id, nickname, password, passwordCheck}
+  const props = {id, nickname, password, passwordCheck};
 
   const onChange = (e) => {
     const target = e.target.id;
