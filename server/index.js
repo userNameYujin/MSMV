@@ -15,6 +15,7 @@ const authRouter = require('./routes/auth');
 const postRouter = require('./routes/post');
 const mypageRouter = require('./routes/mypage');
 const searchRouter = require('./routes/search');
+const reviewRouter = require('./routes/review');
 
 const options ={
   host: process.env.DB_HOST,
@@ -37,7 +38,6 @@ app.use(session({
   cookie: {
     httpOnly: true,
     secure: false,
-    sameSite: 'none',
   },
   store: sessionStore
 }))
@@ -49,6 +49,7 @@ app.use('/join',joinRouter);
 app.use('/post',postRouter);
 app.use('/mypage',mypageRouter);
 app.use('/search',searchRouter);
+app.use('/review',reviewRouter);
 
 app.use((req, res, next) => {
   const error =  new Error(`${req.method} ${req.url} 라우터가 없습니다.`);
