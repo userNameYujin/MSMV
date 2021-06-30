@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 import styled from 'styled-components';
 
 const MainPage = styled.div`
@@ -7,23 +8,28 @@ const MainPage = styled.div`
 const MainDiv = styled.div`
 `;
 
-const SearchedRankDiv = styled.div`
+const SearchedDiv = styled.div`
 `;
 
-const BoxofficeRankDiv = styled.div`
+const BoxofficeDiv = styled.div`
 `;
 
-const MainPresenter = () => {
+const MainPresenter = ({boxOfficeData}) => {
   return (
     <MainPage>
       <MainDiv>
-        <SearchedRankDiv>
-          <p>this div is for 'yesterday searched rank</p>
-        </SearchedRankDiv>
-        <BoxofficeRankDiv>
-          <p>this div is for 'daily boxoffice rank'</p>
-          <img src="https://movie-phinf.pstatic.net/20210609_138/1623220637715dKMK5_JPEG/movie_image.jpg?type=m77_110_2" width="200"></img>
-        </BoxofficeRankDiv>
+        <SearchedDiv>
+          <p>this div is for 'yesterday searched movies</p>
+        </SearchedDiv>
+        <BoxofficeDiv>
+          <p>this div is for 'daily boxoffice movies'</p>
+          {boxOfficeData.map((movie, index) => ( 
+            <div>
+              <img src={movie.image}></img>
+              <Link to={`/Detail?code=${movie.movieCd}`}>{movie.name}</Link> <p>{movie.rank}</p>
+            </div>
+          ))}
+        </BoxofficeDiv>
       </MainDiv>
     </MainPage>
   );
