@@ -1,6 +1,6 @@
-import React, {useState, componentDidMount} from 'react';
+import React, {useState} from 'react';
 import axios from 'axios';
-import {useLocation, useHistory} from 'react-router';
+//import {useLocation, useHistory} from 'react-router';
 import SearchPresenter from './Presenters/SearchPresenter';
 
 const Search = () => {
@@ -9,8 +9,8 @@ const Search = () => {
   const [result, setResult] = useState([]);
   const [currentSearch, setCurrentSearch] = useState('');
   const props = {searchContent, result, currentSearch};
-  const history = useHistory();
-  const location = useLocation();
+  // const history = useHistory();
+  // const location = useLocation();
 
   const submitSearch = async () => {
     setCurrentSearch(searchContent);
@@ -31,10 +31,22 @@ const Search = () => {
       console.log(result);
     }
     else if (searchCrit === "director") {
-      console.log("dummy");
+      console.log("search from director");
+      const check = 2;
+      const dirNm = searchContent;
+      console.log("start axios");
+      await axios.post(`${process.env.REACT_APP_SERVER_URL}/search`, { check, dirNm })
+      .then((response) => {
+        console.log(response);
+        setResult(response.data.result);
+      })
+      .catch((error) => {
+        window.alert(error.response.data.message);
+      });
+      console.log("end axios");
+      console.log(result);
     }
   }
-
   
 
   const takeInput = (e) => {
