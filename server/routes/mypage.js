@@ -26,28 +26,21 @@ router.post('/nickModify/:id', async(req, res, next) => {
 
 
 router.post('/passwordModify', async (req, res, next) => {
-
   const old_pw = req.body.oldPassword;
   const new_pw = req.body.newPassword;
 
   await db.query('SELECT password FROM users where id = ?', [req.body.id], async function(error, hash){
-
     if(error){
       console.log("쿼리문 에러");
       next(error);
     }
     console.log("해시는 ", hash);
-
     const origin_pw = hash[0].password;
     await bcrypt.compare(old_pw, origin_pw, function(err, result){
-
       if(err){
         console.log("bcrypt.compare 오류");
         next(err);
-      }else if(result == true){
-        check = 1;
       }
-
       console.log(result);
       if(result == false){
         console.log("비밀번호 불일치 ", result);
@@ -69,7 +62,6 @@ router.post('/passwordModify', async (req, res, next) => {
     })
   })
 })
-
 
 
 //회원탈퇴
@@ -98,7 +90,7 @@ router.post('/withdraw', async(req, res, next) => {
             next(err);
           }
           else{
-            res.status(200).send({code : 200, message : '회원 탈퇴 완료'});
+            res.status(200).send({code : 200, message : '회원 탈퇴가 완료되었습니다.'});
           }
         })
       }
