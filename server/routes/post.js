@@ -196,7 +196,7 @@ router.get('/boxOffice', async function(req, response,next){
               naverAPI.getMovieList(option,rank)
               .then(function(result2){
                       
-                    crawling.boxOfficeParsing(result2.movieCd,result2,async function(res){
+                    crawling.parsing(result2.movieCd,result2,async function(res){
                         movieList.push(res);
                         
                         await db.query('insert into boxoffice(movierank,name,movieCd,image) values(?,?,?,?)',[res.rank*=1,res.name,res.movieCd,res.image],function(err,result){
