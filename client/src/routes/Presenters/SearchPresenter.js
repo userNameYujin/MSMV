@@ -2,7 +2,6 @@ import React, {optionsState} from "react";
 import {Link} from "react-router-dom";
 
 const SearchPresenter = ({searchCritCheck, searchCrit, submitSearch, takeInput, searchContent, result, currentSearch}) => {
-  let link;
 
   return (
     <div>
@@ -16,7 +15,8 @@ const SearchPresenter = ({searchCritCheck, searchCrit, submitSearch, takeInput, 
       <div>
         <h>{currentSearch}에 대한 검색 결과</h>
           {result.map((movie, index) => ( 
-            <div>  
+            <div>
+              <img src={movie.image}></img>
               <Link to={`/Detail?code=${movie.movieCd}`}>{movie.title}</Link> <p>{movie.rate}</p>
             </div>
           ))}
