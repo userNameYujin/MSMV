@@ -57,8 +57,14 @@ const Search = () => {
     setSearchCrit(e.target.value);
   };
 
+  const inputEnter = (e) => {
+    if (e.key === 'Enter') {
+      submitSearch();
+    }
+  }
+
   return ( 
-    <SearchPresenter searchCritCheck={SearchCritCheck} searchCrit={searchCrit} submitSearch={submitSearch} takeInput={takeInput} {...props}/>
+    <SearchPresenter searchCritCheck={SearchCritCheck} searchCrit={searchCrit} submitSearch={submitSearch} takeInput={takeInput} inputEnter={inputEnter} {...props}/>
   )
 }
 

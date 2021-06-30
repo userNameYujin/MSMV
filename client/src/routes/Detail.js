@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import DetailPresenter from "./Presenters/DetailPresenter.js";
 import {useLocation} from "react-router";
 import axios from "axios";
@@ -12,7 +12,7 @@ const Detail = () => {
   const getMovieData = async () => {
     await axios.get(`${process.env.REACT_APP_SERVER_URL}/post/detail/${movieCd}`, { movieCd })
     .then((response) => {
-      setMovieData(response.data);
+      setMovieData(response.data.result);
     })
     .catch((error) => {
       console.log(error);
@@ -21,10 +21,10 @@ const Detail = () => {
 
   console.log(movieCd);
   console.log(movieData);
-  getMovieData();
+  useEffect(() => getMovieData(), []);
 
   return (
-    <DetailPresenter/>
+    <DetailPresenter movieData={movieData}/>
   )
 }
 

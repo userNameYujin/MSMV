@@ -1,7 +1,7 @@
 import React, {optionsState} from "react";
 import {Link} from "react-router-dom";
 
-const SearchPresenter = ({searchCritCheck, searchCrit, submitSearch, takeInput, searchContent, result, currentSearch}) => {
+const SearchPresenter = ({searchCritCheck, searchCrit, submitSearch, takeInput, inputEnter, searchContent, result, currentSearch}) => {
 
   return (
     <div>
@@ -10,7 +10,7 @@ const SearchPresenter = ({searchCritCheck, searchCrit, submitSearch, takeInput, 
         <option value="title">제목</option>
         <option value="director">감독</option>
       </select>
-      <input onChange={takeInput} placeholder="검색어 입력"></input>
+      <input onChange={takeInput} onKeyPress={inputEnter} placeholder="검색어 입력"></input>
       <button onClick={submitSearch}>검색</button>
       <div>
         <h>{currentSearch}에 대한 검색 결과</h>
