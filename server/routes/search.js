@@ -4,6 +4,11 @@ const axios = require('axios');
 const utf8 = require('utf8');
 const request = require('request')
 
+const cheerio = require('cheerio');
+const naverAPI = require('../lib/boxOffice/naverAPI');
+const crawling = require('../lib/boxOffice/crawling');
+const movieData = require('../lib/boxOffice/movieData');
+
 router.post('/',(req,response)=>{
     console.log('search start')
     console.log(req.body.check)
@@ -74,61 +79,44 @@ router.post('/',(req,response)=>{
                                             'prdtYear' : result[i].prdtYear})
                     }
                     callback(resultMovies)
-                }) 
+                })
             }
             
             searchMovieDir(req.body.dirNm,function(res){
+                let checkLength =res.length
                 
-                if(res.length===0){
-                    response.status(400).send({code : 400, message : "해당 감독의 영화가 없습니다."});
-                }
-                let searchList = new Array();
-                checkLength = res.length; //영화진흥원 데이터에는 있는데 네이버 데이터에 없을 경우 체크
+                let movieList = new Array();
                 for(let i=0; i<res.length; i++){
-                    
+                    let prdtYear = res[i].prdtYear;
                     const option = {
                         query : res[i].movieName,
-                        start :1,
-                        display:1,
-                        yearfrom:res[i].prdtYear,
-                        yearto:res[i].prdtYear,
-                        sort :'sim',
-                        filter:'small',
-                    
+                        start : 1,
+                        display : 5,
+                        yearfrom : prdtYear,
+                        yearto : prdtYear,
+                        sort : 'sim',
+                        filter : 'small',
                     }
-                    request.get({
-                        uri: 'https://openapi.naver.com/v1/search/movie.json',
-                        qs: option,
-                        headers: {
-                            'X-Naver-Client-Id': process.env.NAVER_CLIENT_ID,
-                            'X-Naver-Client-Secret': process.env.NAVER_CLIENT_SECRET
-                        }
-                    }, async function (err, res2, body) {
-            
-            
-                        let movieData = JSON.parse(body);
-                        if(movieData.items[0] !== undefined){
-                            searchList.push({'title' : movieData.items[0].title,
-                                'image' : movieData.items[0].image,
-                                'movieCd' : movieData.items[0].link.split("code=")[1],
-                                'rate' : movieData.items[0].userRating
-                            })
-                        }else{
+                    naverAPI.getMovieList2(option,req.body.dirNm)
+                    .then(function(result2){
+                        
+                        if(!result2){
                             checkLength--;
-                        }
-    
-                        if(searchList.length === checkLength){
-            
-                            searchList.sort(async function(a,b){
-                                return parseFloat(b.rate)-parseFloat(a.rate)
+                        }else{
+                            crawling.parsing(result2.movieCd,result2,function(res){
+                                //console.log(res);
+                                movieList.push(res);
+                                if(movieList.length === checkLength){
+                                    movieList.sort(function(a,b){
+                                        return parseFloat(a.rank)-parseFloat(b.rank)
+                                    })
+                                    console.log(movieList);
+                                    response.status(200).send({code : 200, result : movieList});
+                                    
+                                }
                             })
-                            console.log(searchList);
-                            
-                            if(searchList.length>0){
-                                response.status(200).send({code : 200, result : searchList});
-                            }
                         }
-                    }) 
+                    })
                 }
             })
         }
