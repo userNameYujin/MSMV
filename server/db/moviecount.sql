@@ -13,9 +13,9 @@ CREATE EVENT IF NOT EXISTS CopyCount
     ENABLE
     COMMENT 'make a copy'
     DO
-	BEGIN
-		TRUNCATE TABLE todaymovie;
-		INSERT INTO todaymovie SELECT * FROM moviecount;
-		TRUNCATE TABLE moviecount;
-	END$$
+	  BEGIN
+		  TRUNCATE TABLE todaymovie;
+		  INSERT INTO todaymovie SELECT * FROM moviecount;
+		  TRUNCATE TABLE moviecount;
+	  END$$
 DELIMITER ;
