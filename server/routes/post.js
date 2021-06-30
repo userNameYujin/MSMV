@@ -2,81 +2,12 @@ const express = require('express');
 const router = express.Router();
 const db = require('../lib/db');
 const request = require('request')
-const boxOffice = require('../lib/boxOffice');
+const boxOffice = require('../lib/boxOffice/boxOffice');
 const axios = require('axios');
 const cheerio = require('cheerio');
-
-router.post('/review/write', async(req,res,next)=> {
-  console.log("REVIEW");
-  const contents = req.body.contents;
-  const commenter = req.body.commenter;
-  const rate = req.body.rate;
-  const movieCd = req.body.movieCd;
-
-  await db.query('INSERT INTO review(contents, commenter, rate, movieCd) values (?, ?, ?, ?)', [
-    contents, commenter, rate, movieCd], async (error, result) =>{
-    if(error) {
-      next(error);
-    }
-    
-    await db.query('SELECT * FROM review WHERE movieCd = ?', [movieCd],
-       (err, result2) => {
-         if(err){
-           next(err);
-         }
-         console.log(result2);
-         if(result2[0]){
-          res.status(200).send({code: 200, result: result2}) 
-         }else{
-           res.status(400).send({code: 400, message: "에러"})
-         }
-      });
-  });
-})
-
-
-
-
-router.post('/review/update', async(req, res, next) => {
-  console.log("Update review");
-  //req.body.id 는 리뷰의 id
-  await db.query('SELECT commenter FROM review WHERE id=?',[req.body.id], async(error,result)=>{
-    if(error){
-      next(error);
-    }
-    if(req.user.id===result[0].commenter){
-      await db.query('UPDATE review SET comments = ? WHERE id = ?', [contents, req.body.id]);
-      res.status(200).send({code:200, result:result});
-    } else{
-      res.status(400).send({code:400, message : "내가 쓴 리뷰가 아닙니다."});
-    }
-  })
-
-})
-
-
-
-
-router.post('/review/delete', async (req, res, next) => {
-  console.log("Delete review");
-  await db.query('SELECT commenter FROM review WHERE id=?',[req.body.id], async(error,result)=>{
-    if(error){
-      next(error);
-    }
-    if(req.user.id===result[0].commenter){
-      await db.query('DELETE FROM review WHERE id = ?', [req.body.id]);
-      res.status(200).send({code:200, message : "리뷰가 삭제되었습니다."});
-    } else{
-      res.status(400).send({code:400, message : "내가 쓴 리뷰가 아닙니다."});
-    }
-  })
-})
-
-
-
-//moviecount테이블조작, 디테일페이지 영화정보
-
-
+const naverAPI = require('../lib/boxOffice/naverAPI');
+const crawling = require('../lib/boxOffice/crawling');
+const movieData = require('../lib/boxOffice/movieData');
 
 router.get('/detail/:movieCd', async function(req, response, next){
   const movieCd = req.params.movieCd;
@@ -160,7 +91,7 @@ router.get('/detail/:movieCd', async function(req, response, next){
           genre = genre.replace(/(\r\n\t|\n|\r\t|\t)/gm,"")
       
           item = {
-              "image": $(".poster").find("img").attr("src"),
+              "image": $(".mv_info_area").find("img").attr("src"),
               //"title": $(".mv_info").find(`h3>a`).text(),
               "title": title,
               "show" : show,
@@ -194,13 +125,16 @@ router.get('/detail/:movieCd', async function(req, response, next){
 
 
 router.get('/boxOffice', function(req, response){
+
+  
+
   let movies = new Object();
   let now = new Date();	// 현재 날짜 및 시간
 
   let yesterday = new Date(now.setDate(now.getDate() - 1));	// 어제
   
   let yy = yesterday.toString().split(' ');
-  
+
   let month = function(d){
       if(d[1]==='Jan'){
           return '01'
@@ -231,13 +165,7 @@ router.get('/boxOffice', function(req, response){
   
   let targetDt = yy[3]+month(yy)+yy[2];
   
-  async function getName2(targetDt){
-      let mvName = await boxOffice.movieData(targetDt);
-      return mvName.boxOfficeResult
-      //console.log(mvName.boxOfficeResult);
-  }
-  let a = getName2(targetDt);
-  
+  let a = movieData.getName(targetDt);
   
   a.then(function(result){
       let movieData;
@@ -246,68 +174,42 @@ router.get('/boxOffice', function(req, response){
       //let movieTT = new Array();
       let checkLength = result.dailyBoxOfficeList.length;
       for(let i=0; i<result.dailyBoxOfficeList.length; i++){
-          let year = result.dailyBoxOfficeList[i].openDt.split('-')[0];
+        let prdtYear = result.dailyBoxOfficeList[i].prdtYear;
               const option = {
               query : result.dailyBoxOfficeList[i].movieNm,
               start :1,
               display:1,
-              yearfrom:year-1,
-              yearto:year,
+              yearfrom:prdtYear,
+              yearto:prdtYear,
               sort :'sim',
               filter:'small',
           }
-  
-          request.get({
-              uri: 'https://openapi.naver.com/v1/search/movie.json',
-              qs: option,
-              headers: {
-                  'X-Naver-Client-Id': process.env.NAVER_CLIENT_ID,
-                  'X-Naver-Client-Secret': process.env.NAVER_CLIENT_SECRET
-              }
-          }, async function (err, res, body){
-              movieData = JSON.parse(body);
-              //console.log(movieData);
-              if(movieData.items[0] !== undefined){
-                movieData.items[0].rank = result.dailyBoxOfficeList[i].rnum;
-                let boxOfficeData = { //데이터 골라서 넣기
-                  "rank" : movieData.items[0].rank,
-                  "name" : movieData.items[0].title,
-                  "image" : movieData.items[0].image,
-                  "director" : movieData.items[0].director,
-                  "actor" : movieData.items[0].actor,
-                  "movieCd" : movieData.items[0].link.split('code=')[1],
-                  "userRating" : movieData.items[0].userRating,
-               }
-              
-                movieList.push(boxOfficeData);
-              } else{
-                checkLength--;
-              }
-              
-
-              //console.log(movieData.items[0].rank);
-              
-              if(movieList.length===checkLength){
-                  movieList.sort(function(a,b){
-                      return parseFloat(a.rank)-parseFloat(b.rank)
-                  })
-                  //console.log(movieList);
+          let rank = result.dailyBoxOfficeList[i].rnum
+          naverAPI.getMovieList(option,rank)
+          .then(function(result2){
                   
-                  // movies = {
-                  //     "boxOffice" : movieList
-                  // }
-                  console.log(movieList);
-                  if(movieList){
-                    response.status(200).send({code : 200, result : movieList});
-                  }else{
-                    response.status(400).send({code : 400, result : '에러'});
-                  }
-                  
-              }
+                crawling.boxOfficeParsing(result2.movieCd,result2,async function(res){
+                    movieList.push(res);
+                    /*
+                    await db.query('insert into boxoffice(movierank,name,movieCd,image) values(?,?,?,?)',[res.rank*=1,res.name,res.movieCd,res.image],function(err,result){
+                      if(err){
+                        console.log('sql err');
+                      }
+                    })
+                    */
+                    if(i === result.dailyBoxOfficeList.length-1){
+                        movieList.sort(function(a,b){
+                            return parseFloat(a.rank)-parseFloat(b.rank)
+                        })
+                        movies = {
+                            "boxOffice" : movieList
+                        }
+                        response.status(200).send({code:200, result:movies});
+                    }
+                })
           })
       }
   })
-  
 })
 
 
@@ -357,7 +259,7 @@ router.get('/top10', async function(req, response){
           title = title.substring(0,title.length/2);
       }
       item = {
-          "image": $(".poster").find("img").attr("src"),
+          "image": $(".mv_info_area").find("img").attr("src"),
           "title": title,
           "movieCd": keyword,
           "rank": rank
