@@ -124,92 +124,111 @@ router.get('/detail/:movieCd', async function(req, response, next){
 })
 
 
-router.get('/boxOffice', function(req, response){
+router.get('/boxOffice', async function(req, response,next){
 
-  
-
-  let movies = new Object();
-  let now = new Date();	// 현재 날짜 및 시간
-
-  let yesterday = new Date(now.setDate(now.getDate() - 1));	// 어제
-  
-  let yy = yesterday.toString().split(' ');
-
-  let month = function(d){
-      if(d[1]==='Jan'){
-          return '01'
-      } else if(d[1] === 'Feb'){
-          return '02'
-      } else if(d[1] === 'Mar'){
-          return '03'
-      } else if(d[1] === 'Apr'){
-          return '04'
-      } else if(d[1] === 'May'){
-          return '05'
-      } else if(d[1] === 'Jun'){
-          return '06'
-      } else if(d[1] === 'Jul'){
-          return '07'
-      } else if(d[1] === 'Aug'){
-          return '08'
-      } else if(d[1] === 'Sept'){
-          return '09'
-      } else if(d[1] === 'Oct'){
-          return '10'
-      } else if(d[1] === 'Nov'){
-          return '11'
-      } else if(d[1] === 'Dec'){
-          return '12'
-      }
-  }
-  
-  let targetDt = yy[3]+month(yy)+yy[2];
-  
-  let a = movieData.getName(targetDt);
-  
-  a.then(function(result){
-      let movieData;
+  await db.query('select * from boxoffice order by movierank',async(err, result)=>{
+    if(err){
+      next(err)
+    }
+    if(result.length>0){
+      //console.log('있으면',result)
+      response.status(200).send({code:200, boxOffice: result});
+    }
+    else{
+      //console.log('없음')
+      let movies = new Object();
+      let now = new Date();	// 현재 날짜 및 시간
+    
+      let yesterday = new Date(now.setDate(now.getDate() - 1));	// 어제
       
-      let movieList = new Array();
-      //let movieTT = new Array();
-      let checkLength = result.dailyBoxOfficeList.length;
-      for(let i=0; i<result.dailyBoxOfficeList.length; i++){
-        let prdtYear = result.dailyBoxOfficeList[i].prdtYear;
-              const option = {
-              query : result.dailyBoxOfficeList[i].movieNm,
-              start :1,
-              display:1,
-              yearfrom:prdtYear,
-              yearto:prdtYear,
-              sort :'sim',
-              filter:'small',
+      let yy = yesterday.toString().split(' ');
+    
+      let month = function(d){
+          if(d[1]==='Jan'){
+              return '01'
+          } else if(d[1] === 'Feb'){
+              return '02'
+          } else if(d[1] === 'Mar'){
+              return '03'
+          } else if(d[1] === 'Apr'){
+              return '04'
+          } else if(d[1] === 'May'){
+              return '05'
+          } else if(d[1] === 'Jun'){
+              return '06'
+          } else if(d[1] === 'Jul'){
+              return '07'
+          } else if(d[1] === 'Aug'){
+              return '08'
+          } else if(d[1] === 'Sept'){
+              return '09'
+          } else if(d[1] === 'Oct'){
+              return '10'
+          } else if(d[1] === 'Nov'){
+              return '11'
+          } else if(d[1] === 'Dec'){
+              return '12'
           }
-          let rank = result.dailyBoxOfficeList[i].rnum
-          naverAPI.getMovieList(option,rank)
-          .then(function(result2){
-                  
-                crawling.boxOfficeParsing(result2.movieCd,result2,async function(res){
-                    movieList.push(res);
-                    /*
-                    await db.query('insert into boxoffice(movierank,name,movieCd,image) values(?,?,?,?)',[res.rank*=1,res.name,res.movieCd,res.image],function(err,result){
-                      if(err){
-                        console.log('sql err');
-                      }
-                    })
-                    */
-                    if(i === result.dailyBoxOfficeList.length-1){
-                        movieList.sort(function(a,b){
-                            return parseFloat(a.rank)-parseFloat(b.rank)
-                        })
-                        movies = {
-                            "boxOffice" : movieList
-                        }
-                        response.status(200).send({code:200, result:movies});
-                    }
-                })
-          })
       }
+      
+      let targetDt = yy[3]+month(yy)+yy[2];
+      
+      let a = movieData.getName(targetDt);
+      
+      a.then(function(result){
+          let movieData;
+          
+          let movieList = new Array();
+          //let movieTT = new Array();
+          let checkLength = result.dailyBoxOfficeList.length;
+          for(let i=0; i<result.dailyBoxOfficeList.length; i++){
+            let prdtYear = result.dailyBoxOfficeList[i].prdtYear;
+                  const option = {
+                  query : result.dailyBoxOfficeList[i].movieNm,
+                  start :1,
+                  display:1,
+                  yearfrom:prdtYear,
+                  yearto:prdtYear,
+                  sort :'sim',
+                  filter:'small',
+              }
+              let rank = result.dailyBoxOfficeList[i].rnum
+              naverAPI.getMovieList(option,rank)
+              .then(function(result2){
+                      
+                    crawling.boxOfficeParsing(result2.movieCd,result2,async function(res){
+                        movieList.push(res);
+                        
+                        await db.query('insert into boxoffice(movierank,name,movieCd,image) values(?,?,?,?)',[res.rank*=1,res.name,res.movieCd,res.image],function(err,result){
+                          if(err){
+                            console.log('sql err');
+                          }
+                        })
+                        
+                        if(movieList.length === result.dailyBoxOfficeList.length){
+                          await db.query('select * from boxoffice order by movierank',async(err, result)=>{
+                            if(err){
+                              next(err)
+                            }
+                             response.status(200).send({code:200, boxOffice: result});
+                          })
+                            // movieList.sort(function(a,b){
+                            //     return parseFloat(a.rank)-parseFloat(b.rank)
+                            // })
+                            // movies = {
+                            //     "boxOffice" : movieList
+                            // }
+                            // response.status(200).send({code:200, boxOffice:movies});
+                        }
+                    })
+              })
+          }
+      })
+      
+    }
   })
+
+
 })
 
 
