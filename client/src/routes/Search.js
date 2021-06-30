@@ -1,100 +1,70 @@
-import React from 'react';
-import qs from 'qs';
+import React, {useState} from 'react';
 import axios from 'axios';
-import request from 'request';
-import MovieCard from '../components/MovieCard';
-import jsonData from './item.json';
-import { useLocation } from 'react-router';
-
-
-const NAVER_CLIENT_ID = "uzK_pSQ_WaUUJQ1dj8Me";
-const NAVER_CLIENT_SECRET = "nlgAT5sHfD";
-const serviceKey = "06675af903736aef8fb3a019a30249a2"
-
-
+//import {useLocation, useHistory} from 'react-router';
+import SearchPresenter from './Presenters/SearchPresenter';
 
 const Search = () => {
-  const location = useLocation();
-  const searchTitle = location.search.split("=")[1];
+  const [searchCrit, setSearchCrit] = useState("title");
+  const [searchContent, setSearchContent] = useState('');
+  const [result, setResult] = useState([]);
+  const [currentSearch, setCurrentSearch] = useState('');
+  const props = {searchContent, result, currentSearch};
+  // const history = useHistory();
+  // const location = useLocation();
 
-  function getName(callback) {
-    movieData(searchTitle).then((response) => {
-      console.log(response.movieListResult.movieList);
-      callback(response.movieListResult.movieList);
-    })
+  const submitSearch = async () => {
+    setCurrentSearch(searchContent);
+    if (searchCrit === "title") {
+      console.log("search from title");
+      const check = 1;
+      const movieNm = searchContent;
+      console.log("start axios");
+      await axios.post(`${process.env.REACT_APP_SERVER_URL}/search`, { check, movieNm })
+      .then((response) => {
+        console.log(response);
+        setResult(response.data.result);
+      })
+      .catch((error) => {
+        window.alert(error.response.data.message);
+      });
+      console.log("end axios");
+      console.log(result);
+    }
+    else if (searchCrit === "director") {
+      console.log("search from director");
+      const check = 2;
+      const dirNm = searchContent;
+      console.log("start axios");
+      await axios.post(`${process.env.REACT_APP_SERVER_URL}/search`, { check, dirNm })
+      .then((response) => {
+        console.log(response);
+        setResult(response.data.result);
+      })
+      .catch((error) => {
+        window.alert(error.response.data.message);
+      });
+      console.log("end axios");
+      console.log(result);
+    }
   }
   
-  function movieData(searchTitle){
-    return axios.get(`http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieList.json?key=${serviceKey}&movieNm=${searchTitle}`).then(response =>{
 
-      return response.data
-    })
+  const takeInput = (e) => {
+    setSearchContent(e.target.value);
   }
 
-  let getMovieList = [];
-  for(let i=0; i<10; i++){
-      getName(async function(data) {
-        //console.log(data[i]);
-        let year = data[i].openDt.split('-')[0];
-        const option = {
-            query : data[i].movieNm,
-            start :1,
-            display:1,
-            yearfrom:year-1,
-            yearto:year,
-            sort :'sim',
-            filter:'small',
-        }
-          
-          request.get({
-              uri: 'https://openapi.naver.com/v1/search/movie.json',
-              qs: option,
-              headers: {
-                  'X-Naver-Client-Id': NAVER_CLIENT_ID,
-                  'X-Naver-Client-Secret': NAVER_CLIENT_SECRET
-              }
-          }, async function (err, res, body) {
-              //console.log('쿼리', i, option.query);
-              //console.log('개봉일', i, option.yearfrom);
-              
-              let movieData = JSON.parse(body);
-              movieData.items[0].lank = i+1;
-              let nameImage = { //데이터 골라서 넣기
-                  "lank" : i+1,
-                  "name" : movieData.items[0].title,
-                  "image" : movieData.items[0].image,
-                  "userRating" : movieData.items[0].userRating,
-              }
-              //console.log('asdfasdf', movieData.items[0]);
-              //movieList.push(movieData.items[0]);   모든 데이터 넣기
-              getMovieList.push(nameImage);
-              
-              //console.log('asdf',movieList[1]);
-              if(getMovieList.length===10){
-                  getMovieList.sort(function(a,b){
-                      return parseFloat(a.lank)-parseFloat(b.lank)
-                  })
-                  //movieList = JSON.stringify(movieList);
-                  console.log('일일 박스오피스 리스트',getMovieList);
-                  // console.log('제목으로 찾기');
-                  // for(let j=0; j<10; j++){
-                  //     if(movieList[j].title==='<b>파이프라인</b>'){
-                  //         console.log(movieList[j].image);
-                  //     }
-                  // }
-                  console.log('이미지 추출',getMovieList[0].image);
-                  
-              }
-          }) 
-          
-          }
-      )
+  const SearchCritCheck = (e) => {
+    setSearchCrit(e.target.value);
+  };
+
+  const inputEnter = (e) => {
+    if (e.key === 'Enter') {
+      submitSearch();
+    }
   }
 
-  return (
-    <div>
-      
-    </div>
+  return ( 
+    <SearchPresenter searchCritCheck={SearchCritCheck} searchCrit={searchCrit} submitSearch={submitSearch} takeInput={takeInput} inputEnter={inputEnter} {...props}/>
   )
 }
 
