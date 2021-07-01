@@ -11,25 +11,26 @@ const movieData = require('../lib/boxOffice/movieData');
 
 router.get('/detail/:movieCd', async function(req, response, next){
   const movieCd = req.params.movieCd;
-  await db.query('SELECT movieCd FROM moviecount', async function(error, results){
+  await db.query('SELECT * FROM moviecount WHERE movieCd = ?', [movieCd], async function(error, results){
     if(error){
-      throw(error);
+      next(error);
     }
     if(results.length===0){ //null값
 
       await db.query('INSERT INTO moviecount(movieCd, count) values (?, ?)', [
         movieCd, 1
       ])
-      console.log('moviecount 테이블 갱신');
+      //console.log('moviecount 테이블 갱신');
     }
     else{ //moviecount에 해당 영화가 있으면
-      await db.query('SELECT count FROM moviecount', async function(error2, count){
+      await db.query('SELECT count FROM moviecount where movieCd = ?',[movieCd] ,async function(error2, count){
         if(error2){
-          throw(error2);
+          next(error2);
         }
-        else{
-          await db.query('UPDATE moviecount SET count = ? WHERE movieCd = ?', [count[0].count + 1, movieCd]);
-        }
+
+        await db.query('UPDATE moviecount SET count = ? WHERE movieCd = ?', [count[0].count+1, movieCd]
+        );
+        
       })
     }
 
@@ -110,7 +111,7 @@ router.get('/detail/:movieCd', async function(req, response, next){
 
       parsing(movieCd,resultR,function(res){
           //console.log(res);
-          console.log(res)
+          
           if(res){
             response.status(200).send({code : 200, result : res});
           }else{
