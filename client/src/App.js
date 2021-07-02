@@ -18,18 +18,13 @@ import { HashRouter as Router, Route } from 'react-router-dom';
 function App() {
   const [isLoginChecked, setIsLoginChecked] = useState(false);
   const loginCheck = async () => {
-
-    await axios
-      .get(`${process.env.REACT_APP_SERVER_URL}/auth/login`, { withCredentials: true })
-      .then(async (result) => {
-
     await axios.get(`${process.env.REACT_APP_SERVER_URL}/auth/login`, { withCredentials: true })
     .then(async (result) => {
         console.log(result);
         await store.dispatch({ type: 'LOGIN', user: result.data.dataValues });
       })
     .catch((error) => {
-      console.log(error.response.data);
+      console.log(error.response);
       setIsLoginChecked(true);
     });
   };
