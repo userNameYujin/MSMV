@@ -13,15 +13,15 @@ const Detail = () => {
     await axios.get(`${process.env.REACT_APP_SERVER_URL}/post/detail/${movieCd}`, { movieCd })
     .then((response) => {
       setMovieData(response.data.result);
+      console.log(response.data.result);
     })
     .catch((error) => {
       console.log(error);
     });
   }
 
-  console.log(movieCd);
-  console.log(movieData);
   useEffect(() => getMovieData(), []);
+  
 
   return (
     <DetailPresenter movieData={movieData}/>

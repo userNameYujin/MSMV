@@ -13,10 +13,10 @@ const SearchPresenter = ({searchCritCheck, searchCrit, submitSearch, takeInput, 
       <input onChange={takeInput} onKeyPress={inputEnter} placeholder="검색어 입력"></input>
       <button onClick={submitSearch}>검색</button>
       <div>
-        <h>{currentSearch}에 대한 검색 결과</h>
+        <h1>{currentSearch}에 대한 검색 결과</h1>
           {result.map((movie, index) => ( 
             <div>
-              <img src={movie.image}></img>
+              <img alt={movie.title} src={movie.image}></img>
               <Link to={`/Detail?code=${movie.movieCd}`}>{movie.title}</Link> <p>{movie.rate}</p>
             </div>
           ))}

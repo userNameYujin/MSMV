@@ -7,6 +7,7 @@ import Join from './routes/Join.js';
 import Header from './routes/Header.js';
 import Search from './routes/Search.js';
 import Detail from './routes/Detail.js';
+import MyPage from './routes/MyPage.js';
 
 import store from "./store";
 import axios from 'axios';
@@ -35,9 +36,9 @@ function App() {
   }, []);
 
   return (
-    <>
+    <div className="App">
       {isLoginChecked && (
-        <Router className="App">
+        <Router>
             <Header />
           <Route exact path="/">
             <Main />
@@ -54,9 +55,13 @@ function App() {
           <Route exact path="/detail">
             <Detail />
           </Route>
+          <Route exact path="/mypage">
+            <MyPage />
+          </Route>
         </Router>
       )}
-    </>
+    </div>
+    
   );
 }
 
