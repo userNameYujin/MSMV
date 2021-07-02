@@ -11,10 +11,11 @@ const Header = styled.header`
 `;
 
 const Banner = styled(Link)`
-  font-size: 2rem;
+  font-size: 2.5rem;
   letter-spacing:2px;
   color: red;
-  font-family: cursive;
+  font-family: fantasy;
+  
 `;
 
 const Menu = styled.div`
@@ -83,6 +84,15 @@ const Spacer2 = styled.div`
     flex-grow: 0.01;
 `;
 
+const SearchLink = styled(Link)`
+  color: red;
+  text-decoration: none;
+  font-size: 13px;
+  &:hover {
+    color: white;
+}
+`;
+
 const HeaderPresenter = ({user, LogoutClick}) => {
   return (
     <Header>
@@ -90,6 +100,8 @@ const HeaderPresenter = ({user, LogoutClick}) => {
       <Menu>
       <Banner to='/'>GlaDos</Banner>
       <Spacer/>
+      <SearchLink to = "/search">영화검색하러 가기!</SearchLink>
+      <Spacer2/>
         {user ? (
           <LogoutButton onClick={LogoutClick}>Logout</LogoutButton>
         ) : (

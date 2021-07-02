@@ -22,7 +22,7 @@ const Input = styled.input`
   height: 40px;
   margin-top: 5px;
   margin-bottom: 20px;
-  border: 1px solid gray;
+  border: 2px solid black;
   border-radius: 3px;
   transition: border 0.1s ease-in-out;
   outline: none;
