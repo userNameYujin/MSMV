@@ -25,7 +25,7 @@ function App() {
         await store.dispatch({ type: 'LOGIN', user: result.data.dataValues });
       })
     .catch((error) => {
-      console.log(error.response.data);
+      console.log(error.response);
       setIsLoginChecked(true);
     });
   };

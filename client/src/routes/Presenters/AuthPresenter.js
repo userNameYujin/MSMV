@@ -2,6 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
+const Wrapper = styled.div`
+    padding-top: 60px; 
+`;
+
 const Login = styled.div`
   width: 100%;
   display: flex;
@@ -45,7 +49,7 @@ const Input = styled.input`
   outline: none;
   &:hover,
   &:focus {
-    border: 2px solid #2962ff;
+    border: 2px solid red;
   }
 `;
 
@@ -56,7 +60,7 @@ const PasswordTitleDiv = styled.div`
 `;
 
 const PasswordResetLink = styled(Link)`
-  color: #0053f4;
+  color: red;
   text-decoration: none;
   font-size: 13px;
 `;
@@ -70,14 +74,14 @@ const LoginButton = styled.button`
   cursor: pointer;
   outline: none;
   width: 80%;
-  background-color: #2962ff;
+  background-color: black;
   height: 40px;
-  color: #ffffff;
+  color: red;
   font-weight: 600;
   font-size: 15px;
   border-radius: 4px;
   &:hover {
-    background-color: #0039cb;
+    background-color: white;
   }
 `;
 
@@ -111,6 +115,7 @@ const LinkInnerSpan = styled.span`
 
 const AuthPresenter = ({ id, password, onChange, onSubmit }) => {
   return (
+    <Wrapper>
     <Login>
       <LoginForm onSubmit={onSubmit}>
         <LoginTitle>로그인</LoginTitle>
@@ -133,6 +138,7 @@ const AuthPresenter = ({ id, password, onChange, onSubmit }) => {
         </JoinLink>
       </AskJoinDiv>
     </Login>
+    </Wrapper>
   );
 };
 

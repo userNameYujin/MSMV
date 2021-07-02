@@ -2,6 +2,10 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import styled from 'styled-components';
 
+const Wrapper = styled.div`
+    padding-top: 60px; 
+`;
+
 const MainPage = styled.div`
 `;
 
@@ -16,6 +20,7 @@ const BoxofficeDiv = styled.div`
 
 const MainPresenter = ({boxOfficeData}) => {
   return (
+    <Wrapper>
     <MainPage>
       <MainDiv>
         <SearchedDiv>
@@ -32,6 +37,7 @@ const MainPresenter = ({boxOfficeData}) => {
         </BoxofficeDiv>
       </MainDiv>
     </MainPage>
+    </Wrapper>
   );
 };
 

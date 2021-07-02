@@ -10,7 +10,7 @@ const getHTML = async(keyword) => {
     
 }
 
-const boxOfficeParsing = async(keyword, result, callback) => {
+const parsing = async(keyword, result, callback) => {
     const html = await getHTML(keyword);
     
     const $ = cheerio.load(html.data); 
@@ -20,4 +20,4 @@ const boxOfficeParsing = async(keyword, result, callback) => {
     callback(result);
 
 }
-module.exports = {boxOfficeParsing};
+module.exports = {parsing};

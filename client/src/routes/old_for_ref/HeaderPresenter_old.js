@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import SearchContainer from './SearchContainer';
 
 const Header = styled.header`
-  height: 120px;
+  height: 150px;
   display: flex;
   justify-content: space-between;
 `;
