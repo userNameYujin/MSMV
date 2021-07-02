@@ -69,6 +69,7 @@ const GradientBorder = styled.div`
     background: linear-gradient(to right, white, red);
 `;
 
+
 const BlackBackground = styled.div`
     background: black;
     display: flex;
@@ -94,6 +95,7 @@ const SearchLink = styled(Link)`
 `;
 
 const HeaderPresenter = ({user, LogoutClick}) => {
+
   return (
     <Header>
       <BlackBackground>
@@ -112,6 +114,8 @@ const HeaderPresenter = ({user, LogoutClick}) => {
             
           </>
         )}
+
+
       </Menu>
       </BlackBackground>
       <GradientBorder/>

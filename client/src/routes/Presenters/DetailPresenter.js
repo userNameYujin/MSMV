@@ -10,7 +10,7 @@ const DetailPresenter = ({movieData}) => {
         {movieData.openDt}
       </li>
       <li>
-        <img src={movieData.image}/>
+        <img src={movieData.image} alt="movieData.title"/>
       </li>
       <li>
         {movieData.grade}

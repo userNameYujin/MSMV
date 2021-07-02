@@ -29,8 +29,8 @@ const MainPresenter = ({boxOfficeData}) => {
         <BoxofficeDiv>
           <p>this div is for 'daily boxoffice movies'</p>
           {boxOfficeData.map((movie, index) => ( 
-            <div>
-              <img src={movie.image}></img>
+            <div key={movie.movieCd}>
+              <img src={movie.image} alt={movie.name}></img>
               <Link to={`/Detail?code=${movie.movieCd}`}>{movie.name}</Link> <p>{movie.rank}</p>
             </div>
           ))}

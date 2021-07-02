@@ -78,12 +78,11 @@ const Join = () => {
   };
 
   const onSubmit = async (e) => {
-    let code = 0;
     if (!isPasswordSame())
       return window.alert('비밀번호를 다시 확인해주세요.');
     
     //id check
-    switch(code = await isIdAvailable()) {
+    switch(await isIdAvailable()) {
       case 200 : 
         break;
       case 400 :
@@ -92,7 +91,7 @@ const Join = () => {
         return window.alert('ID 체크 중 오류');
     }
 
-    switch(code = await isNicknameAvailable()) {
+    switch(await isNicknameAvailable()) {
       case 200 : 
         break;
       case 400 :

@@ -120,6 +120,7 @@ const SearchPresenter = ({searchCritCheck, searchCrit, submitSearch, takeInput, 
         <option value="director">감독</option>
       </select>
 
+
       <Spacer/>
       <Input onChange={takeInput} placeholder="검색어 입력"></Input>
       <Spacer/>
@@ -139,6 +140,7 @@ const SearchPresenter = ({searchCritCheck, searchCrit, submitSearch, takeInput, 
               </Info>
               
             </MovieDiv>
+
           ))}
       </Shape>
       </SearchResult>  
