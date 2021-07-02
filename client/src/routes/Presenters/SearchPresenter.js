@@ -1,6 +1,6 @@
 import React, {optionsState} from "react";
 import {Link} from "react-router-dom";
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const Wrapper = styled.div`
     padding-top: 60px; 
@@ -65,6 +65,51 @@ const SearchResult = styled.div`
 const SearchPresenter = ({searchCritCheck, searchCrit, submitSearch, takeInput, searchContent, result, currentSearch}) => {
   let link;
 
+  const Shape = styled.div`
+    display: block;
+    flex: 1;
+    margin-left: auto;
+    margin-right: auto; 
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+    width: 65%;
+    height: auto;
+    background: lightgray;
+
+  
+  `;
+
+  const MovieDiv = styled.div`
+    display: inline-block;
+    
+    margin-left: auto;
+    margin-right: auto;
+    width: 400px;
+    height: 300px;
+    background: #606060;
+    float: right;
+    list-style: none;
+    padding: 10px;
+    margin: 10px 20px 30px 10px;
+    border-radius: 10px;
+    box-shadow: 0 15px 10px #000;
+    font-family: 'Noto Sans KR', sans-serif;
+
+  `;
+
+  const Image = styled.div`
+
+    width: 200px;
+    height: 200px;
+    size: cover;
+  `;  
+  
+  const Info = styled.div`
+    display:
+    font-size: 20px;
+  `;
+
   return (
     <Wrapper>
     <div>
@@ -74,21 +119,30 @@ const SearchPresenter = ({searchCritCheck, searchCrit, submitSearch, takeInput, 
         <option value="title">제목</option>
         <option value="director">감독</option>
       </select>
+
       <Spacer/>
       <Input onChange={takeInput} placeholder="검색어 입력"></Input>
       <Spacer/>
       <SearchButton onClick={submitSearch}>검색</SearchButton>
       </SearchAsk>
       <SearchResult>
-      <div>
-        <h>{currentSearch}에 대한 검색 결과</h>
+      <Shape>
+        <h>-----------------------------------------{currentSearch}에 대한 검색 결과-----------------------------------------</h>
           {result.map((movie, index) => ( 
-            <div>  
-              <Link to={`/Detail?code=${movie.movieCd}`}>{movie.title}</Link> <p>{movie.rate}</p>
-            </div>
+            
+            <MovieDiv>
+              <Image>
+                <img src={movie.image}></img>
+              </Image>
+              <Info>
+                <Link to={`/Detail?code=${movie.movieCd}`}>{movie.title}</Link> <p>{movie.rate}</p>
+              </Info>
+              
+            </MovieDiv>
           ))}
-      </div>
+      </Shape>
       </SearchResult>  
+
     </div>
     </Wrapper>
   )
