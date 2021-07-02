@@ -1,47 +1,108 @@
-import React, {optionsState} from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from "styled-components";
 
 const Header = styled.header`
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0px;
+  width: 100%;
 `;
 
 const Banner = styled(Link)`
+  font-size: 2rem;
+  letter-spacing:2px;
+  color: red;
+  font-family: cursive;
 `;
 
 const Menu = styled.div`
+width: 1200px;
+height: 55px;
+display: flex;
+flex-direction: row;
+align-items: center;
+
+padding-right: 1rem;
+padding-left: 1rem;
+ 
+`;
+
+const LoginJoinButton = styled(Link)`
+font-weight: 600;
+color: red;
+border: 1px solid red;
+padding: 0.5rem;
+padding-bottom: 0.4rem;
+cursor: pointer;
+border-radius: 2px;
+text-decoration: none;
+transition: .2s all;
+
+&:hover {
+    background: $red;
+    color: white;
+}
 `;
 
 const LogoutButton = styled.button`
+font-weight: 600;
+color: red;
+border: 1px solid red;
+padding: 0.5rem;
+padding-bottom: 0.4rem;
+cursor: pointer;
+border-radius: 2px;
+text-decoration: none;
+transition: .2s all;
+
+&:hover {
+    background: $red;
+    color: white;
+}
 `;
 
-const StyledLink = styled(Link)`
-  padding: 0px 100px;
+const GradientBorder = styled.div`
+    height: 5px;
+    background: linear-gradient(to right, white, red);
 `;
 
-const Input = styled.input`
+const BlackBackground = styled.div`
+    background: black;
+    display: flex;
+    justify-content: center;
+    height: auto;
 `;
 
-const HeaderPresenter = ({user, LogoutClick, SearchCritCheck, SearchClick}) => {
+const Spacer = styled.div`
+    flex-grow: 1;
+`;
+
+const Spacer2 = styled.div`
+    flex-grow: 0.01;
+`;
+
+const HeaderPresenter = ({user, LogoutClick}) => {
   return (
     <Header>
-      <Banner to='/'>MSMV</Banner>
+      <BlackBackground>
       <Menu>
+      <Banner to='/'>GlaDos</Banner>
+      <Spacer/>
         {user ? (
           <LogoutButton onClick={LogoutClick}>Logout</LogoutButton>
         ) : (
           <>
-            <StyledLink to="Login">Login</StyledLink>
-            <StyledLink to="Join">Join</StyledLink>
+            <LoginJoinButton to="Login">Login</LoginJoinButton>
+            <Spacer2/>
+            <LoginJoinButton to="Join">Join</LoginJoinButton>
+            
           </>
         )}
-        {/* <select name="SearchCrit" value={optionsState} onChange={SearchCritCheck}>
-          <option value="title">제목</option>
-          <option value="director">감독</option>
-        </select>
-        <Input placeholder="검색"/>
-        <button onClick={SearchClick}>검색</button> */}
-        <Link to="/search"><img src="https://previews.123rf.com/images/tatianasun/tatianasun1612/tatianasun161200074/68936384-%EB%8F%8B%EB%B3%B4%EA%B8%B0-%EC%95%84%EC%9D%B4%EC%BD%98-%EB%B2%A1%ED%84%B0-%EB%8F%8B%EB%B3%B4%EA%B8%B0-%EB%98%90%EB%8A%94-%EB%B6%80%EB%B6%84-%ED%99%95%EB%8C%80-%EA%B8%B0%ED%98%B8-.jpg"  width="50px"/></Link>
       </Menu>
+      </BlackBackground>
+      <GradientBorder/>
     </Header>
   )
 }
