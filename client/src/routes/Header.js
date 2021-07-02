@@ -18,15 +18,22 @@ const Header = () => {
   // check isinlogin
 
   const history = useHistory();
-  const moveSearch = (e) => {
+  const moveSearch = () => {
     if (window.location.hash === "#/Search")
       ;//do nothing
     else
-      history.push("/search");
+      history.push("/Search");
+  }
+
+  const moveMyPage = () => {
+    if (window.location.hash === "#/MyPage")
+      ;//do nothing
+    else
+      history.push("/MyPage");
   }
 
   return (
-    <HeaderPresenter user={user} LogoutClick={LogoutClick} moveSearch={moveSearch}/>
+    <HeaderPresenter user={user} LogoutClick={LogoutClick} moveSearch={moveSearch} moveMyPage={moveMyPage}/>
   );
 }
 

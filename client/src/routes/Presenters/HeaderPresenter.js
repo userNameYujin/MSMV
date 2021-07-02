@@ -94,7 +94,7 @@ const SearchLink = styled(Link)`
 }
 `;
 
-const HeaderPresenter = ({user, LogoutClick}) => {
+const HeaderPresenter = ({user, LogoutClick, moveSearch, moveMyPage}) => {
 
   return (
     <Header>
@@ -111,6 +111,10 @@ const HeaderPresenter = ({user, LogoutClick}) => {
             <LoginJoinButton to="Login">Login</LoginJoinButton>
             <Spacer2/>
             <LoginJoinButton to="Join">Join</LoginJoinButton>
+            <Spacer2/>
+            <LoginJoinButton onClick={moveMyPage}>[MyPageImage]</LoginJoinButton>
+            <Spacer2/>
+            <LoginJoinButton onClick={moveSearch}>[SearchImage]</LoginJoinButton>
             
           </>
         )}

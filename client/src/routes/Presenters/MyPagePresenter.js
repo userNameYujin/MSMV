@@ -4,7 +4,7 @@ const MyPagePresenter = () => {
   return (
 
     <div>
-      <p>MyPage Example</p>
+      <img alt="mypage" src="https://beslow.co.kr/assets/img/mobile-float-mypage.png" width="50px"/>
     </div>
   )
 }
