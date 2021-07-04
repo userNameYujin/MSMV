@@ -4,6 +4,7 @@ import {useLocation} from "react-router";
 import axios from "axios";
 
 const Detail = () => {
+  // below for detail code
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const movieCd = searchParams.get("code")
@@ -22,9 +23,31 @@ const Detail = () => {
 
   useEffect(() => getMovieData(), []);
   
+  // below for review code
+  const [reviewContent, setReviewContent] = useState('');
 
+  const submitWriteReview = () => {
+
+  }
+
+  const reviewOnChange = (e) => {
+    setReviewContent(e.target.value);
+    console.log(reviewContent);
+  }
+
+  const reviewOnClick = () => {
+    submitWriteReview();
+  }
+
+  const reviewOnKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      reviewOnClick();
+    }
+  }
+
+  
   return (
-    <DetailPresenter movieData={movieData}/>
+    <DetailPresenter movieData={movieData} reviewOnChange={reviewOnChange} reviewOnClick={reviewOnClick} reviewOnKeyPress={reviewOnKeyPress} />
   )
 }
 
