@@ -1,32 +1,42 @@
 import React from 'react';
+import styled from 'styled-components';
 
-const DetailPresenter = ({movieData}) => {
+const List = styled.div`
+  margin: auto;
+  width: 65%;
+`;
+
+const DetailPresenter = ({movieData, reviewOnChange, reviewOnClick, reviewOnKeyPress}) => {
   return (
     <div>
-      <li>
+      <List>
         {movieData.title}
-      </li>
-      <li>
+      </List>
+      <List>
         {movieData.openDt}
-      </li>
-      <li>
+      </List>
+      <List>
         <img src={movieData.image} alt="movieData.title"/>
-      </li>
-      <li>
+      </List>
+      <List>
         {movieData.grade}
-      </li>
-      <li>
+      </List>
+      <List>
         {movieData.genres}
-      </li>
-      <li>
+      </List>
+      <List>
         {movieData.country}
-      </li>
-      <li>
+      </List>
+      <List>
         {movieData.runningTime}
-      </li>
-      <li>
+      </List>
+      <List>
         {movieData.summary}
-      </li>
+      </List>
+
+      <div>
+        <input onChange={reviewOnChange} onClick={reviewOnClick} onKeyPress={reviewOnKeyPress} placeholder="리뷰 작성"></input>
+      </div>
     </div>
   )
 }
