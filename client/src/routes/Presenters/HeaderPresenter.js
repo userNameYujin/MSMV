@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from "styled-components";
+import { Button, Tooltip } from "antd";
+import { SearchOutlined } from "@ant-design/icons"
 
 const Header = styled.header`
   display: flex;
@@ -12,7 +14,7 @@ const Header = styled.header`
 
 const Banner = styled(Link)`
   font-size: 2.5rem;
-  letter-spacing:2px;
+  letter-spacing:3px;
   color: red;
   font-family: fantasy;
   
@@ -94,15 +96,25 @@ const SearchLink = styled(Link)`
 }
 `;
 
+const MenuButton = styled(Button)`
+    cursor: pointer;
+    background-color : red;
+    `;
+
 const HeaderPresenter = ({user, LogoutClick}) => {
 
   return (
     <Header>
       <BlackBackground>
       <Menu>
-      <Banner to='/'>GlaDos</Banner>
+      <Banner to='/'>MSmV</Banner>
       <Spacer/>
       <SearchLink to = "/search">영화검색하러 가기!</SearchLink>
+      
+            <Tooltip title="영화검색하러 가기!">
+                <MenuButton to ="Search" shape="circle" icon={<SearchOutlined />} ></MenuButton>
+            </Tooltip>   
+        
       <Spacer2/>
         {user ? (
           <LogoutButton onClick={LogoutClick}>Logout</LogoutButton>
