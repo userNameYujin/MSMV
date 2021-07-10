@@ -2,6 +2,7 @@ const request = require('request')
 
 
 function getMovieList(option, rank){ //박스오피스 검색시 사용
+    //console.log('옵션',option)
     return new Promise(resolve=>{
         request.get({
             uri: 'https://openapi.naver.com/v1/search/movie.json',
@@ -11,7 +12,13 @@ function getMovieList(option, rank){ //박스오피스 검색시 사용
                 'X-Naver-Client-Secret': process.env.NAVER_CLIENT_SECRET
             }
         },function(err, res, body){
+            
+            //console.log('바디',body);
             movieData = JSON.parse(body);
+            //console.log('무비데이터',movieData.items[0])
+            if(movieData.items[0] === undefined){
+                return resolve(false)
+            }
             //movieData.items[0].rank = result.dailyBoxOfficeList[i].rnum;
             let boxOfficeData = { //데이터 골라서 넣기
                 "rank" : rank,
