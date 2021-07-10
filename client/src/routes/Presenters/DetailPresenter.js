@@ -26,9 +26,13 @@ background: black;
     color: black;
 }
 `;
+const ReviewTitle = styled.div`
+  margin-top: 50px;
+  font-size: 20px;
+  font-weight: 600;
+`;
 
-
-const DetailPresenter = ({movieData}) => {
+const DetailPresenter = ({movieData, handleClick, reviewValue}) => {
   return (
     <Wrapper>
       <br />
@@ -48,11 +52,13 @@ const DetailPresenter = ({movieData}) => {
     
     <div>
     <br />
+    <ReviewTitle>리뷰</ReviewTitle>
+    <hr />
       <form style={{ display: 'flex' }} onSubmit>
                 <textArea
                     style={{ width: '80%', borderRadius: '2px' }}
-                    onChange
-                    value
+                    onChange={handleClick}
+                    value={reviewValue}
                     placeholder="리뷰를 입력해주세요"
                 />
                 <br />

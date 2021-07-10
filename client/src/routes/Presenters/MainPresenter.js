@@ -19,6 +19,11 @@ const SearchedDiv = styled.div`
 
 const BoxofficeDiv = styled.div`
 `;
+const BoxOfficeTitle = styled.div`
+  margin-top: 50px;
+  font-size: 20px;
+  font-weight: 600;
+`;
 
 const MainPresenter = ({boxOfficeData}) => {
   return (
@@ -31,7 +36,8 @@ const MainPresenter = ({boxOfficeData}) => {
         <BoxofficeDiv>
           <p>this div is for 'daily boxoffice movies'</p>
           
-          <li>최근 박스오피스 개봉영화</li>
+          <BoxOfficeTitle>최근 박스오피스 개봉영화</BoxOfficeTitle>
+          <hr />
           <Row gutter={[16,16]}>
           {boxOfficeData && boxOfficeData.map((movie, index) => ( 
             <React.Fragment key={movie.movieCd}>
