@@ -33,18 +33,18 @@ const JoinTitle = styled.div`
 
 const InputContainer = styled.div`
   width: 80%;
-  margin-top: 30px;
+  margin-top: 40px;
 `;
 
 const Input = styled.input`
   padding: 0px 10px;
   box-sizing: border-box;
   width: 100%;
-  height: 40px;
+  height: 50px;
   margin-top: 5px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   border: 1px solid gray;
-  border-radius: 3px;
+  border-radius: 1px;
   transition: border 0.1s ease-in-out;
   outline: none;
   &:hover,
@@ -53,22 +53,22 @@ const Input = styled.input`
   }
 `;
 
-
 const InputLabel = styled.label`
   font-size: 13px;
 `;
 
 const JoinButton = styled.button`
+  margin-top: 25px;
   border: none;
-  border-radius: 3px;
+  border-radius: 20px;
   cursor: pointer;
   outline: none;
   width: 80%;
   background-color: black;
-  height: 40px;
+  height: 50px;
   color: red;
   font-weight: 600;
-  font-size: 15px;
+  font-size: 16px;
   &:hover {
     background-color: white;
   }
@@ -92,7 +92,7 @@ const LoginLink = styled(Link)`
   top: -1px;
   transition: all 0.1 ease-in-out;
   &:hover {
-    color: #0039cb;
+    color: darkred;
   }
 `;
 
@@ -101,39 +101,46 @@ const LinkInnerSpan = styled.span`
   margin-right: 5px;
 `;
 
-const JoinPresenter = ({ onSubmit, onChange, id, password, nickname, passwordCheck }) => {
+const JoinPresenter = ({ onSubmit, onChange, id, password, nickname, passwordCheck, email }) => {
   return (
     <Wrapper>
     <Join>
       <JoinForm onSubmit={onSubmit}>
         <JoinTitle>회원가입</JoinTitle>
         <InputContainer>
-          <InputLabel placeholder="id">아이디</InputLabel>
-          <Input required={true} maxLength={10} value={id} placeholder="ID" id="id" onChange={onChange} />
-          <InputLabel placeholder="nickname">닉네임</InputLabel>
-          <Input required={true} maxLength={8} value={nickname} placeholder="Nickname" id="nickname" onChange={onChange} />
-          <InputLabel placeholder="password">비밀번호</InputLabel>
+          <Input required={true} maxLength={10} value={id} placeholder="아이디" id="id" onChange={onChange} />
+          <Input required={true} maxLength={8} value={nickname} placeholder="닉네임" id="nickname" onChange={onChange} />
+          <Input
+            required={true}
+            minLength={10}
+            maxLength={30}
+            type="email"
+            value={email}
+            placeholder="이메일"
+            id="email"
+            onChange={onChange}
+          />
           <Input
             required={true}
             minLength={6}
             maxLength={13}
             type="password"
             value={password}
-            placeholder="Password"
+            placeholder=" 비밀번호"
             id="password"
             onChange={onChange}
           />
-          <InputLabel placeholder="passwordCheck">비밀번호 확인</InputLabel>
           <Input
             required={true}
             minLength={6}
             maxLength={13}
             type="password"
             value={passwordCheck}
-            placeholder="Password Check"
+            placeholder="비밀번호 확인"
             id="passwordCheck"
             onChange={onChange}
           />
+          
         </InputContainer>
         <JoinButton type="submit">회원가입</JoinButton>
         <AskLoginDiv>

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
-    padding-top: 60px; 
+    padding-top: 120px; 
 `;
 
 const Login = styled.div`
@@ -26,25 +26,25 @@ const LoginForm = styled.form`
 `;
 
 const LoginTitle = styled.div`
-  margin-top: 10px;
+  margin-top: 8px; // 
   font-size: 30px;
   font-weight: 600;
 `;
 
 const InputContainer = styled.div`
   width: 80%;
-  margin-top: 30px;
+  margin-top: 40px;
 `;
 
 const Input = styled.input`
   padding: 0px 10px;
   box-sizing: border-box;
   width: 100%;
-  height: 40px;
+  height: 50px;
   margin-top: 5px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   border: 1px solid gray;
-  border-radius: 3px;
+  border-radius: 1px;
   transition: border 0.1s ease-in-out;
   outline: none;
   &:hover,
@@ -70,22 +70,24 @@ const InputLabel = styled.label`
 `;
 
 const LoginButton = styled.button`
+  margin-top: 25px;
   border: none;
   cursor: pointer;
   outline: none;
   width: 80%;
   background-color: black;
-  height: 40px;
+  height: 50px;
   color: red;
   font-weight: 600;
-  font-size: 15px;
-  border-radius: 4px;
+  font-size: 16px;
+  border-radius: 20px;
   &:hover {
     background-color: white;
   }
 `;
 
 const AskJoinDiv = styled.div`
+  margin-top: 30px;
   position: relative;
   top: -60px;
   display: flex;
@@ -104,7 +106,7 @@ const JoinLink = styled(Link)`
   top: -1px;
   transition: all 0.1 ease-in-out;
   &:hover {
-    color: #0039cb;
+    color: darkred;
   }
 `;
 
@@ -120,21 +122,18 @@ const AuthPresenter = ({ id, password, onChange, onSubmit }) => {
       <LoginForm onSubmit={onSubmit}>
         <LoginTitle>로그인</LoginTitle>
         <InputContainer>
-          <InputLabel placeholder="id">아이디</InputLabel>
-          <Input onChange={onChange} value={id} placeholder="ID" id="id" />
+          <Input onChange={onChange} value={id} placeholder="아이디" id="id" />
           <PasswordTitleDiv>
-            <InputLabel placeholder="password">비밀번호</InputLabel>
-            <PasswordResetLink to="#">비밀번호 재설정</PasswordResetLink>
           </PasswordTitleDiv>
-          <Input onChange={onChange} value={password} placeholder="Password" id="password" type="password" />
+          <Input onChange={onChange} value={password} placeholder="비밀번호" id="password" type="password" />
         </InputContainer>
         <LoginButton type="submit">로그인 하기</LoginButton>
       </LoginForm>
 
       <AskJoinDiv>
-        <AskJoinTitle>아직 계정이 없으신가요?</AskJoinTitle>
+        <AskJoinTitle>비밀번호를 잊으셨나요?</AskJoinTitle>
         <JoinLink to="/join">
-          <LinkInnerSpan>계정 만들기</LinkInnerSpan>
+          <LinkInnerSpan>비밀번호 재설정</LinkInnerSpan>
         </JoinLink>
       </AskJoinDiv>
     </Login>
