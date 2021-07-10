@@ -9,7 +9,12 @@ const Detail = () => {
   const searchParams = new URLSearchParams(location.search);
   const movieCd = searchParams.get("code")
   const [movieData, setMovieData] = useState([]);
-  
+  const [reviewValue, setreviewValue]=useState("")
+
+  const handleClick = (e)=> {
+    setreviewValue(e.currentTarget.value)
+  }
+
   const getMovieData = async () => {
     await axios.get(`${process.env.REACT_APP_SERVER_URL}/post/detail/${movieCd}`, { movieCd })
     .then((response) => {
@@ -47,7 +52,9 @@ const Detail = () => {
 
   
   return (
-    <DetailPresenter movieData={movieData} reviewOnChange={reviewOnChange} reviewOnClick={reviewOnClick} reviewOnKeyPress={reviewOnKeyPress} />
+
+    <DetailPresenter movieData={movieData} handleClick={handleClick}/>
+
   )
 }
 
