@@ -2,8 +2,6 @@ const express = require('express');
 const router = express.Router();
 const db = require('../lib/db');
 
-
-
 router.post('/review/write', async(req,res,next)=> {
     console.log("REVIEW");
     const contents = req.body.contents;

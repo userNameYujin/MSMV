@@ -21,49 +21,49 @@ const Banner = styled(Link)`
 `;
 
 const Menu = styled.div`
-width: 1200px;
-height: 55px;
-display: flex;
-flex-direction: row;
-align-items: center;
+  width: 1200px;
+  height: 55px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 
-padding-right: 1rem;
-padding-left: 1rem;
- 
+  padding-right: 1rem;
+  padding-left: 1rem;
+  
 `;
 
 const LoginJoinButton = styled(Link)`
-font-weight: 600;
-color: red;
-border: 1px solid red;
-padding: 0.5rem;
-padding-bottom: 0.4rem;
-cursor: pointer;
-border-radius: 2px;
-text-decoration: none;
-transition: .2s all;
+  font-weight: 600;
+  color: red;
+  border: 1px solid red;
+  padding: 0.5rem;
+  padding-bottom: 0.4rem;
+  cursor: pointer;
+  border-radius: 2px;
+  text-decoration: none;
+  transition: .2s all;
 
-&:hover {
-    background: $red;
-    color: white;
-}
+  &:hover {
+      background: $red;
+      color: white;
+  }
 `;
 
 const LogoutButton = styled.button`
-font-weight: 600;
-color: red;
-border: 1px solid red;
-padding: 0.5rem;
-padding-bottom: 0.4rem;
-cursor: pointer;
-border-radius: 2px;
-text-decoration: none;
-transition: .2s all;
+  font-weight: 600;
+  color: red;
+  border: 1px solid red;
+  padding: 0.5rem;
+  padding-bottom: 0.4rem;
+  cursor: pointer;
+  border-radius: 2px;
+  text-decoration: none;
+  transition: .2s all;
 
-&:hover {
-    background: $red;
-    color: white;
-}
+  &:hover {
+      background: $red;
+      color: white;
+  }
 `;
 
 const GradientBorder = styled.div`
@@ -87,14 +87,15 @@ const Spacer2 = styled.div`
     flex-grow: 0.01;
 `;
 
-const SearchLink = styled(Link)`
+/* const SearchLink = styled(Link)`
   color: red;
   text-decoration: none;
   font-size: 13px;
   &:hover {
     color: white;
 }
-`;
+`; */
+
 
 const MenuButton = styled(Button)`
     cursor: pointer;
@@ -103,18 +104,20 @@ const MenuButton = styled(Button)`
 
 const HeaderPresenter = ({user, LogoutClick}) => {
 
+
   return (
     <Header>
       <BlackBackground>
       <Menu>
       <Banner to='/'>MSmV</Banner>
       <Spacer/>
+
       <SearchLink to = "/search">영화검색하러 가기!</SearchLink>
       
             <Tooltip title="영화검색하러 가기!">
                 <MenuButton to ="Search" shape="circle" icon={<SearchOutlined />} ></MenuButton>
             </Tooltip>   
-        
+
       <Spacer2/>
         {user ? (
           <LogoutButton onClick={LogoutClick}>Logout</LogoutButton>
@@ -123,10 +126,14 @@ const HeaderPresenter = ({user, LogoutClick}) => {
             <LoginJoinButton to="Login">Login</LoginJoinButton>
             <Spacer2/>
             <LoginJoinButton to="Join">Join</LoginJoinButton>
+            <Spacer2/>
             
           </>
         )}
-
+            <LoginJoinButton to="MyPage">[MyPageImage]</LoginJoinButton>
+            <Spacer2/>
+            <LoginJoinButton to="Search">[SearchImage]</LoginJoinButton>
+            
 
       </Menu>
       </BlackBackground>

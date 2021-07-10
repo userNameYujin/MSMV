@@ -32,22 +32,22 @@ const Input = styled.input`
   }
 `;
 
-const SearchButton = styled(Link)`
-font-weight: 600;
-color: red;
-border: 1px solid red;
-background-color: black;
-padding: 0.5rem;
-padding-bottom: 0.4rem;
-cursor: pointer;
-border-radius: 3px;
-text-decoration: none;
-transition: .2s all;
+const SearchButton = styled.button`
+  font-weight: 600;
+  color: red;
+  border: 1px solid red;
+  background-color: black;
+  padding: 0.5rem;
+  padding-bottom: 0.4rem;
+  cursor: pointer;
+  border-radius: 3px;
+  text-decoration: none;
+  transition: .2s all;
 
-&:hover {
-    background: black;
-    color: white;
-}
+  &:hover {
+      background: black;
+      color: white;
+  }
 `;
 const Spacer = styled.div`
     flex-grow: 0.01;
@@ -62,10 +62,7 @@ const SearchResult = styled.div`
     margin: 10px 10px 10px 10px;
 `;
 
-const SearchPresenter = ({searchCritCheck, searchCrit, submitSearch, takeInput, searchContent, result, currentSearch}) => {
-  let link;
-
-  const Shape = styled.div`
+const Shape = styled.div`
     display: block;
     flex: 1;
     margin-left: auto;
@@ -80,35 +77,37 @@ const SearchPresenter = ({searchCritCheck, searchCrit, submitSearch, takeInput, 
   
   `;
 
-  const MovieDiv = styled.div`
-    display: inline-block;
-    
-    margin-left: auto;
-    margin-right: auto;
-    width: 400px;
-    height: 300px;
-    background: #606060;
-    float: right;
-    list-style: none;
-    padding: 10px;
-    margin: 10px 20px 30px 10px;
-    border-radius: 10px;
-    box-shadow: 0 15px 10px #000;
-    font-family: 'Noto Sans KR', sans-serif;
-
-  `;
-
-  const Image = styled.div`
-
-    width: 200px;
-    height: 200px;
-    size: cover;
-  `;  
+const MovieDiv = styled.div`
+  display: inline-block;
   
-  const Info = styled.div`
-    display:
-    font-size: 20px;
-  `;
+  margin-left: auto;
+  margin-right: auto;
+  width: 400px;
+  height: 300px;
+  background: #606060;
+  float: right;
+  list-style: none;
+  padding: 10px;
+  margin: 10px 20px 30px 10px;
+  border-radius: 10px;
+  box-shadow: 0 15px 10px #000;
+  font-family: 'Noto Sans KR', sans-serif;
+
+`;
+
+const Image = styled.div`
+
+  width: 200px;
+  height: 200px;
+  size: cover;
+`;  
+
+const Info = styled.div`
+  display:
+  font-size: 20px;
+`;
+
+const SearchPresenter = ({searchCritCheck, searchCrit, submitSearch, takeInput, result, currentSearch, inputEnter}) => {
 
   return (
     <Wrapper>
@@ -122,18 +121,18 @@ const SearchPresenter = ({searchCritCheck, searchCrit, submitSearch, takeInput, 
 
 
       <Spacer/>
-      <Input onChange={takeInput} placeholder="검색어 입력"></Input>
+      <Input onChange={takeInput} onKeyPress={inputEnter} placeholder="검색어 입력"></Input>
       <Spacer/>
       <SearchButton onClick={submitSearch}>검색</SearchButton>
       </SearchAsk>
       <SearchResult>
       <Shape>
-        <h>-----------------------------------------{currentSearch}에 대한 검색 결과-----------------------------------------</h>
-          {result.map((movie, index) => ( 
+        <h1>----------------------{currentSearch}에 대한 검색 결과----------------------</h1>
+          {result.map((movie) => ( 
             
-            <MovieDiv>
+            <MovieDiv key={movie.movieCd}>
               <Image>
-                <img src={movie.image}></img>
+                <img alt="movie" src={movie.image}></img>
               </Image>
               <Info>
                 <Link to={`/Detail?code=${movie.movieCd}`}>{movie.title}</Link> <p>{movie.rate}</p>

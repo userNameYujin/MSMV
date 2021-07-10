@@ -23,11 +23,15 @@ function App() {
     .then(async (result) => {
         console.log(result);
         await store.dispatch({ type: 'LOGIN', user: result.data.dataValues });
+        console.log("App.js check logined");
       })
     .catch((error) => {
       console.log(error.response);
       setIsLoginChecked(true);
+      console.log("App.js check not logined");
     });
+    
+
   };
 
 
