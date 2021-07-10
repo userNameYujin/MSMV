@@ -177,11 +177,11 @@ router.get('/boxOffice', async function(req, response,next){
       let a = movieData.getName(targetDt);
       
       a.then(function(result){
-          let movieData;
+          // let movieData;
           
           let movieList = new Array();
           //let movieTT = new Array();
-          let checkLength = result.dailyBoxOfficeList.length;
+          // let checkLength = result.dailyBoxOfficeList.length;
           for(let i=0; i<result.dailyBoxOfficeList.length; i++){
             let prdtYear = result.dailyBoxOfficeList[i].prdtYear;
                   const option = {
@@ -202,7 +202,7 @@ router.get('/boxOffice', async function(req, response,next){
                         
                         await db.query('insert into boxoffice(movierank,name,movieCd,image) values(?,?,?,?)',[res.rank*=1,res.name,res.movieCd,res.image],function(err,result){
                           if(err){
-                            console.log('sql err');
+                            console.error('sql error, 검색안되는 영화 있음');
                           }
                         })
                         
@@ -246,17 +246,17 @@ router.get('/boxOffice', async function(req, response,next){
 // })
 
 router.get('/top10', async function(req, response){
-  console.log('탑텐 시작')
+  //console.log('탑텐 시작')
   await db.query('SELECT * FROM todaymovie ORDER BY count DESC LIMIT 10', function(error, result){
     if(error){
       throw(error);
     }
-    console.log('result',result);
+    //console.log('result',result);
     let movieCd = [];
     for(let i=0; i<result.length; i++){
       movieCd.push(result[i].movieCd)
     }
-    console.log('movieCd',movieCd);
+    //console.log('movieCd',movieCd);
     const getHTML = async(keyword) => {
       try{
           return await axios.get("https://movie.naver.com/movie/bi/mi/basic.nhn?code="+keyword)
@@ -264,7 +264,7 @@ router.get('/top10', async function(req, response){
           console.log(err)
       }
   }
-  console.log('영화코드',movieCd);
+  //console.log('영화코드',movieCd);
   const parsing = async(keyword, rank, callback) => {
       const html = await getHTML(keyword);
       
