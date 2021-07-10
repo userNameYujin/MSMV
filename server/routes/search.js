@@ -25,40 +25,22 @@ router.post('/',(req,response)=>{
                 filter:'small',
             
             }
-            request.get({
-                uri: 'https://openapi.naver.com/v1/search/movie.json',
-                qs: option,
-                headers: {
-                    'X-Naver-Client-Id': process.env.NAVER_CLIENT_ID,
-                    'X-Naver-Client-Secret': process.env.NAVER_CLIENT_SECRET
+            let movieListNm = new Array();
+            naverAPI.getMovieListNm(option)
+            .then(function(result){
+
+                for(let i=0; i<result.length; i++){
+                    crawling.parsing(result[i].movieCd,result[i],function(res){
+                        movieListNm.push(res);
+                        if(movieListNm.length === result.length){
+                            movieListNm.sort(function(a,b){
+                                return parseFloat(b.rate)-parseFloat(a.rate)
+                            })
+                            response.status(200).send({code : 200, result : movieListNm});
+                        }
+                    })
                 }
-            }, async function (err, res, body) {
-                
-                let movieData = JSON.parse(body);
-            
-                let searchList = new Array();
-                for(let i=0; i<movieData.items.length; i++){
-                    searchList.push({'title' : movieData.items[i].title,
-                                     'image' : movieData.items[i].image,
-                                     'movieCd' : movieData.items[i].link.split("code=")[1],
-                                     'rate' : movieData.items[i].userRating
-                                    })
-                    if(searchList.length===movieData.items.length){
-                        searchList.sort(function(a,b){
-                            return parseFloat(b.rate)-parseFloat(a.rate)
-                        })
-                    }
-                    
-                    
-                }
-                console.log(searchList);
-                if(searchList.length>0){
-                    response.status(200).send({code : 200, result : searchList});
-                } else{
-                    response.status(400).send({code : 400, message : "해당 제목의 영화가 없습니다."});
-                }
-                
-            }) 
+            })
         }
         
     }
@@ -70,11 +52,9 @@ router.post('/',(req,response)=>{
             function searchMovieDir(directorNm, callback){
                 dirNm = utf8.encode(directorNm);
                 return axios.get( `http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieList.json?key=${process.env.serviceKey}&directorNm=${dirNm}`).then(response =>{
-                    //console.log(response.data.movieListResult.movieList);
                     resultMovies = new Array();
                     let result = response.data.movieListResult.movieList
                     for(let i=0; i<result.length; i++){
-                        //console.log(res[i].movieNm)
                         resultMovies.push({'movieName' : result[i].movieNm,
                                             'prdtYear' : result[i].prdtYear})
                     }
@@ -97,18 +77,17 @@ router.post('/',(req,response)=>{
                         sort : 'sim',
                         filter : 'small',
                     }
-                    naverAPI.getMovieList2(option,req.body.dirNm)
+                    naverAPI.getMovieListDir(option,req.body.dirNm)
                     .then(function(result2){
                         
                         if(!result2){
                             checkLength--;
                         }else{
                             crawling.parsing(result2.movieCd,result2,function(res){
-                                //console.log(res);
                                 movieList.push(res);
                                 if(movieList.length === checkLength){
                                     movieList.sort(function(a,b){
-                                        return parseFloat(a.rank)-parseFloat(b.rank)
+                                        return parseFloat(b.rate)-parseFloat(a.rate)
                                     })
                                     console.log(movieList);
                                     response.status(200).send({code : 200, result : movieList});
