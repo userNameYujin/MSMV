@@ -15,8 +15,16 @@ const parsing = async(keyword, result, callback) => {
     
     const $ = cheerio.load(html.data); 
 
-    result.image = $(".mv_info_area").find("img").attr("src")
+    let date = $(".info_spec").find("span:eq(3)").text().trim()
+    date = date.replace(/(\r\n\t|\n|\r\t|\t)/gm,"")
 
+    let genre = $(".info_spec").find("span:first").text().trim()
+    genre = genre.replace(/(\r\n\t|\n|\r\t|\t)/gm,"")
+
+    result.image = $(".mv_info_area").find("img").attr("src")
+    result.summary = $(".story_area").find(".con_tx").text()
+    result.genre = genre
+    result.date = date
     callback(result);
 
 }

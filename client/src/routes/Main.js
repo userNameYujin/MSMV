@@ -18,13 +18,15 @@ class Image extends React.Component{
 */
 
 const Main = () => {
+  const [topTenData, setTopTenData] = useState([]);
   const [boxOfficeData, setBoxOfficeData] = useState([]);
 
   const getTopTen = async () => {
     console.log("getTopTen");
     await axios.get(`${process.env.REACT_APP_SERVER_URL}/post/top10`)
     .then((response) => {
-      console.log(response);
+      setTopTenData(response.data.result);
+      console.log(response.data.result);
     })
     .catch((error) => {
       console.log(error);
@@ -47,7 +49,7 @@ const Main = () => {
 
 
   return (
-    <MainPresenter boxOfficeData={boxOfficeData}/>
+    <MainPresenter topTenData={topTenData} boxOfficeData={boxOfficeData}/>
   )
 }
 

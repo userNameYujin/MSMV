@@ -1,5 +1,5 @@
 import React from 'react';
-
+import store from '../../store';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import {Descriptions, Badge} from 'antd';
@@ -10,7 +10,7 @@ const Wrapper = styled.div`
     padding-top: 60px; 
 `;
 
-const ReviewButton = styled(Link)`
+const ReviewButton = styled.button`
 font-weight: 600;
 color: red;
 border: 1px solid red;
@@ -33,7 +33,22 @@ const ReviewTitle = styled.div`
   font-weight: 600;
 `;
 
-const DetailPresenter = ({movieData, handleClick, reviewValue}) => {
+const DetailPresenter = ({movieData, movieReviews, peoples, reviewOnChange, writeOnClick, updateClick, submitDeleteReview}) => {
+  const director = [];
+  const actor = [];
+
+  for (let i = 0 ; i < peoples.length; i++) {
+    let people = peoples[i];
+    people.peopleJob = people.peopleJob.replace(/\n/g,' ');
+    people.peopleJob = people.peopleJob.replace(/\t/g,'');
+
+    if (people.peopleJob === "감독") {
+      director.push(people);
+    }
+    else
+      actor.push(people);
+  }
+
   return (
     <Wrapper>
       <br />
@@ -48,26 +63,56 @@ const DetailPresenter = ({movieData, handleClick, reviewValue}) => {
         <Descriptions.Item label="장르">{movieData.genres}</Descriptions.Item>
         <Descriptions.Item label="국가">{movieData.country}</Descriptions.Item>
         <Descriptions.Item label="상영시간">{movieData.runningTime}</Descriptions.Item>
-        <Descriptions.Item label="줄거리" span={3}>{movieData.summary}</Descriptions.Item>
+        <Descriptions.Item label="줄거리">{movieData.summary}</Descriptions.Item>
+        <Descriptions.Item label="감독">{director && director.map((people, index) => ( 
+          <React.Fragment key={people.index}>
+            <div>
+              <p><img src={people.peopleImage} alt={people.peopleName}/> {people.peopleName}</p>
+              <p>{people.peopleJob}</p>
+            </div>
+          </React.Fragment>
+        ))}</Descriptions.Item>
+        <Descriptions.Item label="배우">{actor && actor.map((people, index) => ( 
+          <React.Fragment key={people.index}>
+            <div>
+              <p><img src={people.peopleImage} alt={people.peopleName}/> {people.peopleName}</p>
+              <p>{people.peopleJob}</p>
+            </div>
+          </React.Fragment>
+        ))}</Descriptions.Item>
       </Descriptions>
     
     <div>
     <br />
     <ReviewTitle>리뷰</ReviewTitle>
     <hr />
-      <form style={{ display: 'flex' }} onSubmit>
-                <textArea
-                    style={{ width: '80%', borderRadius: '2px' }}
-                    onChange={handleClick}
-                    value={reviewValue}
-                    placeholder="리뷰를 입력해주세요"
-                />
-                <br />
-                <ReviewButton style={{ width: '20%', height: '52px' }} onClick>작성</ReviewButton>
-            </form>
-            <br/>
+      <form style={{ display: 'flex' }}>
+        <textarea style={{ width: '80%', borderRadius: '2px' }}
+          onChange={reviewOnChange}
+          placeholder="리뷰를 입력해주세요">
+        </textarea>
+        <br />
+        <ReviewButton style={{ width: '20%', height: '52px' }} onClick={writeOnClick}>작성</ReviewButton>
+      </form>
+      <br/>
+      {movieReviews && movieReviews.map((review, index) => ( 
+        <React.Fragment key={review.id}>
+          <div>
+            <p>{review.nickname} : {review.contents}</p>
+            <p>Rate : {review.rate}</p>
+            {store.getState().user ? (
+              (store.getState().user.id === review.commenter) ? (
+                <button type="button" id={review.id} onClick={submitDeleteReview}>reviewid:{review.id} Delete</button>
+                ) : (<p>{review.commenter}, {store.getState().user.id}</p>)
+            ) : (<p>not logined</p>)}
+            
+          </div>
+        </React.Fragment>
+      ))}
     </div>
     </Wrapper>
+  
+
   
     
   )

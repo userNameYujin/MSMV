@@ -55,11 +55,13 @@ router.post('/review/write', async(req,res,next)=> {
   
   router.post('/review/delete', async (req, res, next) => {
     console.log("Delete review");
+    console.log(`req.body.id ${req.body.id}`);
+    console.log(`req.body.user_id ${req.body.user_id}`);
     await db.query('SELECT commenter FROM review WHERE id=?',[req.body.id], async(error,result)=>{
       if(error){
         next(error);
       }
-      if(req.user.id===result[0].commenter){
+      if(req.body.user_id===result[0].commenter){
         await db.query('DELETE FROM review WHERE id = ?', [req.body.id]);
         res.status(200).send({code:200, message : "리뷰가 삭제되었습니다."});
       } else{
