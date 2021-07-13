@@ -7,9 +7,9 @@ const Wrapper = styled.div`
 `;
 
 const SearchTitle = styled.div`
-
-  margin-top: 10px;
-  margin-bottom: 10px;
+  
+  margin-top: 50px;
+  margin-bottom: 20px;
   font-size: 30px;
   font-weight: 600;
 `;
@@ -34,6 +34,7 @@ const Input = styled.input`
 
 const SearchButton = styled.button`
   font-weight: 600;
+  width: 55px;
   color: red;
   border: 1px solid red;
   background-color: black;
@@ -70,7 +71,7 @@ const Shape = styled.div`
     margin-top: 20px;
     margin-bottom: 20px;
     text-align: center;
-    width: 65%;
+    width: 75%;
     height: auto;
     background: lightgray;
 
@@ -78,12 +79,11 @@ const Shape = styled.div`
   `;
 
 const MovieDiv = styled.div`
-  display: inline-block;
-  
+ 
   margin-left: auto;
   margin-right: auto;
-  width: 400px;
-  height: 300px;
+  width: 500px;
+  height: 310px;
   background: #606060;
   float: right;
   list-style: none;
@@ -96,16 +96,28 @@ const MovieDiv = styled.div`
 `;
 
 const Image = styled.div`
-
-  width: 200px;
+  width: 210px;
   height: 200px;
   size: cover;
 `;  
 
-const Info = styled.div`
-  display:
+const InfoBox = styled.div`
+  float: right;
+  width: 290px;
+  height: 200px;
+  text-align: center;
   font-size: 20px;
 `;
+
+const InfoName = styled.div`
+  display: inline-block;
+  font-size: 25px;
+`;
+
+const InfoRate = styled.div`
+  font-size: 20px;
+`;
+
 
 const SearchPresenter = ({searchCritCheck, searchCrit, submitSearch, takeInput, result, currentSearch, inputEnter}) => {
 
@@ -114,35 +126,42 @@ const SearchPresenter = ({searchCritCheck, searchCrit, submitSearch, takeInput, 
     <div>
     <SearchAsk>
       <SearchTitle>현재 검색: {searchCrit}</SearchTitle>
-      <select name="SearchCrit" value={optionsState} onChange={searchCritCheck}>
+      
+        <select name="SearchCrit" value={optionsState} onChange={searchCritCheck}>
         <option value="title">제목</option>
         <option value="director">감독</option>
       </select>
 
-
       <Spacer/>
       <Input onChange={takeInput} onKeyPress={inputEnter} placeholder="검색어 입력"></Input>
       <Spacer/>
-      <SearchButton onClick={submitSearch}>검색</SearchButton>
-      </SearchAsk>
-      <SearchResult>
-      <Shape>
-        <h1>----------------------{currentSearch}에 대한 검색 결과----------------------</h1>
-          {result.map((movie) => ( 
+        <SearchButton onClick={submitSearch}>검색</SearchButton>
+      
+      
+    </SearchAsk>
+    <SearchResult>
+    <Shape>
+      <h1>----------------------{currentSearch}에 대한 검색 결과----------------------</h1>
+      {result.map((movie) => ( 
             
-            <MovieDiv key={movie.movieCd}>
-              <Image>
-                <img alt="movie" src={movie.image}></img>
-              </Image>
-              <Info>
-                <Link to={`/Detail?code=${movie.movieCd}`}>{movie.title}</Link> <p>{movie.rate}</p>
-              </Info>
+        <MovieDiv key={movie.movieCd}>
+          <Image>
+            <img alt="movie" src={movie.image}></img>
+          </Image>
+          <InfoBox>
+            <InfoName>
+              <Link to={`/Detail?code=${movie.movieCd}`}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{movie.title}</Link> 
+            </InfoName>
+            <InfoRate>
+              <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;평점 &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;{movie.rate}</p>
+            </InfoRate>
+          </InfoBox>
               
-            </MovieDiv>
+        </MovieDiv>
 
           ))}
-      </Shape>
-      </SearchResult>  
+    </Shape>
+    </SearchResult>  
 
     </div>
     </Wrapper>

@@ -87,14 +87,14 @@ const Spacer2 = styled.div`
     flex-grow: 0.01;
 `;
 
-/* const SearchLink = styled(Link)`
+const SearchLink = styled(Link)`
   color: red;
   text-decoration: none;
   font-size: 13px;
   &:hover {
     color: white;
 }
-`; */
+`;
 
 
 const MenuButton = styled(Button)`
