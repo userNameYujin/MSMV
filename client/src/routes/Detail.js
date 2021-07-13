@@ -42,16 +42,17 @@ const Detail = () => {
 
     await axios.post(`${process.env.REACT_APP_SERVER_URL}/review/review/write`, { contents, commenter, rate, movieCd })
     .then((response) => {
-     console.log(response); 
+     console.log(response);
+     window.alert("리뷰 작성 완료")
     })
     .catch((error)=> {
       console.log(error);
+      window.alert("리뷰 작성 중 오류 발생")
     }) 
   }
 
   const reviewOnChange = (e) => {
     setReviewContent(e.target.value);
-    console.log(reviewContent);
   }
 
   const setRatingClick = (e) => {
@@ -59,14 +60,31 @@ const Detail = () => {
     // 클릭 위치에 따라 내가 줄 평점을 설정
   }
 
-  const reviewOnClick = () => {
+  const writeOnClick = () => {
     submitWriteReview();
   }
 
+  const deleteOnClick = (self) => {
+    submitDeleteReview(self);
+  }
+
+  const [id, setId] = useState(''); // id value for Delete Review 
+  const submitDeleteReview = async (e) => {
+    setId(e.target.id);
+    await axios.post(`${process.env.REACT_APP_SERVER_URL}/review/review/delete`, { id })
+    .then((response) => {
+     console.log(response);
+     window.alert("리뷰 삭제 완료")
+    })
+    .catch((error)=> {
+      console.log(error);
+      window.alert("리뷰 삭제 중 오류 발생")
+    }) 
+  }
   
   return (
 
-    <DetailPresenter movieData={movieData} movieReviews={movieReviews} peoples={peoples} reviewOnChange={reviewOnChange} reviewOnClick={reviewOnClick}/*{setRatingClick={setRatingClick}}*//>
+    <DetailPresenter movieData={movieData} movieReviews={movieReviews} peoples={peoples} reviewOnChange={reviewOnChange} writeOnClick={writeOnClick} submitDeleteReview={submitDeleteReview}/*{setRatingClick={setRatingClick}}*//>
 
   )
 }

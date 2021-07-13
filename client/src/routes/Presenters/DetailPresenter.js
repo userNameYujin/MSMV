@@ -33,7 +33,7 @@ const ReviewTitle = styled.div`
   font-weight: 600;
 `;
 
-const DetailPresenter = ({movieData, movieReviews, peoples, reviewOnChange, reviewOnClick, updateClick, deleteClick}) => {
+const DetailPresenter = ({movieData, movieReviews, peoples, reviewOnChange, writeOnClick, updateClick, submitDeleteReview}) => {
   const director = [];
   const actor = [];
 
@@ -47,7 +47,6 @@ const DetailPresenter = ({movieData, movieReviews, peoples, reviewOnChange, revi
     }
     else
       actor.push(people);
-    console.log(actor);
   }
 
   return (
@@ -93,7 +92,7 @@ const DetailPresenter = ({movieData, movieReviews, peoples, reviewOnChange, revi
           placeholder="리뷰를 입력해주세요">
         </textarea>
         <br />
-        <ReviewButton style={{ width: '20%', height: '52px' }} onClick={reviewOnClick}>작성</ReviewButton>
+        <ReviewButton style={{ width: '20%', height: '52px' }} onClick={writeOnClick}>작성</ReviewButton>
       </form>
       <br/>
       {movieReviews && movieReviews.map((review, index) => ( 
@@ -101,7 +100,7 @@ const DetailPresenter = ({movieData, movieReviews, peoples, reviewOnChange, revi
           <div>
             <p>{review.nickname} : {review.contents}</p>
             <p>Rate : {review.rate}</p>
-            <button onClick={deleteClick}>Delete</button>
+            <button type="button" id={review.id} onClick={submitDeleteReview}>reviewid:{review.id} Delete</button>
           </div>
         </React.Fragment>
       ))}
