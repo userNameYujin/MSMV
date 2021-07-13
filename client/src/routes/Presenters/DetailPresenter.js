@@ -100,7 +100,12 @@ const DetailPresenter = ({movieData, movieReviews, peoples, reviewOnChange, writ
           <div>
             <p>{review.nickname} : {review.contents}</p>
             <p>Rate : {review.rate}</p>
-            <button type="button" id={review.id} onClick={submitDeleteReview}>reviewid:{review.id} Delete</button>
+            {store.getState().user ? (
+              (store.getState().user.nickname === review.nickname) ? (
+                <button type="button" id={review.id} onClick={submitDeleteReview}>reviewid:{review.id} Delete</button>
+                ) : (<p>{review.nickname}, {store.getState().user.nickname}</p>)
+            ) : (<p>not logined</p>)}
+            
           </div>
         </React.Fragment>
       ))}
