@@ -34,7 +34,7 @@ router.get('/detail/:movieCd', async function(req, response, next){
       })
     }
 
-    await db.query('select review.id,contents, created, updated, rate, nickname from review left join users on review.commenter = users.id WHERE movieCd = ?', 
+    await db.query('select review.id,contents, created, updated, rate, nickname, commenter from review left join users on review.commenter = users.id WHERE movieCd = ?', 
     [req.params.movieCd], async (error3, resultR)=>{
       if(error3){
         throw(error3)
