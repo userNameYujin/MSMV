@@ -68,17 +68,19 @@ const Detail = () => {
     submitDeleteReview(self);
   }
 
-  const [id, setId] = useState(''); // id value for Delete Review 
+  const [id, setId] = useState(''); // id value for Delete Review
+  const [user_id, setUser_Id] = useState('');
   const submitDeleteReview = async (e) => {
     setId(e.target.id);
-    await axios.post(`${process.env.REACT_APP_SERVER_URL}/review/review/delete`, { id })
+    setUser_Id(store.getState().user.id);
+    await axios.post(`${process.env.REACT_APP_SERVER_URL}/review/review/delete`, { id, user_id })
     .then((response) => {
      console.log(response);
      window.alert("리뷰 삭제 완료")
     })
     .catch((error)=> {
       console.log(error);
-      window.alert("리뷰 삭제 중 오류 발생")
+      window.alert(error.message);
     }) 
   }
   
