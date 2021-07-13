@@ -60,26 +60,38 @@ const BoxOfficeTitle = styled.div`
   font-weight: 600;
 `;
 
-const MainPresenter = ({boxOfficeData}) => {
+const MainPresenter = ({topTenData, boxOfficeData}) => {
   return (
     <Wrapper>
     <MainPage>
       <MainDiv>
         <SearchedDiv>
-          <p>this div is for 'yesterday searched movies</p>
+          <BoxOfficeTitle>어제자 검색 영화</BoxOfficeTitle>
+          <hr />
+          <Row gutter={[16,16]}>
+          {topTenData && topTenData.map((movie, index) => ( 
+            <React.Fragment key={movie.movieCd}>
+              <Col lg={3} md={6} xs={12}>
+                <Link to={`/Detail?code=${movie.movieCd}`}>
+                  <img style={{ width:'100%', height:'200px'}} src={movie.image} alt={movie.title}></img>
+                </Link>
+               <p>{movie.rank}</p>
+              </Col>
+            </React.Fragment>
+          ))}
+          </Row>
         </SearchedDiv>
         <BoxofficeDiv>
-          <p>this div is for 'daily boxoffice movies'</p>
           <BoxOfficeTitle>최근 박스오피스 개봉영화</BoxOfficeTitle>
           <hr />
           <Row gutter={[16,16]}>
           {boxOfficeData && boxOfficeData.map((movie, index) => ( 
             <React.Fragment key={movie.movieCd}>
               <Col lg={3} md={6} xs={12}>
-                <a href={`/#/Detail?code=${movie.movieCd}`}>
+                <Link to={`/Detail?code=${movie.movieCd}`}>
                   <img style={{ width:'100%', height:'200px'}} src={movie.image} alt={movie.name}></img>
-                </a>
-               <p>{movie.rank}</p>
+                </Link>
+               <p>{movie.movierank}</p>
               </Col>
             </React.Fragment>
           ))}
