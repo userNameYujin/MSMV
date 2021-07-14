@@ -10,14 +10,15 @@ const Header = styled.header`
   position: fixed;
   top: 0px;
   width: 100%;
+  
 `;
 
 const Banner = styled(Link)`
   font-size: 2.5rem;
   letter-spacing:3px;
-  color: red;
-  font-family: fantasy;
+  color: #6b66ff;
   
+  font-family: 'Nanum Pen Script', cursive;
 `;
 
 const Menu = styled.div`
@@ -26,7 +27,7 @@ const Menu = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-
+  
   padding-right: 1rem;
   padding-left: 1rem;
   
@@ -34,8 +35,8 @@ const Menu = styled.div`
 
 const LoginJoinButton = styled(Link)`
   font-weight: 600;
-  color: red;
-  border: 1px solid red;
+  color: #6b66ff;
+  border: 1px solid #6b66ff;
   padding: 0.5rem;
   padding-bottom: 0.4rem;
   cursor: pointer;
@@ -44,15 +45,15 @@ const LoginJoinButton = styled(Link)`
   transition: .2s all;
 
   &:hover {
-      background: $red;
+      background: $#6b66ff;
       color: white;
   }
 `;
 
 const LogoutButton = styled.button`
   font-weight: 600;
-  color: red;
-  border: 1px solid red;
+  color: #6b66ff;
+  border: 1px solid #6b66ff;
   padding: 0.5rem;
   padding-bottom: 0.4rem;
   cursor: pointer;
@@ -61,19 +62,19 @@ const LogoutButton = styled.button`
   transition: .2s all;
 
   &:hover {
-      background: $red;
+      background: $#6b66ff;
       color: white;
   }
 `;
 
 const GradientBorder = styled.div`
     height: 5px;
-    background: linear-gradient(to right, white, red);
+    background: linear-gradient(to right, white, #6b66ff);
 `;
 
 
 const BlackBackground = styled.div`
-    background: black;
+    background: lightgray;
     display: flex;
     justify-content: center;
     height: auto;
@@ -88,7 +89,7 @@ const Spacer2 = styled.div`
 `;
 
 const SearchLink = styled(Link)`
-  color: red;
+  color: #6b66ff;
   text-decoration: none;
   font-size: 13px;
   &:hover {
@@ -99,7 +100,7 @@ const SearchLink = styled(Link)`
 
 const MenuButton = styled(Button)`
     cursor: pointer;
-    background-color : red;
+    background-color : #6b66ff;
     `;
 
 const HeaderPresenter = ({user, LogoutClick}) => {
@@ -109,7 +110,7 @@ const HeaderPresenter = ({user, LogoutClick}) => {
     <Header>
       <BlackBackground>
       <Menu>
-      <Banner to='/'>MSmV</Banner>
+      <Banner to='/'>무슨무비</Banner>
       <Spacer/>
 
       <SearchLink to = "/search">영화검색하러 가기!</SearchLink>
