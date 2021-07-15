@@ -60,9 +60,17 @@ const BoxOfficeTitle = styled.div`
   font-weight: 600;
 `;
 
+const GrayBackground = styled.div`
+    background: #eaeaea;
+    display: flex;
+    justify-content: center;
+    height: auto;
+`;
+
 const MainPresenter = ({topTenData, boxOfficeData}) => {
   return (
     <Wrapper>
+    <GrayBackground>
     <MainPage>
       <MainDiv>
         <SearchedDiv>
@@ -101,6 +109,7 @@ const MainPresenter = ({topTenData, boxOfficeData}) => {
         </BoxofficeDiv>
       </MainDiv>
     </MainPage>
+    </GrayBackground>
     </Wrapper>
   );
 };
