@@ -120,7 +120,10 @@ const HeaderPresenter = ({user, LogoutClick}) => {
 
       <Spacer2/>
         {user ? (
-          <LogoutButton onClick={LogoutClick}>Logout</LogoutButton>
+          <>
+            <LogoutButton onClick={LogoutClick}>Logout</LogoutButton>
+            <LoginJoinButton to="MyPage">[MyPageImage]</LoginJoinButton>
+          </>
         ) : (
           <>
             <LoginJoinButton to="Login">Login</LoginJoinButton>
@@ -130,11 +133,7 @@ const HeaderPresenter = ({user, LogoutClick}) => {
             
           </>
         )}
-            <LoginJoinButton to="MyPage">[MyPageImage]</LoginJoinButton>
-            <Spacer2/>
-            <LoginJoinButton to="Search">[SearchImage]</LoginJoinButton>
             
-
       </Menu>
       </BlackBackground>
       <GradientBorder/>
