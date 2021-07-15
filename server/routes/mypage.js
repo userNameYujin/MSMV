@@ -102,13 +102,13 @@ router.post('/withdraw', async(req, res, next) => {
   })
 })
 
-router.get('myReview', async function(req, res, err){
+router.get('/myReview', async function(req, res, err){
   const user_id = req.body.user_id;
-  await db.query('select review.id, contents, created, updated, commenter, nickname, rate, movieCd  from review left join users on ? = review.commenter;', [user_id], function(err, review){
+  await db.query('select review.id as review_id, contents, created, updated, commenter, nickname, rate, movieCd  from review left join users on ? = review.commenter;', [user_id], function(err, review){
     if(err){
       next(err);
     }
-    res.status(200).send({code:200});
+    res.status(200).send({code:200, result:review});
   })
 })
 
