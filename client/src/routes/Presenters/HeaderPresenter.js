@@ -102,21 +102,21 @@ const HeaderPresenter = ({user, LogoutClick}) => {
       <Spacer2/>
         {user ? (
           <>
-            <LogoutButton onClick={LogoutClick}>Logout</LogoutButton>
-            <LoginJoinButton to="MyPage">[MyPageImage]</LoginJoinButton>
+            <LogoutButton onClick={LogoutClick}>로그아웃</LogoutButton>
+            <Tooltip title="마이페이지 가기!">
+            <LoginJoinButton to="MyPage"><img src="https://beslow.co.kr/assets/img/mobile-float-mypage.png" width="25px"/></LoginJoinButton>
+            </Tooltip>
           </>
         ) : (
           <>
-            <LoginJoinButton to="Login">Login</LoginJoinButton>
+            <LoginJoinButton to="Login">로그인</LoginJoinButton>
             <Spacer2/>
-            <LoginJoinButton to="Join">Join</LoginJoinButton>
+            <LoginJoinButton to="Join">회원가입</LoginJoinButton>
             <Spacer2/>
             
           </>
 
-        )}  <Tooltip title="마이페이지 가기!">
-            <LoginJoinButton to="MyPage"><img src="https://beslow.co.kr/assets/img/mobile-float-mypage.png" width="25px"/></LoginJoinButton>
-            </Tooltip>
+        )}  
             <Spacer2/>
             <Tooltip title="영화검색하러 가기!">
             <LoginJoinButton to="Search"><img  src="https://beslow.co.kr/assets/img/search.png" width="25px"/></LoginJoinButton>

@@ -105,7 +105,7 @@ const JoinPresenter = ({ onSubmit, onChange, id, password, nickname, passwordChe
   return (
     <Wrapper>
     <Join>
-      <JoinForm onSubmit={onSubmit}>
+      <JoinForm>
         <JoinTitle>회원가입</JoinTitle>
         <InputContainer>
           <Input required={true} maxLength={10} value={id} placeholder="아이디" id="id" onChange={onChange} />
@@ -142,7 +142,7 @@ const JoinPresenter = ({ onSubmit, onChange, id, password, nickname, passwordChe
           />
           
         </InputContainer>
-        <JoinButton type="submit">회원가입</JoinButton>
+        <JoinButton onClick={onSubmit}>회원가입</JoinButton>
         <AskLoginDiv>
           <AskLoginTitle>이미 계정이 있으신가요?</AskLoginTitle>
           <LoginLink to="/login">
