@@ -121,6 +121,11 @@ const InfoRate = styled.div`
 
 const SearchPresenter = ({searchCritCheck, searchCrit, submitSearch, takeInput, result, currentSearch, inputEnter}) => {
 
+  for (let i = 0 ; i < result.length; i++) {
+    result[i].title = result[i].title.replace(/<b>/igm, '');
+    result[i].title = result[i].title.replace(/<\/b>/igm, '');
+  }
+
   return (
     <Wrapper>
     <div>

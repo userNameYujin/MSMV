@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useHistory} from 'react-router';
 import store from "../store";
 import MyPagePresenter from './Presenters/MyPagePresenter.js';
@@ -9,6 +9,7 @@ const MyPage = () => {
   const [newPassword, setNewPassword] = useState('');
   const [oldPassword, setOldPassword] = useState('');
   const [withdrawPassword, setWithdrawPassword] = useState('');
+  const [myReviews, setMyReviews] = useState([]);
 
   const takeNewNickname = (e) => {
     setNewNickname(e.target.value);
@@ -81,6 +82,19 @@ const MyPage = () => {
       window.alert(error.response.data.message);
     });
   }
+
+  const getMyReviews = async() => {
+    const user_id = store.getState().user.id;
+    await axios.get(`${process.env.REACT_APP_SERVER_URL}/mypage/myReview`, { user_id })
+    .then((response) => {
+      console.log(response);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  }
+
+  useEffect(() => getMyReviews(), []);
 
   return (
     <MyPagePresenter takeNewNickname={takeNewNickname} submitNewNickname={submitNewNickname} testNewNickname={testNewNickname} takeNewPassword={takeNewPassword} takeOldPassword={takeOldPassword} submitNewPassword={submitNewPassword} takeWithdrawPassword={takeWithdrawPassword} submitWithdraw={submitWithdraw}/>

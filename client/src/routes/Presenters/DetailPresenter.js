@@ -6,6 +6,7 @@ import {Descriptions, Badge, Row, Col} from 'antd';
 import 'antd/dist/antd.css';
 import 'antd/dist/antd.less';
 import '../../App.css';
+import StarRatingComponent  from 'react-star-rating-component';
 
 const Wrapper = styled.div`
     padding-top: 60px; 
@@ -45,7 +46,7 @@ const Background = styled.div`
 
 
 
-const DetailPresenter = ({movieData, movieReviews, peoples, reviewOnChange, writeOnClick, updateClick, submitDeleteReview}) => {
+const DetailPresenter = ({movieData, movieReviews, peoples, reviewOnChange, writeOnClick, updateClick, submitDeleteReview, starRating, onStarClick}) => {
   const director = [];
   const actor = [];
 
@@ -96,6 +97,7 @@ const DetailPresenter = ({movieData, movieReviews, peoples, reviewOnChange, writ
             </Col>
           </React.Fragment>
         ))}
+        
         </Row>
         </Descriptions.Item>
       </Descriptions>
@@ -108,6 +110,13 @@ const DetailPresenter = ({movieData, movieReviews, peoples, reviewOnChange, writ
     <br />
     <ReviewTitle>○영화 리뷰○</ReviewTitle>
     <hr />
+      <StarRatingComponent 
+          name="rate1" 
+          starCount={5}
+          value={starRating.rating}
+          onStarClick={onStarClick}
+      />
+
       <form style={{ display: 'flex' }}>
         <textarea style={{ width: '80%', borderRadius: '2px' }}
           onChange={reviewOnChange}

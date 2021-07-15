@@ -74,7 +74,6 @@ SwiperCore.use([Navigation, Pagination])
 
 const MainPresenter = ({topTenData, boxOfficeData}) => {
   
-
   return (
     <Wrapper>
     <GrayBackground>
@@ -111,37 +110,8 @@ const MainPresenter = ({topTenData, boxOfficeData}) => {
             </React.Fragment>
           ))}
           </Row>         
-
-          
-
         </BoxofficeDiv>
-        <BoxofficeDiv>
-        <BoxOfficeTitle>최근 박스오피스 개봉영화 TOP10</BoxOfficeTitle>
-          <hr />
-          
- <Swiper
-        className="banner"
-        spaceBetween={3}
-        slidesPerView={6}
-        slidesPerGroup={6}
-        navigation
-        pagination={{ clickable: true }} 
-      >
         
-	{boxOfficeData && boxOfficeData.map((movie, index) => ( 
-            <React.Fragment key={movie.movieCd}>
-              <SwiperSlide>
-                <Link to={`/Detail?code=${movie.movieCd}`}>
-                  <img style={{ width:'50%', height:'100px'}} src={movie.image} alt={movie.name}></img>
-                </Link>
-               <p>{movie.movierank}</p>
-               </SwiperSlide>
-            </React.Fragment>
-          ))}
-        
- </Swiper>   
-
-        </BoxofficeDiv>
       </MainDiv>
     </MainPage>
     </GrayBackground>
