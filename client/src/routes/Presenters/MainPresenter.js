@@ -16,7 +16,7 @@ const Wrapper = styled.div`
 
 const MainPage = styled.div`
 
-  background-color: ffffff;
+  background-color: #eaeaea;
 `;
 
 const MainDiv = styled.div`
@@ -29,6 +29,10 @@ const SearchedDiv = styled.div`
 
 const BoxofficeDiv = styled.div`
   display: inline-block;
+`;
+
+const SwipeDiv = styled.div`
+
 `;
 
 const Boxoffice = styled.div`
@@ -70,48 +74,78 @@ const GrayBackground = styled.div`
     background: #eaeaea;
 `;
 
+const SwipePad = styled.div`
+    padding-left: 100px;
+    padding-right: 100px;
+`;
 SwiperCore.use([Navigation, Pagination])
 
 const MainPresenter = ({topTenData, boxOfficeData}) => {
-  
+
   return (
     <Wrapper>
     <GrayBackground>
     <MainPage>
       <MainDiv>
-        <SearchedDiv>
-          <BoxOfficeTitle>어제자 검색 영화 TOP8</BoxOfficeTitle>
+
+        <SwipeDiv>
+        <BoxOfficeTitle>최근 박스오피스 개봉영화 TOP10</BoxOfficeTitle>
           <hr />
-          <Row gutter={[16,16]}>
-          {topTenData && topTenData.map((movie, index) => ( 
+          <SwipePad>
+            <Swiper
+              className="banner"
+              spaceBetween={30}
+              slidesPerView={6}
+              slidesPerGroup={6}
+              navigation
+              pagination={{ clickable: true }} 
+           >
+        
+        {topTenData && topTenData.map((movie, index) => ( 
             <React.Fragment key={movie.movieCd}>
-              <Col lg={3} md={6} xs={12}>
+              <SwiperSlide>
                 <Link to={`/Detail?code=${movie.movieCd}`}>
                   <img style={{ width:'100%', height:'200px'}} src={movie.image} alt={movie.title}></img>
                 </Link>
                <p>{movie.rank}</p>
-              </Col>
+              </SwiperSlide>
             </React.Fragment>
           ))}
-          </Row>
-        </SearchedDiv>
-        <BoxofficeDiv>
-          <BoxOfficeTitle>최근 박스오피스 개봉영화 TOP10</BoxOfficeTitle>
+
+        
+            </Swiper>   
+          </SwipePad>
+
+        </SwipeDiv>
+        <SwipeDiv>
+        <BoxOfficeTitle>최근 박스오피스 개봉영화 TOP10</BoxOfficeTitle>
           <hr />
-          <Row gutter={[16,16]}>
-          {boxOfficeData && boxOfficeData.map((movie, index) => ( 
+          <SwipePad>
+            <Swiper
+              className="banner"
+              spaceBetween={30}
+              slidesPerView={6}
+              slidesPerGroup={6}
+              navigation
+              pagination={{ clickable: true }} 
+           >
+        
+	        {boxOfficeData && boxOfficeData.map((movie, index) => ( 
             <React.Fragment key={movie.movieCd}>
-              <Col lg={3} md={6} xs={12}>
+              <SwiperSlide>
                 <Link to={`/Detail?code=${movie.movieCd}`}>
                   <img style={{ width:'100%', height:'200px'}} src={movie.image} alt={movie.name}></img>
                 </Link>
                <p>{movie.movierank}</p>
-              </Col>
+              </SwiperSlide>
             </React.Fragment>
           ))}
-          </Row>         
-        </BoxofficeDiv>
         
+            </Swiper>   
+          </SwipePad>
+
+        </SwipeDiv>
+
       </MainDiv>
     </MainPage>
     </GrayBackground>
