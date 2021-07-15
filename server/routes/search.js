@@ -28,10 +28,12 @@ router.post('/',(req,response)=>{
             let movieListNm = new Array();
             naverAPI.getMovieListNm(option)
             .then(function(result){
+                //let resultLen = result.length;
 
                 for(let i=0; i<result.length; i++){
                     crawling.parsing(result[i].movieCd,result[i],function(res){
-                        movieListNm.push(res);
+                         movieListNm.push(res);
+
                         if(movieListNm.length === result.length){
                             movieListNm.sort(function(a,b){
                                 return parseFloat(b.rate)-parseFloat(a.rate)
