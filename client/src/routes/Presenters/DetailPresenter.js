@@ -2,7 +2,7 @@ import React from 'react';
 import store from '../../store';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import {Descriptions, Badge} from 'antd';
+import {Descriptions, Badge, Row, Col} from 'antd';
 import 'antd/dist/antd.css';
 import 'antd/dist/antd.less';
 
@@ -12,19 +12,19 @@ const Wrapper = styled.div`
 
 const ReviewButton = styled.button`
 font-weight: 600;
-color: red;
-border: 1px solid red;
+color: white;
+border: 1px solid #6799FF;
 padding: 0.5rem;
 padding-bottom: 0.4rem;
 cursor: pointer;
 border-radius: 2px;
 text-decoration: none;
 transition: .2s all;
-background: black;
+background:#6B66FF;
 
 &:hover {
     background-color: white;
-    color: black;
+    color: #6799FF;
 }
 `;
 const ReviewTitle = styled.div`
@@ -32,6 +32,16 @@ const ReviewTitle = styled.div`
   font-size: 20px;
   font-weight: 600;
 `;
+
+const GrayBackground = styled.div`
+    background: #eaeaea;
+`;
+
+const Background = styled.div`
+    background: #EBF7FF;
+`;
+
+
 
 const DetailPresenter = ({movieData, movieReviews, peoples, reviewOnChange, writeOnClick, updateClick, submitDeleteReview}) => {
   const director = [];
@@ -51,6 +61,7 @@ const DetailPresenter = ({movieData, movieReviews, peoples, reviewOnChange, writ
 
   return (
     <Wrapper>
+      <GrayBackground>
       <br />
       
         <img src={movieData.image} alt="movieData.title"/>
@@ -63,24 +74,31 @@ const DetailPresenter = ({movieData, movieReviews, peoples, reviewOnChange, writ
         <Descriptions.Item label="장르">{movieData.genres}</Descriptions.Item>
         <Descriptions.Item label="국가">{movieData.country}</Descriptions.Item>
         <Descriptions.Item label="상영시간">{movieData.runningTime}</Descriptions.Item>
-        <Descriptions.Item label="줄거리">{movieData.summary}</Descriptions.Item>
-        <Descriptions.Item label="감독">{director && director.map((people, index) => ( 
+        <Descriptions.Item label="줄거리" span={3} >{movieData.summary}</Descriptions.Item>
+        <Descriptions.Item label="감독" span={3}>{director && director.map((people, index) => ( 
           <React.Fragment key={people.index}>
-            <div>
-              <p><img src={people.peopleImage} alt={people.peopleName}/> {people.peopleName}</p>
+            
+              <img src={people.peopleImage} alt={people.peopleName}/><br/>{people.peopleName}
               <p>{people.peopleJob}</p>
-            </div>
+            
           </React.Fragment>
         ))}</Descriptions.Item>
-        <Descriptions.Item label="배우">{actor && actor.map((people, index) => ( 
+        <Descriptions.Item label="배우" span={3}>
+        <Row gutter={[16,16]}>
+          {actor && actor.map((people, index) => ( 
           <React.Fragment key={people.index}>
-            <div>
-              <p><img src={people.peopleImage} alt={people.peopleName}/> {people.peopleName}</p>
+            <Col lg={3} md={6} xs={12}>
+              <img style={{ width:'100%', height:'150px'}} src={people.peopleImage} alt={people.peopleName}/> {people.peopleName}
               <p>{people.peopleJob}</p>
-            </div>
+            </Col>
           </React.Fragment>
-        ))}</Descriptions.Item>
+        ))}
+        </Row>
+        </Descriptions.Item>
       </Descriptions>
+      
+      
+      
     
     <div>
     <br />
@@ -110,6 +128,7 @@ const DetailPresenter = ({movieData, movieReviews, peoples, reviewOnChange, writ
         </React.Fragment>
       ))}
     </div>
+    </GrayBackground>
     </Wrapper>
   
 
