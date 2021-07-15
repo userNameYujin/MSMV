@@ -3,7 +3,12 @@ import {Link} from 'react-router-dom';
 import styled from 'styled-components';
 import { Row, Col } from 'antd';
 import 'antd/dist/antd.css';
-
+import { Swiper, SwiperSlide } from 'swiper/react';
+import SwiperCore, { Navigation, Pagination } from "swiper";
+import "swiper/swiper.scss";
+import "swiper/components/navigation/navigation.scss";
+import "swiper/components/pagination/pagination.scss";
+import '../../App.css';
 
 const Wrapper = styled.div`
     padding-top: 60px; 
@@ -56,8 +61,9 @@ const BoxofficeTitle = styled.div`
 `;
 const BoxOfficeTitle = styled.div`
   margin-top: 50px;
-  font-size: 20px;
+  font-size: 30px;
   font-weight: 600;
+  font-family: 'Nanum Pen Script', cursive;
 `;
 
 const GrayBackground = styled.div`
@@ -74,7 +80,7 @@ const MainPresenter = ({topTenData, boxOfficeData}) => {
     <MainPage>
       <MainDiv>
         <SearchedDiv>
-          <BoxOfficeTitle>어제자 검색 영화</BoxOfficeTitle>
+          <BoxOfficeTitle>어제자 검색 영화 TOP8</BoxOfficeTitle>
           <hr />
           <Row gutter={[16,16]}>
           {topTenData && topTenData.map((movie, index) => ( 
@@ -90,7 +96,7 @@ const MainPresenter = ({topTenData, boxOfficeData}) => {
           </Row>
         </SearchedDiv>
         <BoxofficeDiv>
-          <BoxOfficeTitle>최근 박스오피스 개봉영화</BoxOfficeTitle>
+          <BoxOfficeTitle>최근 박스오피스 개봉영화 TOP10</BoxOfficeTitle>
           <hr />
           <Row gutter={[16,16]}>
           {boxOfficeData && boxOfficeData.map((movie, index) => ( 
@@ -103,8 +109,7 @@ const MainPresenter = ({topTenData, boxOfficeData}) => {
               </Col>
             </React.Fragment>
           ))}
-          </Row>
-            
+          </Row>         
 
         </BoxofficeDiv>
       </MainDiv>

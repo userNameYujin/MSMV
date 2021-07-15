@@ -64,13 +64,14 @@ const JoinButton = styled.button`
   cursor: pointer;
   outline: none;
   width: 80%;
-  background-color: black;
+  background-color: #6b66ff;
   height: 50px;
-  color: red;
+  color: white;
   font-weight: 600;
   font-size: 16px;
   &:hover {
-    background-color: white;
+    background-color: #6799ff;
+    color: white;
   }
 `;
 
