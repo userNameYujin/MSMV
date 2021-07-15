@@ -5,6 +5,8 @@ import styled from 'styled-components';
 import {Descriptions, Badge, Row, Col} from 'antd';
 import 'antd/dist/antd.css';
 import 'antd/dist/antd.less';
+import '../../App.css';
+import StarRatingComponent  from 'react-star-rating-component';
 
 const Wrapper = styled.div`
     padding-top: 60px; 
@@ -29,8 +31,9 @@ background:#6B66FF;
 `;
 const ReviewTitle = styled.div`
   margin-top: 50px;
-  font-size: 20px;
+  font-size: 30px;
   font-weight: 600;
+  font-family: 'Nanum Pen Script', cursive;
 `;
 
 const GrayBackground = styled.div`
@@ -38,12 +41,12 @@ const GrayBackground = styled.div`
 `;
 
 const Background = styled.div`
-    background: #EBF7FF;
+    font-family: 'Nanum Pen Script', cursive;
 `;
 
 
 
-const DetailPresenter = ({movieData, movieReviews, peoples, reviewOnChange, writeOnClick, updateClick, submitDeleteReview}) => {
+const DetailPresenter = ({movieData, movieReviews, peoples, reviewOnChange, writeOnClick, updateClick, submitDeleteReview, starRating, onStarClick}) => {
   const director = [];
   const actor = [];
 
@@ -67,15 +70,16 @@ const DetailPresenter = ({movieData, movieReviews, peoples, reviewOnChange, writ
         <img src={movieData.image} alt="movieData.title"/>
       
       <br />
+      <Background>
       <Descriptions title="영화 정보" bordered>
-        <Descriptions.Item label="영화 제목">{movieData.title}</Descriptions.Item>
-        <Descriptions.Item label="개봉 날짜">{movieData.openDt}</Descriptions.Item>
-        <Descriptions.Item label="관람등급">{movieData.grade}</Descriptions.Item>
-        <Descriptions.Item label="장르">{movieData.genres}</Descriptions.Item>
-        <Descriptions.Item label="국가">{movieData.country}</Descriptions.Item>
-        <Descriptions.Item label="상영시간">{movieData.runningTime}</Descriptions.Item>
-        <Descriptions.Item label="줄거리" span={3} >{movieData.summary}</Descriptions.Item>
-        <Descriptions.Item label="감독" span={3}>{director && director.map((people, index) => ( 
+        <Descriptions.Item label="영화 제목" contentStyle={{ background: "white" }}>{movieData.title}</Descriptions.Item>
+        <Descriptions.Item label="개봉 날짜" contentStyle={{ background: "white" }}>{movieData.openDt}</Descriptions.Item>
+        <Descriptions.Item label="관람등급" contentStyle={{ background: "white" }}>{movieData.grade}</Descriptions.Item>
+        <Descriptions.Item label="장르" contentStyle={{ background: "white" }}>{movieData.genres}</Descriptions.Item>
+        <Descriptions.Item label="국가" contentStyle={{ background: "white" }}>{movieData.country}</Descriptions.Item>
+        <Descriptions.Item label="상영시간" contentStyle={{ background: "white" }}>{movieData.runningTime}</Descriptions.Item>
+        <Descriptions.Item label="줄거리" span={3} contentStyle={{ background: "white" }}>{movieData.summary}</Descriptions.Item>
+        <Descriptions.Item label="감독" span={3} contentStyle={{ background: "white" }}>{director && director.map((people, index) => ( 
           <React.Fragment key={people.index}>
             
               <img src={people.peopleImage} alt={people.peopleName}/><br/>{people.peopleName}
@@ -83,7 +87,7 @@ const DetailPresenter = ({movieData, movieReviews, peoples, reviewOnChange, writ
             
           </React.Fragment>
         ))}</Descriptions.Item>
-        <Descriptions.Item label="배우" span={3}>
+        <Descriptions.Item label="배우" span={3} contentStyle={{ background: "white" }}>
         <Row gutter={[16,16]}>
           {actor && actor.map((people, index) => ( 
           <React.Fragment key={people.index}>
@@ -93,17 +97,26 @@ const DetailPresenter = ({movieData, movieReviews, peoples, reviewOnChange, writ
             </Col>
           </React.Fragment>
         ))}
+        
         </Row>
         </Descriptions.Item>
       </Descriptions>
+      </Background>
       
       
       
     
     <div>
     <br />
-    <ReviewTitle>리뷰</ReviewTitle>
+    <ReviewTitle>○영화 리뷰○</ReviewTitle>
     <hr />
+      <StarRatingComponent 
+          name="rate1" 
+          starCount={5}
+          value={starRating.rating}
+          onStarClick={onStarClick}
+      />
+
       <form style={{ display: 'flex' }}>
         <textarea style={{ width: '80%', borderRadius: '2px' }}
           onChange={reviewOnChange}

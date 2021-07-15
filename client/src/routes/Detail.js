@@ -12,6 +12,7 @@ const Detail = () => {
   const [movieData, setMovieData] = useState([]);
   const [movieReviews, setMovieReviews] = useState([]);
   const [peoples, setPeoples] = useState([]);
+  const [starRating, setStarRating] = useState(1);
 
   const getMovieData = async () => {
     await axios.get(`${process.env.REACT_APP_SERVER_URL}/post/detail/${movieCd}`, { movieCd })
@@ -26,7 +27,7 @@ const Detail = () => {
     });
   }
 
-  useEffect(() => getMovieData(), []);
+  
   
   // below for review code
 
@@ -38,7 +39,7 @@ const Detail = () => {
   const submitWriteReview = async () => {
     const contents = reviewContent;
     const commenter = store.getState().user.id;
-    const rate = 5;
+    const rate = starRating.rating;
 
     await axios.post(`${process.env.REACT_APP_SERVER_URL}/review/review/write`, { contents, commenter, rate, movieCd })
     .then((response) => {
@@ -55,17 +56,9 @@ const Detail = () => {
     setReviewContent(e.target.value);
   }
 
-  const setRatingClick = (e) => {
-    return 5; // 임시
-    // 클릭 위치에 따라 내가 줄 평점을 설정
-  }
 
   const writeOnClick = () => {
     submitWriteReview();
-  }
-
-  const deleteOnClick = (self) => {
-    submitDeleteReview(self);
   }
 
   const [id, setId] = useState(''); // id value for Delete Review
@@ -83,10 +76,17 @@ const Detail = () => {
       window.alert(error.message);
     }) 
   }
-  
+
+  const onStarClick = (nextValue, prevValue, name) => {
+    setStarRating({rating: nextValue});
+    console.log(starRating);
+  };
+
+  useEffect(() => getMovieData(), []);
+
   return (
 
-    <DetailPresenter movieData={movieData} movieReviews={movieReviews} peoples={peoples} reviewOnChange={reviewOnChange} writeOnClick={writeOnClick} submitDeleteReview={submitDeleteReview}/*{setRatingClick={setRatingClick}}*//>
+    <DetailPresenter movieData={movieData} movieReviews={movieReviews} peoples={peoples} reviewOnChange={reviewOnChange} writeOnClick={writeOnClick} submitDeleteReview={submitDeleteReview} starRating={starRating} onStarClick={onStarClick}/>
 
   )
 }

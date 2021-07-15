@@ -121,12 +121,16 @@ const InfoRate = styled.div`
 
 const SearchPresenter = ({searchCritCheck, searchCrit, submitSearch, takeInput, result, currentSearch, inputEnter}) => {
 
+  for (let i = 0 ; i < result.length; i++) {
+    result[i].title = result[i].title.replace(/<b>/igm, '');
+    result[i].title = result[i].title.replace(/<\/b>/igm, '');
+  }
+
   return (
     <Wrapper>
     <div>
     <SearchAsk>
-      <SearchTitle>현재 검색: {searchCrit}</SearchTitle>
-      
+      <SearchTitle></SearchTitle>
         <select name="SearchCrit" value={optionsState} onChange={searchCritCheck}>
         <option value="title">제목</option>
         <option value="director">감독</option>
@@ -155,6 +159,8 @@ const SearchPresenter = ({searchCritCheck, searchCrit, submitSearch, takeInput, 
             <InfoRate>
               <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;평점 &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;{movie.rate}</p>
             </InfoRate>
+            <p>줄거리 : {movie.summary}</p>
+            <p>개봉일 : {movie.openDt}</p>
           </InfoBox>
               
         </MovieDiv>

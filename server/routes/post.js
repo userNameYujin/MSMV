@@ -71,9 +71,10 @@ router.get('/detail/:movieCd', async function(req, response, next){
           let peopleArray = new Array();
       
           $peopleList.each((idx,node)=>{
-              const peopleImage = $(node).find("img").attr("src")
-              const peopleName =  $(node).find(".tx_people").text()
-              const peopleJob =$(node).find(".staff").text().trim()
+              let peopleImage = $(node).find("img").attr("src")
+              let peopleName =  $(node).find(".tx_people").text()
+              let peopleJob =$(node).find(".staff").text().trim()
+
               people = {
                   "peopleImage" : peopleImage,
                   "peopleName" : peopleName,
@@ -86,7 +87,18 @@ router.get('/detail/:movieCd', async function(req, response, next){
           let time = $(".info_spec").find("span:eq(2)").text().trim()
           let date = $(".info_spec").find("span:eq(3)").text().trim()
           let grade = $(".info_spec").find("span:eq(4)").text().trim()
-      
+          if(!show){
+            if(date.charAt(0)==='['){
+              grade = date;
+            }
+            date = '정보 없음'
+          }
+           
+          
+          if(grade.charAt(0)!=='['){
+            grade = '정보 없음'
+          }
+          country = country.replace(/(\r\n\t|\n|\r\t|\t)/gm,"")
           grade = grade.replace(/(\r\n\t|\n|\r\t|\t)/gm,"")
           date = date.replace(/(\r\n\t|\n|\r\t|\t)/gm,"")
           genre = genre.replace(/(\r\n\t|\n|\r\t|\t)/gm,"")

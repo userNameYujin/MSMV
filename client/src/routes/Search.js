@@ -6,7 +6,7 @@ import SearchPresenter from './Presenters/SearchPresenter';
 const Search = () => {
   const [searchCrit, setSearchCrit] = useState("title");
   const [searchContent, setSearchContent] = useState('');
-  const [result, setResult] = useState([]);
+  let [result, setResult] = useState([]);
   const [currentSearch, setCurrentSearch] = useState('');
   const props = {searchContent, result, currentSearch};
   // const history = useHistory();
@@ -46,6 +46,8 @@ const Search = () => {
       console.log("end axios");
       console.log(result);
     }
+
+    
   }
   
 
