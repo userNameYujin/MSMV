@@ -173,8 +173,12 @@ const SearchPresenter = ({searchCritCheck, searchCrit, submitSearch, takeInput, 
                 <Link to={`/Detail?code=${movie.movieCd}`}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{movie.title}</Link> 
               </InfoName>
               <InfoRate>
-                <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;평점 &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;{movie.rate}</p>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;평점 &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;{movie.rate} <br/>
+                  {movie.date} <br/>
+                  {movie.summary}
+                </p>
               </InfoRate>
+              
             </InfoBox>
           </MovieDiv>))}</>) : (
         <>
