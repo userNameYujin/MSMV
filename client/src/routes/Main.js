@@ -22,7 +22,6 @@ const Main = () => {
   const [boxOfficeData, setBoxOfficeData] = useState([]);
 
   const getTopTen = async () => {
-    console.log("getTopTen");
     await axios.get(`${process.env.REACT_APP_SERVER_URL}/post/top10`)
     .then((response) => {
       setTopTenData(response.data.result);
