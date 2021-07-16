@@ -101,15 +101,12 @@ const MainPresenter = ({topTenData, boxOfficeData}) => {
               pagination={{ clickable: true }} 
            >
         
-        {topTenData && topTenData.map((movie, index) => ( 
-            <React.Fragment key={movie.movieCd}>
-              <SwiperSlide>
+        {topTenData && topTenData.map((movie) => ( 
+              <SwiperSlide key={movie.movieCd}> 
                 <Link to={`/Detail?code=${movie.movieCd}`}>
                   <img style={{ width:'100%', height:'200px'}} src={movie.image} alt={movie.title}></img>
                 </Link>
-               <p>{movie.rank}</p>
               </SwiperSlide>
-            </React.Fragment>
           ))}
 
         
@@ -130,15 +127,12 @@ const MainPresenter = ({topTenData, boxOfficeData}) => {
               pagination={{ clickable: true }} 
            >
         
-	        {boxOfficeData && boxOfficeData.map((movie, index) => ( 
-            <React.Fragment key={movie.movieCd}>
-              <SwiperSlide>
+	        {boxOfficeData && boxOfficeData.map((movie) => ( 
+              <SwiperSlide key={movie.movieCd}>
                 <Link to={`/Detail?code=${movie.movieCd}`}>
                   <img style={{ width:'100%', height:'200px'}} src={movie.image} alt={movie.name}></img>
                 </Link>
-               <p>{movie.movierank}</p>
               </SwiperSlide>
-            </React.Fragment>
           ))}
         
             </Swiper>   
