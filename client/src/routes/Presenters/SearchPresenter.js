@@ -3,22 +3,23 @@ import {Link} from "react-router-dom";
 import styled from "styled-components";
 
 const Wrapper = styled.div`
-    padding-top: 60px; 
+    padding-top: 105px; 
 `;
 
 const SearchTitle = styled.div`
-  
+  text-align: center;
   margin-top: 50px;
   margin-bottom: 20px;
   font-size: 30px;
   font-weight: 600;
+  
 `;
 
 const Input = styled.input`
-
+  
   padding: 0px 10px;
   box-sizing: border-box;
-  width: 40%;
+  width: 500px;
   height: 40px;
   margin-top: 5px;
   margin-bottom: 20px;
@@ -28,16 +29,16 @@ const Input = styled.input`
   outline: none;
   &:hover,
   &:focus {
-    border: 2px solid red;
+    border: 2px solid #6B66FF;
   }
 `;
 
 const SearchButton = styled.button`
   font-weight: 600;
   width: 55px;
-  color: red;
-  border: 1px solid red;
-  background-color: black;
+  color: #6B66FF;
+  border: 1px solid #6B66FF;
+  background-color: lightgray;
   padding: 0.5rem;
   padding-bottom: 0.4rem;
   cursor: pointer;
@@ -46,16 +47,18 @@ const SearchButton = styled.button`
   transition: .2s all;
 
   &:hover {
-      background: black;
+      background: #6B66FF;
       color: white;
   }
 `;
 const Spacer = styled.div`
     flex-grow: 0.01;
+    float: left;
 `;
 
 const SearchAsk = styled.div`
     margin: 10px 10px 10px 10px;
+    float: left;
 `;
 
 
@@ -64,16 +67,14 @@ const SearchResult = styled.div`
 `;
 
 const Shape = styled.div`
-    display: block;
+    display: inline-block;
     flex: 1;
-    margin-left: auto;
-    margin-right: auto; 
-    margin-top: 20px;
-    margin-bottom: 20px;
-    text-align: center;
-    width: 75%;
+    margin: 0 auto 0 auto;
+    text-align: left;
+    width: 72%;
     height: auto;
     background: lightgray;
+    font-size: 10px;
 
   
   `;
@@ -96,15 +97,16 @@ const MovieDiv = styled.div`
 `;
 
 const Image = styled.div`
-  width: 210px;
-  height: 200px;
+  float: left;
+  width: 50%
+  height: 100%;
   size: cover;
 `;  
 
 const InfoBox = styled.div`
-  float: right;
-  width: 290px;
-  height: 200px;
+  float: left;
+  width: 50%;
+  height: 100%;
   text-align: center;
   font-size: 20px;
 `;
@@ -119,6 +121,13 @@ const InfoRate = styled.div`
 `;
 
 
+const SelectType = styled.div`
+  float: left;
+  width: 80px;
+  height: 40px;
+  padding: 9px;
+`;
+
 const SearchPresenter = ({searchCritCheck, searchCrit, submitSearch, takeInput, result, currentSearch, inputEnter}) => {
 
   return (
@@ -127,10 +136,13 @@ const SearchPresenter = ({searchCritCheck, searchCrit, submitSearch, takeInput, 
     <SearchAsk>
       <SearchTitle>현재 검색: {searchCrit}</SearchTitle>
       
+      <SelectType>
         <select name="SearchCrit" value={optionsState} onChange={searchCritCheck}>
         <option value="title">제목</option>
         <option value="director">감독</option>
       </select>
+      </SelectType>
+        
 
       <Spacer/>
       <Input onChange={takeInput} onKeyPress={inputEnter} placeholder="검색어 입력"></Input>
@@ -141,7 +153,7 @@ const SearchPresenter = ({searchCritCheck, searchCrit, submitSearch, takeInput, 
     </SearchAsk>
     <SearchResult>
     <Shape>
-      <h1>----------------------{currentSearch}에 대한 검색 결과----------------------</h1>
+      <h1> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '{currentSearch}' 전체 검색결과가 건 발견되었습니다.</h1>
       {result.map((movie) => ( 
             
         <MovieDiv key={movie.movieCd}>
