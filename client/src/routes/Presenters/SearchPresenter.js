@@ -130,8 +130,11 @@ const SelectType = styled.div`
   padding-left: 400px;
 `;
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> c6b90b9dc7b3925474c349a0f6f08988c477a50a
 const SearchPresenter = ({searchCritCheck, searchCrit, submitSearch, takeInput, result, currentSearch, inputEnter}) => {
 
   for (let i = 0 ; i < result.length; i++) {
@@ -143,17 +146,16 @@ const SearchPresenter = ({searchCritCheck, searchCrit, submitSearch, takeInput, 
     <Wrapper>
     <div>
     <SearchAsk>
-      <SearchTitle>검색</SearchTitle>
-      
-
-      <Spacer/>
-      <Input onChange={takeInput} onKeyPress={inputEnter} placeholder="검색어 입력"></Input>
+      <SearchTitle></SearchTitle>
       <SelectType>
         <select name="SearchCrit" value={optionsState} onChange={searchCritCheck}>
         <option value="title">제목</option>
         <option value="director">감독</option>
       </select>
       </SelectType>
+
+      <Spacer/>
+      <Input onChange={takeInput} onKeyPress={inputEnter} placeholder="검색어 입력"></Input>
       <Spacer/>
       <SearchButton onClick={submitSearch}>검색</SearchButton>
       
@@ -165,7 +167,6 @@ const SearchPresenter = ({searchCritCheck, searchCrit, submitSearch, takeInput, 
         {/* 무언가가 검색되었을 때의 표시 공간 */}
         <h1> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '{currentSearch}' 전체 검색결과가 건 발견되었습니다.</h1>
         {result.map((movie) => ( 
-              
           <MovieDiv key={movie.movieCd}>
             <Image>
               <Link to={`/Detail?code=${movie.movieCd}`}><img alt="movie" src={movie.image}></img></Link> 

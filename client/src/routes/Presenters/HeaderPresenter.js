@@ -5,18 +5,17 @@ import { Button, Tooltip } from "antd";
 import { SearchOutlined } from "@ant-design/icons"
 
 const Header = styled.header`
-display: flex;
-flex-direction: column;
-position: fixed;
-top: 0px;
-width: 100%;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0px;
+  width: 100%;
 `;
 
 const Banner = styled(Link)`
   font-size: 2.5rem;
   letter-spacing:3px;
   color: #6b66ff;
-  font-family: fantasy;
   
   font-family: 'Nanum Pen Script', cursive;
 `;
@@ -62,6 +61,9 @@ const LogoutButton = styled.button`
   transition: .2s all;
 
   &:hover {
+      background: #6799ff;
+      color: white;
+  }
 `;
 const GradientBorder = styled.div`
     height: 5px;
@@ -84,7 +86,6 @@ const Spacer2 = styled.div`
     flex-grow: 0.01;
 `;
 
-
 const HeaderPresenter = ({user, LogoutClick}) => {
 
 
@@ -92,13 +93,14 @@ const HeaderPresenter = ({user, LogoutClick}) => {
     <Header>
       <WhiteBackground>
       <Menu>
-      <Banner to='/'>MSmV</Banner>
+      <Banner to='/'>무슨무비</Banner>
       <Spacer/> 
       
       <Spacer2/>
         {user ? (
           <>
             <LogoutButton onClick={LogoutClick}>로그아웃</LogoutButton>
+            <Spacer2/>
             <Tooltip title="마이페이지 가기!">
             <LoginJoinButton to="MyPage"><img src="https://beslow.co.kr/assets/img/mobile-float-mypage.png" width="25px"/></LoginJoinButton>
             </Tooltip>

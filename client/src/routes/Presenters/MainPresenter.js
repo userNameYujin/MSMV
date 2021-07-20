@@ -32,8 +32,8 @@ const BoxofficeDiv = styled.div`
 `;
 
 const SwipeDiv = styled.div`
-
 `;
+
 
 const Boxoffice = styled.div`
 
@@ -78,18 +78,22 @@ const SwipePad = styled.div`
     padding-left: 100px;
     padding-right: 100px;
 `;
+
+const Ex  = styled.div`
+    margin: 15px;
+`;
 SwiperCore.use([Navigation, Pagination])
 
 const MainPresenter = ({topTenData, boxOfficeData}) => {
 
   return (
-    <Wrapper>
     <GrayBackground>
+    <Wrapper>
     <MainPage>
       <MainDiv>
 
         <SwipeDiv>
-        <BoxOfficeTitle>최근 박스오피스 개봉영화 TOP10</BoxOfficeTitle>
+        <BoxOfficeTitle>최근 검색 영화 TOP10</BoxOfficeTitle>
           <hr />
           <SwipePad>
             <Swiper
@@ -108,8 +112,9 @@ const MainPresenter = ({topTenData, boxOfficeData}) => {
                 </Link>
               </SwiperSlide>
           ))}
-
         
+            <br/>
+            <br/>
             </Swiper>   
           </SwipePad>
 
@@ -134,7 +139,8 @@ const MainPresenter = ({topTenData, boxOfficeData}) => {
                 </Link>
               </SwiperSlide>
           ))}
-        
+            <br/>
+            <br/>
             </Swiper>   
           </SwipePad>
 
@@ -142,8 +148,8 @@ const MainPresenter = ({topTenData, boxOfficeData}) => {
 
       </MainDiv>
     </MainPage>
-    </GrayBackground>
     </Wrapper>
+    </GrayBackground>
   );
 };
 
