@@ -103,6 +103,7 @@ const HeaderPresenter = ({user, LogoutClick}) => {
         {user ? (
           <>
             <LogoutButton onClick={LogoutClick}>로그아웃</LogoutButton>
+            <Spacer2/>
             <Tooltip title="마이페이지 가기!">
             <LoginJoinButton to="MyPage"><img src="https://beslow.co.kr/assets/img/mobile-float-mypage.png" width="25px"/></LoginJoinButton>
             </Tooltip>
