@@ -49,7 +49,7 @@ const Input = styled.input`
   outline: none;
   &:hover,
   &:focus {
-    border: 2px solid red;
+    border: 2px solid #6799ff;
   }
 `;
 
