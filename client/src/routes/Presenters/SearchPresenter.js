@@ -130,19 +130,22 @@ const SelectType = styled.div`
 
 const SearchPresenter = ({searchCritCheck, searchCrit, submitSearch, takeInput, result, currentSearch, inputEnter}) => {
 
+  for (let i = 0 ; i < result.length; i++) {
+    result[i].title = result[i].title.replace(/<b>/igm, '');
+    result[i].title = result[i].title.replace(/<\/b>/igm, '');
+  }
+
   return (
     <Wrapper>
     <div>
     <SearchAsk>
-      <SearchTitle>현재 검색: {searchCrit}</SearchTitle>
-      
+      <SearchTitle></SearchTitle>
       <SelectType>
         <select name="SearchCrit" value={optionsState} onChange={searchCritCheck}>
         <option value="title">제목</option>
         <option value="director">감독</option>
       </select>
       </SelectType>
-        
 
       <Spacer/>
       <Input onChange={takeInput} onKeyPress={inputEnter} placeholder="검색어 입력"></Input>
@@ -153,25 +156,33 @@ const SearchPresenter = ({searchCritCheck, searchCrit, submitSearch, takeInput, 
     </SearchAsk>
     <SearchResult>
     <Shape>
-      <h1> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '{currentSearch}' 전체 검색결과가 건 발견되었습니다.</h1>
-      {result.map((movie) => ( 
-            
-        <MovieDiv key={movie.movieCd}>
-          <Image>
-            <img alt="movie" src={movie.image}></img>
-          </Image>
-          <InfoBox>
-            <InfoName>
-              <Link to={`/Detail?code=${movie.movieCd}`}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{movie.title}</Link> 
-            </InfoName>
-            <InfoRate>
-              <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;평점 &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;{movie.rate}</p>
-            </InfoRate>
-          </InfoBox>
+      {currentSearch ? (<>
+        {/* 무언가가 검색되었을 때의 표시 공간 */}
+        <h1> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '{currentSearch}' 전체 검색결과가 건 발견되었습니다.</h1>
+        {result.map((movie) => ( 
+          <MovieDiv key={movie.movieCd}>
+            <Image>
+              <img alt="movie" src={movie.image}></img>
+            </Image>
+            <InfoBox>
+              <InfoName>
+                <Link to={`/Detail?code=${movie.movieCd}`}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{movie.title}</Link> 
+              </InfoName>
+              <InfoRate>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;평점 &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;{movie.rate} <br/>
+                  {movie.date} <br/>
+                  {movie.summary}
+                </p>
+              </InfoRate>
               
-        </MovieDiv>
+            </InfoBox>
+          </MovieDiv>))}</>) : (
+        <>
+        {/* 아무것도 검색되지 않았을 때의 표시 공간 */}
+            <p>검색할 키워드를 입력하세요</p>
 
-          ))}
+        </>)}
+      
     </Shape>
     </SearchResult>  
 

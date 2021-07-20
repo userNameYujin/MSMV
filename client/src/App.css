@@ -36,3 +36,8 @@
     transform: rotate(360deg);
   }
 }
+
+@import url(http://fonts.googleapis.com/earlyaccess/nanumpenscript.css);
+.nanumpenscript {
+  font-family: 'Nanum Pen Script', cursive;
+} 

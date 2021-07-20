@@ -49,7 +49,7 @@ const Input = styled.input`
   outline: none;
   &:hover,
   &:focus {
-    border: 2px solid red;
+    border: 2px solid #6799ff;
   }
 `;
 
@@ -64,13 +64,14 @@ const JoinButton = styled.button`
   cursor: pointer;
   outline: none;
   width: 80%;
-  background-color: black;
+  background-color: #6b66ff;
   height: 50px;
-  color: red;
+  color: white;
   font-weight: 600;
   font-size: 16px;
   &:hover {
-    background-color: white;
+    background-color: #6799ff;
+    color: white;
   }
 `;
 
@@ -105,7 +106,7 @@ const JoinPresenter = ({ onSubmit, onChange, id, password, nickname, passwordChe
   return (
     <Wrapper>
     <Join>
-      <JoinForm onSubmit={onSubmit}>
+      <JoinForm>
         <JoinTitle>회원가입</JoinTitle>
         <InputContainer>
           <Input required={true} maxLength={10} value={id} placeholder="아이디" id="id" onChange={onChange} />
@@ -142,7 +143,7 @@ const JoinPresenter = ({ onSubmit, onChange, id, password, nickname, passwordChe
           />
           
         </InputContainer>
-        <JoinButton type="submit">회원가입</JoinButton>
+        <JoinButton onClick={onSubmit}>회원가입</JoinButton>
         <AskLoginDiv>
           <AskLoginTitle>이미 계정이 있으신가요?</AskLoginTitle>
           <LoginLink to="/login">

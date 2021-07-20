@@ -10,7 +10,6 @@ const Header = styled.header`
   position: fixed;
   top: 0px;
   width: 100%;
-  
 `;
 
 const Banner = styled(Link)`
@@ -36,7 +35,7 @@ const Menu = styled.div`
 const LoginJoinButton = styled(Link)`
   font-weight: 600;
   color: #6b66ff;
-  border: 1px solid #6b66ff;
+  border: 1px solid #6799ff;
   padding: 0.5rem;
   padding-bottom: 0.4rem;
   cursor: pointer;
@@ -45,7 +44,7 @@ const LoginJoinButton = styled(Link)`
   transition: .2s all;
 
   &:hover {
-      background: $#6b66ff;
+      background: #6799ff;
       color: white;
   }
 `;
@@ -53,7 +52,7 @@ const LoginJoinButton = styled(Link)`
 const LogoutButton = styled.button`
   font-weight: 600;
   color: #6b66ff;
-  border: 1px solid #6b66ff;
+  border: 1px solid #6799ff;
   padding: 0.5rem;
   padding-bottom: 0.4rem;
   cursor: pointer;
@@ -62,19 +61,19 @@ const LogoutButton = styled.button`
   transition: .2s all;
 
   &:hover {
-      background: $#6b66ff;
+      background: #6799ff;
       color: white;
   }
 `;
 
 const GradientBorder = styled.div`
     height: 5px;
-    background: linear-gradient(to right, white, #6b66ff);
+    background: linear-gradient(to right, #6799ff, #6b66ff);
 `;
 
 
-const BlackBackground = styled.div`
-    background: lightgray;
+const WhiteBackground = styled.div`
+    background: white;
     display: flex;
     justify-content: center;
     height: auto;
@@ -88,56 +87,41 @@ const Spacer2 = styled.div`
     flex-grow: 0.01;
 `;
 
-const SearchLink = styled(Link)`
-  color: #6b66ff;
-  text-decoration: none;
-  font-size: 13px;
-  &:hover {
-    color: white;
-}
-`;
-
-
-const MenuButton = styled(Button)`
-    cursor: pointer;
-    background-color : #6b66ff;
-    `;
-
 const HeaderPresenter = ({user, LogoutClick}) => {
 
 
   return (
     <Header>
-      <BlackBackground>
+      <WhiteBackground>
       <Menu>
       <Banner to='/'>무슨무비</Banner>
-      <Spacer/>
-
-      <SearchLink to = "/search">영화검색하러 가기!</SearchLink>
+      <Spacer/> 
       
-            <Tooltip title="영화검색하러 가기!">
-                <MenuButton to ="Search" shape="circle" icon={<SearchOutlined />} ></MenuButton>
-            </Tooltip>   
-
       <Spacer2/>
         {user ? (
-          <LogoutButton onClick={LogoutClick}>Logout</LogoutButton>
+          <>
+            <LogoutButton onClick={LogoutClick}>로그아웃</LogoutButton>
+            <Spacer2/>
+            <Tooltip title="마이페이지 가기!">
+            <LoginJoinButton to="MyPage"><img src="https://beslow.co.kr/assets/img/mobile-float-mypage.png" width="25px"/></LoginJoinButton>
+            </Tooltip>
+          </>
         ) : (
           <>
-            <LoginJoinButton to="Login">Login</LoginJoinButton>
+            <LoginJoinButton to="Login">로그인</LoginJoinButton>
             <Spacer2/>
-            <LoginJoinButton to="Join">Join</LoginJoinButton>
+            <LoginJoinButton to="Join">회원가입</LoginJoinButton>
             <Spacer2/>
             
           </>
-        )}
-            <LoginJoinButton to="MyPage">[MyPageImage]</LoginJoinButton>
-            <Spacer2/>
-            <LoginJoinButton to="Search">[SearchImage]</LoginJoinButton>
-            
 
+        )}  
+            <Spacer2/>
+            <Tooltip title="영화검색하러 가기!">
+            <LoginJoinButton to="Search"><img  src="https://beslow.co.kr/assets/img/search.png" width="25px"/></LoginJoinButton>
+            </Tooltip>
       </Menu>
-      </BlackBackground>
+      </WhiteBackground>
       <GradientBorder/>
     </Header>
   )

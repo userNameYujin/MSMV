@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const db = require('../lib/db');
 const bcrypt = require('bcrypt');
+const { next } = require('cheerio/lib/api/traversing');
 
 //닉네임변경
 router.post('/nickModify/:id', async(req, res, next) => {
@@ -90,11 +91,24 @@ router.post('/withdraw', async(req, res, next) => {
             next(err);
           }
           else{
-            res.status(200).send({code : 200, message : '회원 탈퇴가 완료되었습니다.'});
+            req.logout();
+            req.session.save(function(){
+              res.status(200).send({code : 200, message : '회원 탈퇴가 완료되었습니다.'});
+            });
           }
         })
       }
     })
+  })
+})
+
+router.get('/myReview', async function(req, res, err){
+  const user_id = req.body.user_id;
+  await db.query('select review.id as review_id, contents, created, updated, commenter, nickname, rate, movieCd  from review left join users on ? = review.commenter;', [user_id], function(err, review){
+    if(err){
+      next(err);
+    }
+    res.status(200).send({code:200, result:review});
   })
 })
 

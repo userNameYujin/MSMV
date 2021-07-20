@@ -49,7 +49,7 @@ const Input = styled.input`
   outline: none;
   &:hover,
   &:focus {
-    border: 2px solid red;
+    border: 2px solid #6799ff;
   }
 `;
 
@@ -75,15 +75,17 @@ const LoginButton = styled.button`
   cursor: pointer;
   outline: none;
   width: 80%;
-  background-color: black;
+  background-color: #6b66ff;
   height: 50px;
-  color: red;
+  color: white;
   font-weight: 600;
   font-size: 16px;
   border-radius: 20px;
   &:hover {
-    background-color: white;
+    background-color: #6799ff;
+    color: white;
   }
+  
 `;
 
 const AskJoinDiv = styled.div`
