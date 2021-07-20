@@ -6,7 +6,7 @@ import SearchPresenter from './Presenters/SearchPresenter';
 const Search = () => {
   const [searchCrit, setSearchCrit] = useState("title");
   const [searchContent, setSearchContent] = useState('');
-  const [result, setResult] = useState([]);
+  let [result, setResult] = useState([]);
   const [currentSearch, setCurrentSearch] = useState('');
   const props = {searchContent, result, currentSearch};
   // const history = useHistory();
@@ -14,6 +14,11 @@ const Search = () => {
 
   const submitSearch = async () => {
     setCurrentSearch(searchContent);
+
+    if (searchContent === '') { // 아무것도 입력하지 않을 시
+      return; // 아무것도 반환하지 않음
+    }
+
     if (searchCrit === "title") {
       console.log("search from title");
       const check = 1;

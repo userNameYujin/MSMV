@@ -104,7 +104,7 @@ const Join = () => {
   }
 
   return (
-    <JoinPresenter onChange={onChange} onSubmit={onSubmit} {...props} />
+    <JoinPresenter onSubmit={onSubmit} onChange={onChange} {...props} />
   )
 }
 

@@ -24,8 +24,22 @@ const parsing = async(keyword, result, callback) => {
     result.image = $(".mv_info_area").find("img").attr("src")
     result.summary = $(".story_area").find(".con_tx").text()
     result.genre = genre
-    result.date = date
+    if(genre===date){
+        result.date = "정보 없음";
+        //callback(false)
+    }
+    else if(date.charAt(0)==='['){
+        result.date = "정보 없음";
+    } 
+    else{
+        
+        result.date = date
+        
+    }
     callback(result);
+    
+    
+    
 
 }
 module.exports = {parsing};

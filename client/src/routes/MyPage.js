@@ -1,10 +1,15 @@
 import axios from 'axios';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
+import {useHistory} from 'react-router';
 import store from "../store";
 import MyPagePresenter from './Presenters/MyPagePresenter.js';
 
 const MyPage = () => {
   const [newNickname, setNewNickname] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [oldPassword, setOldPassword] = useState('');
+  const [withdrawPassword, setWithdrawPassword] = useState('');
+  const [myReviews, setMyReviews] = useState([]);
 
   const takeNewNickname = (e) => {
     setNewNickname(e.target.value);
@@ -36,8 +41,63 @@ const MyPage = () => {
     //console.log(store.getState().user.nickname);
   }
 
+
+  const takeNewPassword = async (e) => {
+    setNewPassword(e.target.value);
+  }
+  const takeOldPassword = async (e) => {
+    setOldPassword(e.target.value);
+  }
+
+  const submitNewPassword = async () => {
+    const id = store.getState().user.id;
+    await axios.post(`${process.env.REACT_APP_SERVER_URL}/mypage/passwordModify`, { oldPassword, newPassword, id })
+    .then((response) => {
+        console.log("비밀번호 변경 완료");
+        window.alert("비밀번호가 정상적으로 변경되었습니다.");
+    })
+    .catch((error) => {
+      console.log(error.response.data);
+      window.alert(error.response.data.message);
+    });
+  }
+
+  const takeWithdrawPassword = async (e) => {
+    setWithdrawPassword(e.target.value);
+  }
+
+  const history = useHistory();
+
+  const submitWithdraw = async () => {
+    const id = store.getState().user.id;
+    const pw = withdrawPassword;
+    await axios.post(`${process.env.REACT_APP_SERVER_URL}/mypage/withdraw`, { id, pw })
+    .then((response) => {
+        console.log("탈퇴 완료");
+        window.alert("탈퇴 완료");
+        history.push({ pathname: '/' });
+    })
+    .catch((error) => {
+      console.log(error.response.data);
+      window.alert(error.response.data.message);
+    });
+  }
+
+  const getMyReviews = async() => {
+    const user_id = store.getState().user.id;
+    await axios.get(`${process.env.REACT_APP_SERVER_URL}/mypage/myReview`, { user_id })
+    .then((response) => {
+      console.log(response);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  }
+
+  useEffect(() => getMyReviews(), []);
+
   return (
-    <MyPagePresenter takeNewNickname={takeNewNickname} submitNewNickname={submitNewNickname} testNewNickname={testNewNickname}/>
+    <MyPagePresenter takeNewNickname={takeNewNickname} submitNewNickname={submitNewNickname} testNewNickname={testNewNickname} takeNewPassword={takeNewPassword} takeOldPassword={takeOldPassword} submitNewPassword={submitNewPassword} takeWithdrawPassword={takeWithdrawPassword} submitWithdraw={submitWithdraw}/>
   )
 }
 
