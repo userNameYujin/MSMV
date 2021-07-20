@@ -5,19 +5,19 @@ import { Button, Tooltip } from "antd";
 import { SearchOutlined } from "@ant-design/icons"
 
 const Header = styled.header`
-display: flex;
-flex-direction: column;
-position: fixed;
-top: 0px;
-width: 100%;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0px;
+  width: 100%;
 `;
 
 const Banner = styled(Link)`
   font-size: 2.5rem;
   letter-spacing:3px;
   color: #6b66ff;
-  font-family: fantasy;
   
+  font-family: 'Nanum Pen Script', cursive;
 `;
 
 const Menu = styled.div`
@@ -26,7 +26,7 @@ const Menu = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-
+  
   padding-right: 1rem;
   padding-left: 1rem;
   
@@ -87,8 +87,6 @@ const Spacer2 = styled.div`
     flex-grow: 0.01;
 `;
 
-
-
 const HeaderPresenter = ({user, LogoutClick}) => {
 
 
@@ -96,7 +94,7 @@ const HeaderPresenter = ({user, LogoutClick}) => {
     <Header>
       <WhiteBackground>
       <Menu>
-      <Banner to='/'>MSmV</Banner>
+      <Banner to='/'>무슨무비</Banner>
       <Spacer/> 
       
       <Spacer2/>

@@ -128,8 +128,6 @@ const SelectType = styled.div`
   padding: 9px;
 `;
 
-
-
 const SearchPresenter = ({searchCritCheck, searchCrit, submitSearch, takeInput, result, currentSearch, inputEnter}) => {
 
   for (let i = 0 ; i < result.length; i++) {
@@ -149,7 +147,6 @@ const SearchPresenter = ({searchCritCheck, searchCrit, submitSearch, takeInput, 
       </select>
       </SelectType>
 
-
       <Spacer/>
       <Input onChange={takeInput} onKeyPress={inputEnter} placeholder="검색어 입력"></Input>
       <Spacer/>
@@ -163,7 +160,6 @@ const SearchPresenter = ({searchCritCheck, searchCrit, submitSearch, takeInput, 
         {/* 무언가가 검색되었을 때의 표시 공간 */}
         <h1> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '{currentSearch}' 전체 검색결과가 건 발견되었습니다.</h1>
         {result.map((movie) => ( 
-              
           <MovieDiv key={movie.movieCd}>
             <Image>
               <img alt="movie" src={movie.image}></img>
