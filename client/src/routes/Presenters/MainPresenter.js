@@ -32,8 +32,8 @@ const BoxofficeDiv = styled.div`
 `;
 
 const SwipeDiv = styled.div`
-
 `;
+
 
 const Boxoffice = styled.div`
 
@@ -78,18 +78,22 @@ const SwipePad = styled.div`
     padding-left: 100px;
     padding-right: 100px;
 `;
+
+const Ex  = styled.div`
+    margin: 15px;
+`;
 SwiperCore.use([Navigation, Pagination])
 
 const MainPresenter = ({topTenData, boxOfficeData}) => {
 
   return (
-    <Wrapper>
     <GrayBackground>
+    <Wrapper>
     <MainPage>
       <MainDiv>
 
         <SwipeDiv>
-        <BoxOfficeTitle>최근 박스오피스 개봉영화 TOP10</BoxOfficeTitle>
+        <BoxOfficeTitle>최근 검색 영화 TOP10</BoxOfficeTitle>
           <hr />
           <SwipePad>
             <Swiper
@@ -101,18 +105,16 @@ const MainPresenter = ({topTenData, boxOfficeData}) => {
               pagination={{ clickable: true }} 
            >
         
-        {topTenData && topTenData.map((movie, index) => ( 
-            <React.Fragment key={movie.movieCd}>
-              <SwiperSlide>
+        {topTenData && topTenData.map((movie) => ( 
+              <SwiperSlide key={movie.movieCd}> 
                 <Link to={`/Detail?code=${movie.movieCd}`}>
                   <img style={{ width:'100%', height:'200px'}} src={movie.image} alt={movie.title}></img>
                 </Link>
-               <p>{movie.rank}</p>
               </SwiperSlide>
-            </React.Fragment>
           ))}
-
         
+            <br/>
+            <br/>
             </Swiper>   
           </SwipePad>
 
@@ -130,17 +132,15 @@ const MainPresenter = ({topTenData, boxOfficeData}) => {
               pagination={{ clickable: true }} 
            >
         
-	        {boxOfficeData && boxOfficeData.map((movie, index) => ( 
-            <React.Fragment key={movie.movieCd}>
-              <SwiperSlide>
+	        {boxOfficeData && boxOfficeData.map((movie) => ( 
+              <SwiperSlide key={movie.movieCd}>
                 <Link to={`/Detail?code=${movie.movieCd}`}>
                   <img style={{ width:'100%', height:'200px'}} src={movie.image} alt={movie.name}></img>
                 </Link>
-               <p>{movie.movierank}</p>
               </SwiperSlide>
-            </React.Fragment>
           ))}
-        
+            <br/>
+            <br/>
             </Swiper>   
           </SwipePad>
 
@@ -148,8 +148,8 @@ const MainPresenter = ({topTenData, boxOfficeData}) => {
 
       </MainDiv>
     </MainPage>
-    </GrayBackground>
     </Wrapper>
+    </GrayBackground>
   );
 };
 
