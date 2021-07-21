@@ -10,6 +10,7 @@ import StarRatingComponent  from 'react-star-rating-component';
 import { Comment, Tooltip, Avatar } from 'antd';
 import moment from 'moment';
 
+
 const Wrapper = styled.div`
     padding-top: 60px; 
 `;
@@ -51,6 +52,10 @@ const Pad = styled.div`
     padding-left: 30px; 
     padding-right: 30px; 
     padding-bottom: 30px; 
+ 
+`;
+const ComLeft = styled.div`
+    text-align: left;
 `;
 
 const DetailPresenter = ({movieData, movieReviews, peoples, reviewOnChange, writeOnClick, updateClick, submitDeleteReview, starRating, onStarClick}) => {
@@ -134,58 +139,56 @@ const DetailPresenter = ({movieData, movieReviews, peoples, reviewOnChange, writ
         <ReviewButton style={{ width: '20%', height: '52px' }} onClick={writeOnClick}>작성</ReviewButton>
       </form>
       </Pad>
-      <br/>
-      {movieReviews && movieReviews.map((review, index) => ( 
-        <React.Fragment key={review.id}>
-          <div>
-            <p>{review.nickname} : {review.contents}</p>
-            <p>Rate : {review.rate}</p>
-            {store.getState().user ? (
-              (store.getState().user.id === review.commenter) ? (
-                <button type="button" id={review.id} onClick={submitDeleteReview}>reviewid:{review.id} Delete</button>
-                ) : (<p>{review.commenter}, {store.getState().user.id}</p>)
-            ) : (<p>not logined</p>)}
-            
-          </div>
-        </React.Fragment>
-      ))}
-      <hr/>
+    
+      
+      
     </div>
     <Pad>
     {movieReviews && movieReviews.map((review, index) => ( 
       <Comment 
-        
+        actions={[
+        <React.Fragment key={review.id}>
+        <div>
+          {store.getState().user ? (
+            (store.getState().user.id === review.commenter) ? (
+              <button type="button" id={review.id} onClick={submitDeleteReview}>리뷰 삭제하기</button>
+              ) : (<p>{review.commenter}, {store.getState().user.id}</p>)
+          ) : (<p></p>)}
+          
+        </div>
+        </React.Fragment>
+        ]}
         avatar={<Avatar src="https://beslow.co.kr/assets/img/mobile-float-mypage.png" width="25px" alt="image"/>}
-      author={review.nickname}
+        author={review.nickname}
       
-      content={
-        <p>
-          {review.contents}
-          {review.rate}
-        </p>
+        content={
+            <ComLeft>        
+              <br/>    
+              평점: <StarRatingComponent 
+                name="rate2" 
+                editing={false}
+                starCount={5}
+                value={review.rate}
+               />
+               
+               <br/>
+               <br/>
+               
+
+               내용:  {review.contents}
+               
+            </ComLeft>
+            
         
-      }
+        }
       
-      datetime={
-        <Tooltip title={moment().format('YYYY-MM-DD HH:mm:ss')}>
-          <span>{moment().fromNow()}</span>
-        </Tooltip>
-      }>
+      ><hr/>
       </Comment>
       
+      
+      
  ))}
- {movieReviews && movieReviews.map((review, index) => ( 
-        <React.Fragment key={review.id}>
-          <div>
-            {store.getState().user ? (
-              (store.getState().user.id === review.commenter) ? (
-                <button type="button" id={review.id} onClick={submitDeleteReview}>reviewid:{review.id} Delete</button>
-                ) : (<p>{review.commenter}, {store.getState().user.id}</p>)
-            ) : (<p>not logined</p>)}
-            
-          </div>
-        </React.Fragment>
-      ))}
+    
     </Pad>
     </GrayBackground>
     </Wrapper>
