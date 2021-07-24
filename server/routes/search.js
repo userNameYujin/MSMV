@@ -36,7 +36,7 @@ router.post('/',(req,response)=>{
 
                         if(movieListNm.length === result.length){
                             movieListNm.sort(function(a,b){
-                                return parseFloat(b.rate)-parseFloat(a.rate)
+                                return parseFloat(b.rank)-parseFloat(a.rank)
                             })
                             response.status(200).send({code : 200, result : movieListNm});
                         }
@@ -108,4 +108,62 @@ router.post('/',(req,response)=>{
     }
 })
 
+router.get('/genre/:tg', (request, response) => {
+    /**
+     *  1: 드라마 2: 판타지
+        3: 서부 4: 공포
+        5: 로맨스 6: 모험
+        7: 스릴러 8: 느와르
+        9: 컬트 10: 다큐멘터리
+        11: 코미디 12: 가족
+        13: 미스터리 14: 전쟁
+        15: 애니메이션 16: 범죄
+        17: 뮤지컬 18: SF
+        19: 액션 20: 무협
+        21: 에로 22: 서스펜스
+        23: 서사 24: 블랙코미디
+        25: 실험 26: 영화카툰
+        27: 영화음악 28: 영화패러디포스터
+     */
+    //위에 다되기는 하지만 아래있는것만.
+    /**
+     *  1. 드라마
+        2. 판타지
+        4. 공포
+        5. 로맨스
+        6. 모험
+        7. 스릴러
+        8. 느와르
+        10. 다큐멘터리
+        11. 코미디
+        12. 가족
+        13. 미스터리
+        14. 전쟁
+        15. 애니메이션
+        16. 범죄
+        17. 뮤지컬
+        18. SF
+        19. 액션
+     */
+    crawling.parsingGenre(request.params.tg, (res) => {
+        if(res.length === 0 ){
+            response.status(400).send({code : 400, message : "잘못된 입력입니다."});
+        }
+
+        let movieList = new Array();
+        for(let i=0; i<res.length; i++) {
+            crawling.parsing(res[i].code, res[i], (res2) => {
+
+                movieList.push(res2);
+                if(movieList.length === res.length){
+                    movieList.sort(function(a,b){
+                        return parseFloat(a.rank)-parseFloat(b.rank)
+                    })
+                    response.status(200).send({code : 200, result : movieList});
+                }
+            })
+        }
+
+    })
+})
 module.exports = router;
