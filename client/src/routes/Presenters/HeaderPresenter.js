@@ -65,7 +65,6 @@ const LogoutButton = styled.button`
       color: white;
   }
 `;
-
 const GradientBorder = styled.div`
     height: 5px;
     background: linear-gradient(to right, #6799ff, #6b66ff);
