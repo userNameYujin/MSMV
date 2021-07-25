@@ -8,21 +8,19 @@ const Wrapper = styled.div`
 
 const SearchTitle = styled.div`
   text-align: center;
+  width: auto;
   margin-top: 50px;
-  margin-bottom: 20px;
+  margin-bottom: 50px;
   font-size: 30px;
   font-weight: 600;
-  
+  padding-left: 500px;
 `;
 
 const Input = styled.input`
-  
-  padding: 0px 10px;
   box-sizing: border-box;
   width: 500px;
   height: 40px;
-  margin-top: 5px;
-  margin-bottom: 20px;
+  margin: 0px 5px 0px 20px;
   border: 2px solid black;
   border-radius: 3px;
   transition: border 0.1s ease-in-out;
@@ -35,7 +33,7 @@ const Input = styled.input`
 
 const SearchButton = styled.button`
   font-weight: 600;
-  width: 55px;
+  width: 60px;
   color: #6B66FF;
   border: 1px solid #6B66FF;
   background-color: lightgray;
@@ -52,8 +50,9 @@ const SearchButton = styled.button`
   }
 `;
 const Spacer = styled.div`
-    flex-grow: 0.01;
-    float: left;
+    width: 500px;
+    text-align: left;
+
 `;
 
 const SearchAsk = styled.div`
@@ -72,9 +71,8 @@ const Shape = styled.div`
     margin: 0 auto 0 auto;
     text-align: left;
     width: 72%;
-    height: auto;
-    background: lightgray;
-    font-size: 10px;
+    height: 36px;
+    font-size: 8px;
 
   
   `;
@@ -105,11 +103,13 @@ const Image = styled.div`
 
 const InfoBox = styled.div`
   float: left;
-  width: 50%;
-  height: 100%;
-  text-align: center;
+  width: 55%;
+  height: 300px;
+  text-align: left;
   font-size: 20px;
+  padding-left: 25px;
 `;
+
 
 const InfoName = styled.div`
   display: inline-block;
@@ -117,15 +117,17 @@ const InfoName = styled.div`
 `;
 
 const InfoRate = styled.div`
-  font-size: 20px;
+  font-size: 13px;
+  font color: white;
 `;
 
 
 const SelectType = styled.div`
   float: left;
-  width: 80px;
+  width: auto;
   height: 40px;
   padding: 9px;
+  padding-left: 400px;
 `;
 
 const SearchPresenter = ({searchCritCheck, searchCrit, submitSearch, takeInput, result, currentSearch, inputEnter}) => {
@@ -150,7 +152,7 @@ const SearchPresenter = ({searchCritCheck, searchCrit, submitSearch, takeInput, 
       <Spacer/>
       <Input onChange={takeInput} onKeyPress={inputEnter} placeholder="검색어 입력"></Input>
       <Spacer/>
-        <SearchButton onClick={submitSearch}>검색</SearchButton>
+      <SearchButton onClick={submitSearch}>검색</SearchButton>
       
       
     </SearchAsk>
@@ -162,18 +164,20 @@ const SearchPresenter = ({searchCritCheck, searchCrit, submitSearch, takeInput, 
         {result.map((movie) => ( 
           <MovieDiv key={movie.movieCd}>
             <Image>
-              <img alt="movie" src={movie.image}></img>
+              <Link to={`/Detail?code=${movie.movieCd}`}><img alt="movie" src={movie.image}></img></Link> 
             </Image>
             <InfoBox>
               <InfoName>
-                <Link to={`/Detail?code=${movie.movieCd}`}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{movie.title}</Link> 
+                <Link to={`/Detail?code=${movie.movieCd}`}>{movie.title}</Link> 
               </InfoName>
+              <p> </p>
               <InfoRate>
-                <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;평점 &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;{movie.rate} <br/>
-                  {movie.date} <br/>
-                  {movie.summary}
-                </p>
+                <p>평점 &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;{movie.rate} <br/>
+                   {movie.date} <br/>
+                   {movie.summary}
+                 </p>
               </InfoRate>
+              
               
             </InfoBox>
           </MovieDiv>))}</>) : (
