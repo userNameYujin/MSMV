@@ -40,7 +40,12 @@ const Detail = () => {
     const contents = reviewContent;
     const commenter = store.getState().user.id;
     const rate = starRating.rating;
+    console.log(starRating);
 
+    if (starRating.rating === 0) {
+      window.alert("별점을 매겨주세요.");
+      return;
+    }
     await axios.post(`${process.env.REACT_APP_SERVER_URL}/review/review/write`, { contents, commenter, rate, movieCd })
     .then((response) => {
      console.log(response);
