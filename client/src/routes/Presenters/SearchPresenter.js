@@ -130,11 +130,6 @@ const SelectType = styled.div`
   padding-left: 400px;
 `;
 
-<<<<<<< HEAD
-
-
-=======
->>>>>>> c6b90b9dc7b3925474c349a0f6f08988c477a50a
 const SearchPresenter = ({searchCritCheck, searchCrit, submitSearch, takeInput, result, currentSearch, inputEnter}) => {
 
   for (let i = 0 ; i < result.length; i++) {
