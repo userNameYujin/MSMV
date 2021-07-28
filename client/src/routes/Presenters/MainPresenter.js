@@ -4,14 +4,14 @@ import styled from 'styled-components';
 import { Row, Col } from 'antd';
 import 'antd/dist/antd.css';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import SwiperCore, { Navigation, Pagination } from "swiper";
+import SwiperCore, { Navigation, Pagination, Autoplay } from "swiper";
 import "swiper/swiper.scss";
 import "swiper/components/navigation/navigation.scss";
 import "swiper/components/pagination/pagination.scss";
 import '../../App.css';
 
 const Wrapper = styled.div`
-    padding-top: 60px; 
+    
 `;
 
 const MainPage = styled.div`
@@ -79,20 +79,115 @@ const SwipePad = styled.div`
     padding-right: 100px;
 `;
 
-const Ex  = styled.div`
-    margin: 15px;
+const SearchButton = styled(Link)`
+  font-weight: 600;
+  background: white;
+  border: 1px black;
+  padding: 10px;
+  padding-bottom: 10px;
+  cursor: pointer;
+  border-radius: 2px;
+  text-decoration: none;
+  transition: .2s all;
+
+  &:hover {
+      background: lightblue;
+  }
 `;
-SwiperCore.use([Navigation, Pagination])
+
+SwiperCore.use([Navigation, Pagination, Autoplay])
 
 const MainPresenter = ({topTenData, boxOfficeData}) => {
 
   return (
     <GrayBackground>
-    <Wrapper>
     <MainPage>
+    
       <MainDiv>
-
+      <Swiper
+          className="banner"
+          spaceBetween={50}
+          slidesPerView={1}
+          autoplay={{ delay: 3000 }} 
+       
+           >
+        
+      
+              <SwiperSlide> 
+                 <div style={{
+            background: `linear-gradient(to bottom, rgba(0,0,0,0)
+        39%,rgba(0,0,0,0)
+        41%,rgba(0,0,0,0.65)
+        100%),
+        url('https://images.unsplash.com/photo-1487174244970-cd18784bb4a4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=752&q=80'), #1c1c1c`,
+            height: '500px',
+            backgroundSize: '100%, cover',
+            backgroundPosition: 'center, center',
+            width: '100%',
+            position: 'relative',
+            marginTop: '50px'
+        }}>
+            <div>
+                <div style={{ position: 'absolute', maxWidth: '500px', bottom: '10rem', marginLeft: '25rem' }}>
+                    <h2 style={{fontStyle: 'italic', fontSize:'30px', fontWeight: 'bold',color: 'white' }}> 무더운 여름 공기를 시원하게 해줄 공포영화를 원한다면? </h2>
+                    <br/>
+                    <p style={{ color: 'white', fontSize: '1rem' }}> 지금 바로 검색하러가기</p>
+                    <SearchButton to="Search"><img src="https://beslow.co.kr/assets/img/arrow-foward.png" width="25px"/></SearchButton>
+                </div>
+            </div>
+        </div>
+              </SwiperSlide>
+	<SwiperSlide> 
+                 <div style={{
+            background: `linear-gradient(to bottom, rgba(0,0,0,0)
+        39%,rgba(0,0,0,0)
+        41%,rgba(0,0,0,0.65)
+        100%),
+        url('https://images.unsplash.com/photo-1498747946579-bde604cb8f44?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1789&q=80'), #1c1c1c`,
+            height: '500px',
+            backgroundSize: '100%, cover',
+            backgroundPosition: 'center, center',
+            width: '100%',
+            position: 'relative',
+            marginTop: '50px'
+        }}>
+            <div>
+                <div style={{ position: 'absolute', maxWidth: '500px', bottom: '10rem', marginLeft: '25rem' }}>
+                    <h2 style={{  fontStyle: 'italic', fontSize:'30px', fontWeight: 'bold',color: 'white' }}> 장마를 잠시나마 잊게해줄 힐링영화를 원한다면? </h2>
+                    <br/>
+                    <p style={{ color: 'white', fontSize: '1rem' }}> 지금 바로 검색하러가기</p>
+                    <SearchButton to="Search"><img src="https://beslow.co.kr/assets/img/arrow-foward.png" width="25px"/></SearchButton>
+                </div>
+            </div>
+        </div>
+              </SwiperSlide>
+              <SwiperSlide> 
+                 <div style={{
+            background: `linear-gradient(to bottom, rgba(0,0,0,0)
+        39%,rgba(0,0,0,0)
+        41%,rgba(0,0,0,0.65)
+        100%),
+        url('https://images.unsplash.com/photo-1606335543042-57c525922933?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1954&q=80'), #1c1c1c`,
+            height: '500px',
+            backgroundSize: '100%, cover',
+            backgroundPosition: 'center, center',
+            width: '100%',
+            position: 'relative',
+            marginTop: '50px'
+        }}>
+            <div>
+                <div style={{ position: 'absolute', maxWidth: '500px', bottom: '10rem', marginLeft: '25rem' }}>
+                    <h2 style={{ fontStyle: 'italic', fontSize:'30px', fontWeight: 'bold', color: 'white' }}> 계속되는 폭염을 시원하게 날려줄 격투영화가 보고싶다면? </h2>
+                    <br/>
+                    <p style={{ color: 'white', fontSize: '1rem' }}> 지금 바로 검색하러가기</p>
+                    <SearchButton to="Search"><img src="https://beslow.co.kr/assets/img/arrow-foward.png" width="25px"/></SearchButton>
+                </div>
+            </div>
+        </div>
+              </SwiperSlide>
+            </Swiper> 
         <SwipeDiv>
+
         <BoxOfficeTitle>최근 검색 영화 TOP10</BoxOfficeTitle>
           <hr />
           <SwipePad>
@@ -148,7 +243,6 @@ const MainPresenter = ({topTenData, boxOfficeData}) => {
 
       </MainDiv>
     </MainPage>
-    </Wrapper>
     </GrayBackground>
   );
 };

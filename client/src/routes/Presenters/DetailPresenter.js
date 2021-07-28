@@ -9,10 +9,12 @@ import '../../App.css';
 import StarRatingComponent  from 'react-star-rating-component';
 import { Comment, Tooltip, Avatar } from 'antd';
 import moment from 'moment';
+import { Tab, Tabs } from 'react-bootstrap';
 
-const Wrapper = styled.div`
-    padding-top: 60px; 
-`;
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+
+
 
 const ReviewButton = styled.button`
 font-weight: 600;
@@ -35,7 +37,7 @@ const ReviewTitle = styled.div`
   margin-top: 50px;
   font-size: 30px;
   font-weight: 600;
-  font-family: 'Nanum Pen Script', cursive;
+  font-family: 맑은고딕;
 `;
 
 const GrayBackground = styled.div`
@@ -43,7 +45,7 @@ const GrayBackground = styled.div`
 `;
 
 const Background = styled.div`
-    font-family: 'Nanum Pen Script', cursive;
+    font-family: 맑은고딕;
 `;
 
 const Pad = styled.div`
@@ -51,6 +53,35 @@ const Pad = styled.div`
     padding-left: 30px; 
     padding-right: 30px; 
     padding-bottom: 30px; 
+ 
+`;
+const ComLeft = styled.div`
+    text-align: left;
+`;
+
+
+
+const ThemovieTitle = styled.div`
+    font-family: 'Nanum Gothic', sans-serif;
+    font-weight: 700;
+    font-size:30px;
+`;
+const MovieElement = styled.div`
+    text-align: justify;
+    
+`;
+
+const MyPageLink = styled(Link)`
+  &:hover {
+    color: darkred;
+  }
+`;
+const Font = styled.div`
+  font-family: 'Gowun Dodum', sans-serif;
+`;
+
+const Spacer = styled.div`
+    flex-grow: 0.01;
 `;
 
 const DetailPresenter = ({movieData, movieReviews, peoples, reviewOnChange, writeOnClick, updateClick, submitDeleteReview, starRating, onStarClick}) => {
@@ -70,9 +101,29 @@ const DetailPresenter = ({movieData, movieReviews, peoples, reviewOnChange, writ
   }
 
   return (
-    <Wrapper>
+
+
       <GrayBackground>
-      <br />
+      <img src={movieData.image} alt="movieData.title"/>
+      <ThemovieTitle>{movieData.title}</ThemovieTitle>
+      <MovieElement>관람등급 : {movieData.grade}</MovieElement>
+      <MovieElement>개봉 날짜 : {movieData.openDt}</MovieElement>
+      <MovieElement>장르 : {movieData.genres}</MovieElement>
+      <MovieElement>국가 : {movieData.country}</MovieElement>
+      <MovieElement>상영시간 : {movieData.runningTime}</MovieElement>
+      <Tabs defaultActiveKey="home" id="uncontrolled-tab-example" className="mb-3">
+        <Tab eventKey="home" title="줄거리">
+          <MovieElement>{movieData.summary}</MovieElement>
+        </Tab>
+        <Tab eventKey="profile" title="제작진">
+          ㅇㅏ직몰라
+        </Tab>
+        <Tab eventKey="contact" title="배우">
+          얘도 몰라
+        </Tab>
+      </Tabs>
+
+      {/* <br />
       
         <img src={movieData.image} alt="movieData.title"/>
       
@@ -108,7 +159,7 @@ const DetailPresenter = ({movieData, movieReviews, peoples, reviewOnChange, writ
         </Row>
         </Descriptions.Item>
       </Descriptions>
-      </Background>
+      </Background> */}
       
       
       
@@ -118,6 +169,7 @@ const DetailPresenter = ({movieData, movieReviews, peoples, reviewOnChange, writ
     <ReviewTitle>○영화 리뷰○</ReviewTitle>
     <hr />
     <Pad>
+      <Font>
       <StarRatingComponent 
           name="rate1" 
           starCount={5}
@@ -133,62 +185,61 @@ const DetailPresenter = ({movieData, movieReviews, peoples, reviewOnChange, writ
         <br />
         <ReviewButton style={{ width: '20%', height: '52px' }} onClick={writeOnClick}>작성</ReviewButton>
       </form>
+      </Font>
       </Pad>
-      <br/>
-      {movieReviews && movieReviews.map((review, index) => ( 
-        <React.Fragment key={review.id}>
-          <div>
-            <p>{review.nickname} : {review.contents}</p>
-            <p>Rate : {review.rate}</p>
-            {store.getState().user ? (
-              (store.getState().user.id === review.commenter) ? (
-                <button type="button" id={review.id} onClick={submitDeleteReview}>reviewid:{review.id} Delete</button>
-                ) : (<p>{review.commenter}, {store.getState().user.id}</p>)
-            ) : (<p>not logined</p>)}
-            
-          </div>
-        </React.Fragment>
-      ))}
-      <hr/>
+    
+      
+      
     </div>
     <Pad>
+    <Font>
     {movieReviews && movieReviews.map((review, index) => ( 
       <Comment 
-        
+        actions={[
+        <React.Fragment key={review.id}>
+        <div>
+          {store.getState().user ? (
+            (store.getState().user.id === review.commenter) ? (
+              <button type="button" id={review.id} onClick={submitDeleteReview}>리뷰 삭제하기</button>
+              ) : (<p>{review.commenter}, {store.getState().user.id}</p>)
+          ) : (<p></p>)}
+          
+        </div>
+        </React.Fragment>
+        ]}
         avatar={<Avatar src="https://beslow.co.kr/assets/img/mobile-float-mypage.png" width="25px" alt="image"/>}
-      author={review.nickname}
+        author={<Tooltip title="마이페이지 가기!"><MyPageLink to="/mypage">{review.nickname}</MyPageLink></Tooltip>}
       
-      content={
-        <p>
-          {review.contents}
-          {review.rate}
-        </p>
+        content={
+            <ComLeft>        
+              <br/>    
+              평점: <StarRatingComponent 
+                name="rate2" 
+                editing={false}
+                starCount={5}
+                value={review.rate}
+               />
+               
+               <br/>
+               <br/>
+               
+
+               내용:  {review.contents}
+               
+            </ComLeft>
+            
         
-      }
+        }
       
-      datetime={
-        <Tooltip title={moment().format('YYYY-MM-DD HH:mm:ss')}>
-          <span>{moment().fromNow()}</span>
-        </Tooltip>
-      }>
+      ><hr/>
       </Comment>
       
+      
+      
  ))}
- {movieReviews && movieReviews.map((review, index) => ( 
-        <React.Fragment key={review.id}>
-          <div>
-            {store.getState().user ? (
-              (store.getState().user.id === review.commenter) ? (
-                <button type="button" id={review.id} onClick={submitDeleteReview}>reviewid:{review.id} Delete</button>
-                ) : (<p>{review.commenter}, {store.getState().user.id}</p>)
-            ) : (<p>not logined</p>)}
-            
-          </div>
-        </React.Fragment>
-      ))}
+    </Font>
     </Pad>
     </GrayBackground>
-    </Wrapper>
   
 
   

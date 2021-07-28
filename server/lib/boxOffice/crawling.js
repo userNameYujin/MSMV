@@ -38,8 +38,41 @@ const parsing = async(keyword, result, callback) => {
     }
     callback(result);
     
-    
-    
-
 }
-module.exports = {parsing};
+
+const getHTMLGenre = async(keyword) => {
+    try{
+        return await axios.get("https://movie.naver.com/movie/sdb/rank/rmovie.naver?sel=cnt&date=20210723&tg="+keyword)
+    }catch(err){
+        console.log(err)
+    }
+    
+}
+const parsingGenre = async(keyword, callback) => {
+    const html = await getHTMLGenre(keyword);
+    
+    const $ = cheerio.load(html.data); 
+
+    let list = new Array();
+    let movie = new Object();
+    let len = $(".list_ranking").find("tr").length;
+    let rank = 1;
+    for(let i=2; i<len-1; i++ ){
+        let mvLink = $(".list_ranking").find(`tr:eq(${i})`).find("td.title > .tit3 > a").attr("href") //영화링크
+        let mvName = $(".list_ranking").find(`tr:eq(${i})`).find("td.title > .tit3 > a").text()
+        if(mvLink !== undefined){
+            movie = {
+                "code" : mvLink.split('code=')[1],
+                "name" : mvName,
+                "rank" : rank
+            }
+            list.push(movie);
+            rank++;
+        }
+    }
+    callback(list);
+}
+
+
+
+module.exports = {parsing, parsingGenre};
