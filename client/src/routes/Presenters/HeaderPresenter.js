@@ -10,7 +10,7 @@ import "../../App.css";
 const Header = styled.header`
   display: flex;
   flex-direction: column;
-  position: fixed;
+  
   top: 0px;
   width: 100%;
 `;
