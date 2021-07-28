@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import store from '../../store';
 import Nav from 'react-bootstrap/Nav'
 import { Tab, Tabs, Col, Row } from 'react-bootstrap';
+import moment from 'moment';
 
 const Wrapper = styled.div`
   padding-top: 180px; 
@@ -269,7 +270,7 @@ const MyPagePresenter = ({takeNewNickname, submitNewNickname, takeOldPassword, t
                       <Table key={review.review_id}>
                         
                         <Info>
-                          날짜 : {review.created}
+                          날짜 : {moment(review.created).format('MMMM Do YYYY, h:mm:ss a')}
                         </Info>
                         <Contents>
                           내용 : {review.contents}
