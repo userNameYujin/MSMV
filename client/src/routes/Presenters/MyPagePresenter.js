@@ -7,6 +7,8 @@ import { Tab, Tabs, Col, Row } from 'react-bootstrap';
 import moment from 'moment';
 
 const Wrapper = styled.div`
+  margin-left:100px;
+  margin-right:100px;
   padding-top: 20px;
   padding-left: 10px;
   font-family: 'Nanum Gothic', sans-serif;

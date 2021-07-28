@@ -23,9 +23,11 @@ color: white;
 border: 1px solid #6799FF;
 padding: 0.5rem;
 padding-bottom: 0.4rem;
+margin-left:5px;
 cursor: pointer;
-border-radius: 2px;
+border-radius: 4px;
 text-decoration: none;
+font-size:18px;
 transition: .2s all;
 background:#6B66FF;
 
@@ -37,13 +39,18 @@ background:#6B66FF;
 const ReviewTitle = styled.div`
   margin-top: 50px;
   font-size: 30px;
-  font-weight: 600;
-  font-family: 맑은고딕;
+  font-weight: 700;
+  font-family: 'Nanum Gothic', sans-serif;
 `;
 
 const GrayBackground = styled.div`
-   //background: whitesmoke;
-    // background: linear-gradient( ivory, #c5cae9 )
+
+    // background: #eaeaea;
+    // background: linear-gradient(135deg , ivory, #c5cae9 )
+    margin-left:40px;
+    margin-right:40px;
+
+
 `;
 
 const Background = styled.div`
@@ -66,9 +73,14 @@ const ComLeft = styled.div`
 const ThemovieTitle = styled.div`
     font-family: 'Nanum Gothic', sans-serif;
     font-weight: 700;
-    font-size:30px;
+    font-size:35px;
+`;
+const MovieOutline = styled.div`
+    font-family: 'Nanum Gothic', sans-serif;
+    font-size:15px;
 `;
 const MovieElement = styled.div`
+    font-family: 'Nanum Gothic', sans-serif;
     text-align: justify;
     padding:10px;
     
@@ -122,13 +134,14 @@ const DetailPresenter = ({movieData, movieReviews, peoples, reviewOnChange, writ
           
           <MovieElement>
             <ThemovieTitle>{movieData.title}</ThemovieTitle>
-            
-            관람등급 : {movieData.grade}<p>
-            개봉 날짜 : {movieData.openDt}<p>
-            장르 : {movieData.genres}<p>
-            국가 : {movieData.country}<p>
-            상영시간 : {movieData.runningTime}
-            </p></p></p></p>
+            <MovieOutline>
+              관람등급 : {movieData.grade}<p>
+              개봉 날짜 : {movieData.openDt}<p>
+              장르 : {movieData.genres}<p>
+              국가 : {movieData.country}<p>
+              상영시간 : {movieData.runningTime}
+              </p></p></p></p>
+            </MovieOutline>
             <Tabs defaultActiveKey="home" id="uncontrolled-tab-example" className="mb-3">
               <Tab eventKey="home" title="줄거리">
                 <MovieElement>{movieData.summary}</MovieElement>
@@ -217,6 +230,7 @@ const DetailPresenter = ({movieData, movieReviews, peoples, reviewOnChange, writ
       <StarRatingComponent 
           name="rate1" 
           starCount={5}
+          size={20}
           value={starRating.rating}
           onStarClick={onStarClick}
       />
