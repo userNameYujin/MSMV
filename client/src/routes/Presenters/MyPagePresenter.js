@@ -2,12 +2,14 @@ import React from 'react';
 import styled from 'styled-components';
 import store from '../../store';
 import Nav from 'react-bootstrap/Nav'
+import '../../App.css';
 import { Tab, Tabs, Col, Row } from 'react-bootstrap';
 
 const Wrapper = styled.div`
-  padding-top: 180px; 
-  background: ;
-  background: linear-gradient(135deg , ivory, #c5cae9 )
+  padding-top: 20px;
+  padding-left: 10px;
+  font-family: 'Nanum Gothic', sans-serif;
+  // background: linear-gradient(135deg , ivory, #c5cae9 )
 `;
 
 const MainTitle = styled.div`
@@ -15,7 +17,8 @@ const MainTitle = styled.div`
   width: 400px;
   padding: 20px 10px 20px 10px;
   font-size: 15px;
-  font-weight: bold;
+  font-family: 'Nanum Gothic', sans-serif;
+  font-weight: 700;
   background: ;
   
   margin-left: auto;
@@ -25,36 +28,36 @@ const MainTitle = styled.div`
 
 
 const SubTitle = styled.div`
-  background: ;
-  width: 500px;
-  padding-left: 200px;
+  // width: 500px;
+  padding-left: 30px;
   font-size: 25px;
   font-weight: bold;
-  
 `;
 
 const LeftLayout = styled.div`
-  margin: 50px 0px 0px 270px;
+  margin: 30px 0px 0px 50px;
   background: ;
   font-size: 16px;
   background: ;
   width: 65%;
   height: 200px;
   color: black;
+  font-weight:400;
 `;
 
 const SideBySide1 = styled.div`
-  float: right;
-  width: 500px;
+  // float: right;
+  // width: 500px;
   height: 150px;
-  background: ;
-  margin-top: -50px;
-  margin-right: 20px;
+  // background: ;
+  // margin-top: -50px;
+  // margin-right: 20px;
 `;
 
 const SideBySide2 = styled.div`
-  float: right;
-  width: 500px;
+  // float: right;
+  // width: 500px;
+  margin-left : 90px;
   height: 150px;
   background: ;
   margin-top: -50px
@@ -70,8 +73,8 @@ const SideBySide3 = styled.div`
 
 const NicknameLayout = styled.div`\
   padding: 75px 20px 20px 20px;
-  height: 400px;
-  width: 65%;
+  height: 350px;
+  width: 90%;
   
   font-weight: 600;
   
@@ -81,63 +84,75 @@ const NicknameLayout = styled.div`\
   text-decoration: none;
   background: white;
   text-align: left;
-  margin-left: auto;
-  margin-right: auto;
+  margin-left: 0;
+  // margin-right: auto;
 `;
 
-const PasswordLayout = styled.div`\
+const PasswordLayout = styled.div`
   padding: 72px 20px 20px 20px;
-  height: 400px;
-  width: 65%;
+  height: 350px;
+  width: 90%;
   
   font-weight: 600;
   
-  cursor: pointer;
+  // cursor: pointer;
   border-radius: 3px;
   border-top: 2px solid gray;
   text-decoration: none;
   background: white;
   text-align: left;
-  margin-left: auto;
-  margin-right: auto;
+  margin-left: 0;
+  // margin-right: auto;
   
 `;
 
 const MyReviewLayout = styled.div`
   padding: 72px 20px 20px 20px;
-  height: 500px;
-  width: 65%;
+  height: auto;
+  width: 90%;
 
   font-weight: 600;
   
-  cursor: pointer;
+  /* cursor: pointer; */
   border-radius: 3px;
   border-top: 2px solid gray;
   text-decoration: none;
   background: white;
   text-align: left;
-  margin-left: auto;
-  margin-right: auto;
+  margin-left: 0;
+  // margin-right: auto;
 `;
+
+// const Table = styled.div`
+//   border: 1px solid black;
+//   border-radius:2px;
+//   width: 85%;
+//   height: auto;
+//   padding: 5px 10px 5px 10px;
+//   margin: 0 auto;
+// `;
 
 const Table = styled.div`
-  border: 1px solid black;
-  width: 65%;
+  border-bottom : 1px solid black;
+  width: 85%
   height: auto;
-  padding: 5px 10px 5px 10px;
-  margin: 0 auto;
-`;
+  padding: 20px 10px 15px 10px;
+  margin: 0;
 
+`;
+const Review = styled.div`
+  padding-left:40px;
+`;
 const Rate = styled.div`
   font-size: 15px;
 `;
 
 const Info = styled.div`
-  font-size: 12px;
+  font-size: 15px;
 `;
 
 const Contents = styled.div`
-  font-size: 12px;
+  font-size: 15px;
 `;
 
 const Paging = styled.div`
@@ -145,21 +160,21 @@ const Paging = styled.div`
   width: 150px;
   margin: 30px auto;
 `;
-const DeleteLayout = styled.div`\
+const DeleteLayout = styled.div`
   padding: 100px 20px 20px 20px;
   height: 400px;
-  width: 65%;
+  width: 90%;
   
   font-weight: 600;
   color: #6B66FF;
-  cursor: pointer;
+  /* cursor: pointer;*/
   border-radius: 3px;
   border-top: 2px solid gray;
   text-decoration: none;
   background: white;
   text-align: left;
-  margin-left: auto;
-  margin-right: auto;
+  margin-left: 0;
+  // margin-right: auto;
 
 `;
 
@@ -181,6 +196,7 @@ const AllInput = styled.input`
 `;
 
 const AllButton = styled.button`
+  font-family: 'Nanum Gothic', sans-serif;
   font-size: 16px;
   font-weight: 600;
   width: 60px;
@@ -200,30 +216,55 @@ const AllButton = styled.button`
     color: white;
   }
 `;
+
+const HJLayout = styled.div`
+  padding: 75px 20px 20px 20px;
+  height: 350px;
+  width: 90%;
+  
+  font-weight: 600;
+  
+  background: ;
+  border-radius: 3px;
+  border-top: 2px solid gray;
+  text-decoration: none;
+  background: white;
+  text-align: left;
+  margin-left: 0;
+  // margin-right: auto;
+  
+`;
+const MyTab = styled.div`
+    font-size: 20px;
+`;
+
 const MyPagePresenter = ({takeNewNickname, submitNewNickname, takeOldPassword, takeNewPassword, submitNewPassword, takeWithdrawPassword, submitWithdraw, myReviews}) => {
   const user = store.getState().user;
   
   return (
-    <Wrapper>
-      <div>          
+    <Wrapper>        
         <MainTitle><h1>마이페이지</h1></MainTitle>
         <Tab.Container id="left-tabs-example" defaultActiveKey="first">
           <Row>
             <Col sm={3}>
               <Nav variant="pills" className="flex-column">
-                <Nav.Item>
-                  <Nav.Link eventKey="first">회원정보 수정</Nav.Link>
-                </Nav.Item>
-                <Nav.Item>
-                  <Nav.Link eventKey="second">내가 쓴 리뷰</Nav.Link>
-                </Nav.Item>
-                <Nav.Item>
-                  <Nav.Link eventKey="third"></Nav.Link>
-                </Nav.Item>
+                <MyTab>
+                  <Nav.Item>
+                    <Nav.Link eventKey="first">회원정보 수정</Nav.Link>
+                  </Nav.Item>
+                  <Nav.Item>
+                    <Nav.Link eventKey="second">내가 쓴 리뷰</Nav.Link>
+                  </Nav.Item>
+                </MyTab>
               </Nav>
             </Col>
             <Col sm={9}>
               <Tab.Content>
+                <Tab.Pane eventkey="zero">
+                  <HJLayout>
+
+                  </HJLayout>
+                </Tab.Pane>
                 <Tab.Pane eventKey="first">
                   <NicknameLayout>
                     <SubTitle><p>프로필 수정</p></SubTitle>
@@ -266,20 +307,24 @@ const MyPagePresenter = ({takeNewNickname, submitNewNickname, takeOldPassword, t
                     
                     
                     {myReviews.map((review) => ( 
-                      <Table key={review.review_id}>
+                      <Review>
+                        <Table key={review.review_id}>
                         
-                        <Info>
-                          날짜 : {review.created}
-                        </Info>
-                        <Contents>
-                          내용 : {review.contents}
-                        </Contents>
-                        
-                        <Rate>
-                          평점 : {review.rate}
-                        </Rate>
-                        
-                      </Table>
+                          <Info>
+                            날짜 : {review.created}
+                          </Info>
+                          <Contents>
+                            내용 : {review.contents}
+                          </Contents>
+                          
+                          <Rate>
+                            평점 : {review.rate}
+                          </Rate>
+                          
+                        </Table>
+
+                      </Review>
+                      
                       ))}
                       
                    
@@ -292,20 +337,6 @@ const MyPagePresenter = ({takeNewNickname, submitNewNickname, takeOldPassword, t
             </Col>
           </Row>
         </Tab.Container>
-
-
-        
-        
-        
-
-        
-        
-
-
-       
-
-
-      </div>
     </Wrapper>
   )
 }
