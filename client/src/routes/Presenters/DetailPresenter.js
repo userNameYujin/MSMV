@@ -12,7 +12,7 @@ import moment from 'moment';
 
 
 const Wrapper = styled.div`
-    padding-top: 60px; 
+   
 `;
 
 const ReviewButton = styled.button`
@@ -58,6 +58,20 @@ const ComLeft = styled.div`
     text-align: left;
 `;
 
+const MyPageLink = styled(Link)`
+  &:hover {
+    color: darkred;
+  }
+`;
+const Font = styled.div`
+  font-family: 'Gowun Dodum', sans-serif;
+`;
+
+const Spacer = styled.div`
+    flex-grow: 0.01;
+`;
+
+
 const DetailPresenter = ({movieData, movieReviews, peoples, reviewOnChange, writeOnClick, updateClick, submitDeleteReview, starRating, onStarClick}) => {
   const director = [];
   const actor = [];
@@ -75,7 +89,6 @@ const DetailPresenter = ({movieData, movieReviews, peoples, reviewOnChange, writ
   }
 
   return (
-    <Wrapper>
       <GrayBackground>
       <br />
       
@@ -123,6 +136,7 @@ const DetailPresenter = ({movieData, movieReviews, peoples, reviewOnChange, writ
     <ReviewTitle>○영화 리뷰○</ReviewTitle>
     <hr />
     <Pad>
+      <Font>
       <StarRatingComponent 
           name="rate1" 
           starCount={5}
@@ -138,12 +152,14 @@ const DetailPresenter = ({movieData, movieReviews, peoples, reviewOnChange, writ
         <br />
         <ReviewButton style={{ width: '20%', height: '52px' }} onClick={writeOnClick}>작성</ReviewButton>
       </form>
+      </Font>
       </Pad>
     
       
       
     </div>
     <Pad>
+    <Font>
     {movieReviews && movieReviews.map((review, index) => ( 
       <Comment 
         actions={[
@@ -159,7 +175,7 @@ const DetailPresenter = ({movieData, movieReviews, peoples, reviewOnChange, writ
         </React.Fragment>
         ]}
         avatar={<Avatar src="https://beslow.co.kr/assets/img/mobile-float-mypage.png" width="25px" alt="image"/>}
-        author={review.nickname}
+        author={<Tooltip title="마이페이지 가기!"><MyPageLink to="/mypage">{review.nickname}</MyPageLink></Tooltip>}
       
         content={
             <ComLeft>        
@@ -188,10 +204,9 @@ const DetailPresenter = ({movieData, movieReviews, peoples, reviewOnChange, writ
       
       
  ))}
-    
+    </Font>
     </Pad>
     </GrayBackground>
-    </Wrapper>
   
 
   

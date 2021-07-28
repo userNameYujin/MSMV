@@ -7,7 +7,7 @@ import { SearchOutlined } from "@ant-design/icons"
 const Header = styled.header`
   display: flex;
   flex-direction: column;
-  position: fixed;
+  
   top: 0px;
   width: 100%;
 `;
