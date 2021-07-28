@@ -40,6 +40,7 @@
 @import url(http://fonts.googleapis.com/earlyaccess/nanumpenscript.css);
 .nanumpenscript {
   font-family: 'Nanum Pen Script', cursive;
+
 }
 /* 주아체 */
 @import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
@@ -49,3 +50,7 @@
 #myTabContent{
   background-color: whitesmoke;
 }
+
+
+@import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap');
+

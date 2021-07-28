@@ -36,7 +36,7 @@ router.post('/',(req,response)=>{
 
                         if(movieListNm.length === result.length){
                             movieListNm.sort(function(a,b){
-                                return parseFloat(b.rank)-parseFloat(a.rank)
+                                return parseFloat(b.rate)-parseFloat(a.rate)
                             })
                             response.status(200).send({code : 200, result : movieListNm});
                         }

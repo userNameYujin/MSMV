@@ -104,7 +104,6 @@ const LinkInnerSpan = styled.span`
 
 const JoinPresenter = ({ onSubmit, onChange, id, password, nickname, passwordCheck, email }) => {
   return (
-    <Wrapper>
     <Join>
       <JoinForm>
         <JoinTitle>회원가입</JoinTitle>
@@ -152,7 +151,7 @@ const JoinPresenter = ({ onSubmit, onChange, id, password, nickname, passwordChe
         </AskLoginDiv>
       </JoinForm>
     </Join>
-    </Wrapper>
+
   );
 };
 

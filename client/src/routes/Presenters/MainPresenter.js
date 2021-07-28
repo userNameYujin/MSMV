@@ -11,7 +11,7 @@ import "swiper/components/pagination/pagination.scss";
 import '../../App.css';
 
 const Wrapper = styled.div`
-    padding-top: 60px; 
+    
 `;
 
 const MainPage = styled.div`
@@ -101,7 +101,6 @@ const MainPresenter = ({topTenData, boxOfficeData}) => {
 
   return (
     <GrayBackground>
-    <Wrapper>
     <MainPage>
     
       <MainDiv>
@@ -109,7 +108,7 @@ const MainPresenter = ({topTenData, boxOfficeData}) => {
           className="banner"
           spaceBetween={50}
           slidesPerView={1}
-          autoplay={{ delay: 1000 }} 
+          autoplay={{ delay: 3000 }} 
        
            >
         
@@ -188,6 +187,7 @@ const MainPresenter = ({topTenData, boxOfficeData}) => {
               </SwiperSlide>
             </Swiper> 
         <SwipeDiv>
+
         <BoxOfficeTitle>최근 검색 영화 TOP10</BoxOfficeTitle>
           <hr />
           <SwipePad>
@@ -243,7 +243,6 @@ const MainPresenter = ({topTenData, boxOfficeData}) => {
 
       </MainDiv>
     </MainPage>
-    </Wrapper>
     </GrayBackground>
   );
 };
