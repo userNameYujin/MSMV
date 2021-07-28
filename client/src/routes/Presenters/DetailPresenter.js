@@ -10,6 +10,10 @@ import StarRatingComponent  from 'react-star-rating-component';
 import { Comment, Tooltip, Avatar } from 'antd';
 import moment from 'moment';
 
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import {Tab, Tabs} from 'react-bootstrap';
+
 
 const Wrapper = styled.div`
     padding-top: 60px; 
@@ -58,6 +62,19 @@ const ComLeft = styled.div`
     text-align: left;
 `;
 
+//현정
+const ThemovieTitle = styled.div`
+    font-family: 'Nanum Gothic', sans-serif;
+    font-weight: 700;
+    font-size:30px;
+`;
+const MovieElement = styled.div`
+    text-align: justify;
+    
+`;
+
+
+
 const DetailPresenter = ({movieData, movieReviews, peoples, reviewOnChange, writeOnClick, updateClick, submitDeleteReview, starRating, onStarClick}) => {
   const director = [];
   const actor = [];
@@ -77,7 +94,26 @@ const DetailPresenter = ({movieData, movieReviews, peoples, reviewOnChange, writ
   return (
     <Wrapper>
       <GrayBackground>
-      <br />
+      <img src={movieData.image} alt="movieData.title"/>
+      <ThemovieTitle>{movieData.title}</ThemovieTitle>
+      <MovieElement>관람등급 : {movieData.grade}</MovieElement>
+      <MovieElement>개봉 날짜 : {movieData.openDt}</MovieElement>
+      <MovieElement>장르 : {movieData.genres}</MovieElement>
+      <MovieElement>국가 : {movieData.country}</MovieElement>
+      <MovieElement>상영시간 : {movieData.runningTime}</MovieElement>
+      <Tabs defaultActiveKey="home" id="uncontrolled-tab-example" className="mb-3">
+        <Tab eventKey="home" title="줄거리">
+          <MovieElement>{movieData.summary}</MovieElement>
+        </Tab>
+        <Tab eventKey="profile" title="제작진">
+          ㅇㅏ직몰라
+        </Tab>
+        <Tab eventKey="contact" title="배우">
+          얘도 몰라
+        </Tab>
+      </Tabs>
+
+      {/* <br />
       
         <img src={movieData.image} alt="movieData.title"/>
       
@@ -113,7 +149,7 @@ const DetailPresenter = ({movieData, movieReviews, peoples, reviewOnChange, writ
         </Row>
         </Descriptions.Item>
       </Descriptions>
-      </Background>
+      </Background> */}
       
       
       

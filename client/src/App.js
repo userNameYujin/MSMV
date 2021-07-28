@@ -1,5 +1,6 @@
 import './App.css';
 import React from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Main from './routes/Main.js';
 import Auth from './routes/Auth.js';
