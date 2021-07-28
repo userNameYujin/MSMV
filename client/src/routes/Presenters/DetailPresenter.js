@@ -13,12 +13,8 @@ import { Tab, Tabs } from 'react-bootstrap';
 
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import {Tab, Tabs} from 'react-bootstrap';
 
 
-const Wrapper = styled.div`
-   
-`;
 
 const ReviewButton = styled.button`
 font-weight: 600;
@@ -106,7 +102,6 @@ const DetailPresenter = ({movieData, movieReviews, peoples, reviewOnChange, writ
 
   return (
 
-    <Wrapper>
 
       <GrayBackground>
       <img src={movieData.image} alt="movieData.title"/>

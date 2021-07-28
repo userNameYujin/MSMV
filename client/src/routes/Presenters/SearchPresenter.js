@@ -2,10 +2,10 @@ import React, {optionsState} from "react";
 import {Link} from "react-router-dom";
 import styled from "styled-components";
 import { Tabs, Tab } from 'react-bootstrap';
-import "../../../node_modules/bootswatch/dist/minty/bootstrap.min.css";
+//import "../../../node_modules/bootswatch/dist/minty/bootstrap.min.css";
 
 const Wrapper = styled.div`
-  padding-top: 105px;
+  padding-top: 40px;
   padding-bottom: 40px;
 `;
 
