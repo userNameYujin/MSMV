@@ -104,7 +104,7 @@ router.get('/detail/:movieCd', async function(req, response, next){
           genre = genre.replace(/(\r\n\t|\n|\r\t|\t)/gm,"")
       
           item = {
-              "image": $(".mv_info_area").find("img").attr("src"),
+              //"image": $(".mv_info_area").find("img").attr("src"),
               //"title": $(".mv_info").find(`h3>a`).text(),
               "title": title,
               "show" : show,
@@ -120,15 +120,35 @@ router.get('/detail/:movieCd', async function(req, response, next){
           }
           callback(item);
       }
+      const getHTMLPost = async(keyword) => {
+        try{
+            return await axios.get("https://movie.naver.com/movie/bi/mi/photoViewPopup.naver?movieCode="+keyword)
+        }catch(err){
+            console.log(err)
+        }
+        
+    }
+      const parsingPost = async(keyword,result,callback) => {
+        const html = await getHTMLPost(keyword);
+        
+        const $ = cheerio.load(html.data); 
 
+        result.image = $("#page_content").find("img").attr("src")
+
+        callback(result);
+    }
       parsing(movieCd,resultR,function(res){
-          //console.log(res);
-          
-          if(res){
-            response.status(200).send({code : 200, result : res});
+        //console.log(res);
+        parsingPost(movieCd,res,function(res2){
+          //console.log(res2);
+          if(res2){
+            response.status(200).send({code : 200, result : res2});
           }else{
             response.status(400).send({code : 400, result : '에러'});
           }
+        })
+          
+          
       })
 
       }
