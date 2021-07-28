@@ -4,8 +4,8 @@ import store from '../../store';
 
 const Wrapper = styled.div`
   padding-top: 180px; 
-  background: #c5cae9;
-  
+  background: ;
+  background: linear-gradient(135deg , ivory, #c5cae9 )
 `;
 
 const MainTitle = styled.div`
@@ -38,6 +38,7 @@ const LeftLayout = styled.div`
   background: ;
   width: 60%;
   height: 200px;
+  color: black;
 `;
 
 const SideBySide1 = styled.div`
@@ -71,7 +72,7 @@ const NicknameLayout = styled.div`\
   width: 65%;
   
   font-weight: 600;
-  color: #6B66FF;
+  
   background: ;
   border-radius: 3px;
   border-top: 2px solid gray;
@@ -88,7 +89,7 @@ const PasswordLayout = styled.div`\
   width: 65%;
   
   font-weight: 600;
-  color: #6B66FF;
+  
   cursor: pointer;
   border-radius: 3px;
   border-top: 2px solid gray;
@@ -98,6 +99,49 @@ const PasswordLayout = styled.div`\
   margin-left: auto;
   margin-right: auto;
   
+`;
+
+const MyReviewLayout = styled.div`
+  padding: 72px 20px 20px 20px;
+  height: 500px;
+  width: 65%;
+
+  font-weight: 600;
+  
+  cursor: pointer;
+  border-radius: 3px;
+  border-top: 2px solid gray;
+  text-decoration: none;
+  background: white;
+  text-align: left;
+  margin-left: auto;
+  margin-right: auto;
+`;
+
+const Table = styled.div`
+  border: 1px solid black;
+  width: 65%;
+  height: auto;
+  padding: 5px 10px 5px 10px;
+  margin: 0 auto;
+`;
+
+const Rate = styled.div`
+  font-size: 15px;
+`;
+
+const Info = styled.div`
+  font-size: 12px;
+`;
+
+const Contents = styled.div`
+  font-size: 12px;
+`;
+
+const Paging = styled.div`
+  fonst-size: 12px;
+  width: 150px;
+  margin: 30px auto;
 `;
 const DeleteLayout = styled.div`\
   padding: 100px 20px 20px 20px;
@@ -186,6 +230,29 @@ const MyPagePresenter = ({takeNewNickname, submitNewNickname, takeOldPassword, t
           </SideBySide2>
           </LeftLayout>
         </PasswordLayout>
+
+        <MyReviewLayout>
+          <SubTitle><p>내가 쓴 리뷰</p></SubTitle>
+          <Table>
+            <Rate>분노의질주 &nbsp; ★★★★★</Rate>
+            <Info><p> {user.nickname} &nbsp; | &nbsp; 2021.07.28 </p></Info>
+            <Contents>저는 아주 재미있게 봤습니다!</Contents>
+          </Table>
+          <Table>
+            <Rate>크루엘라 &nbsp; ★★★★★</Rate>
+            <Info><p> {user.nickname} &nbsp; | &nbsp; 2021.07.28 </p></Info>
+            <Contents>저는 아주 재미있게 봤습니다!</Contents>
+          </Table>
+          <Table>
+            <Rate>루카 &nbsp; ★★★★★</Rate>
+            <Info><p> {user.nickname} &nbsp; | &nbsp; 2021.07.28 </p></Info>
+            <Contents>저는 아주 재미있게 봤습니다!</Contents>
+          </Table>
+          <Paging>◀ &nbsp; 1 &nbsp; 2 &nbsp; 3 &nbsp; 4 &nbsp; 5 &nbsp; ▶</Paging>
+
+         
+        </MyReviewLayout>
+        
 
         <DeleteLayout>
         <SubTitle><p>계정 탈퇴</p></SubTitle>
