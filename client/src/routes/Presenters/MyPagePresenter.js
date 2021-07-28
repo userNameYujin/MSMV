@@ -34,9 +34,9 @@ const SubTitle = styled.div`
 const LeftLayout = styled.div`
   margin: 50px 0px 0px 270px;
   background: ;
-  font-size: 19px;
+  font-size: 16px;
   background: ;
-  width: 60%;
+  width: 65%;
   height: 200px;
   color: black;
 `;
