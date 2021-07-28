@@ -8,7 +8,7 @@ import { Tab, Tabs, Col, Row } from 'react-bootstrap';
 const Wrapper = styled.div`
   padding-top: 20px;
   padding-left: 10px;
-  background: none;
+  font-family: 'Nanum Gothic', sans-serif;
   // background: linear-gradient(135deg , ivory, #c5cae9 )
 `;
 
@@ -28,21 +28,21 @@ const MainTitle = styled.div`
 
 
 const SubTitle = styled.div`
-  background: ;
-  width: 500px;
-  padding-left: 200px;
+  // width: 500px;
+  padding-left: 30px;
   font-size: 25px;
   font-weight: bold;
 `;
 
 const LeftLayout = styled.div`
-  margin: 50px 0px 0px 270px;
+  margin: 30px 0px 0px 50px;
   background: ;
   font-size: 16px;
   background: ;
   width: 65%;
   height: 200px;
   color: black;
+  font-weight:400;
 `;
 
 const SideBySide1 = styled.div`
@@ -55,8 +55,9 @@ const SideBySide1 = styled.div`
 `;
 
 const SideBySide2 = styled.div`
-  float: right;
-  width: 500px;
+  // float: right;
+  // width: 500px;
+  margin-left : 90px;
   height: 150px;
   background: ;
   margin-top: -50px
@@ -87,9 +88,9 @@ const NicknameLayout = styled.div`\
   // margin-right: auto;
 `;
 
-const PasswordLayout = styled.div`\
+const PasswordLayout = styled.div`
   padding: 72px 20px 20px 20px;
-  height: 400px;
+  height: 350px;
   width: 90%;
   
   font-weight: 600;
@@ -107,7 +108,7 @@ const PasswordLayout = styled.div`\
 
 const MyReviewLayout = styled.div`
   padding: 72px 20px 20px 20px;
-  height: 500px;
+  height: auto;
   width: 90%;
 
   font-weight: 600;
@@ -122,24 +123,36 @@ const MyReviewLayout = styled.div`
   // margin-right: auto;
 `;
 
-const Table = styled.div`
-  border: 1px solid black;
-  width: 65%;
-  height: auto;
-  padding: 5px 10px 5px 10px;
-  margin: 0 auto;
-`;
+// const Table = styled.div`
+//   border: 1px solid black;
+//   border-radius:2px;
+//   width: 85%;
+//   height: auto;
+//   padding: 5px 10px 5px 10px;
+//   margin: 0 auto;
+// `;
 
+const Table = styled.div`
+  border-bottom : 1px solid black;
+  width: 85%
+  height: auto;
+  padding: 20px 10px 15px 10px;
+  margin: 0;
+
+`;
+const Review = styled.div`
+  padding-left:40px;
+`;
 const Rate = styled.div`
   font-size: 15px;
 `;
 
 const Info = styled.div`
-  font-size: 12px;
+  font-size: 15px;
 `;
 
 const Contents = styled.div`
-  font-size: 12px;
+  font-size: 15px;
 `;
 
 const Paging = styled.div`
@@ -147,7 +160,7 @@ const Paging = styled.div`
   width: 150px;
   margin: 30px auto;
 `;
-const DeleteLayout = styled.div`\
+const DeleteLayout = styled.div`
   padding: 100px 20px 20px 20px;
   height: 400px;
   width: 90%;
@@ -204,14 +217,14 @@ const AllButton = styled.button`
   }
 `;
 
-const HJLayout = styled.div`\
-  padding: 72px 20px 20px 20px;
-  height: 400px;
+const HJLayout = styled.div`
+  padding: 75px 20px 20px 20px;
+  height: 350px;
   width: 90%;
   
   font-weight: 600;
   
-  // cursor: pointer;
+  background: ;
   border-radius: 3px;
   border-top: 2px solid gray;
   text-decoration: none;
@@ -220,6 +233,9 @@ const HJLayout = styled.div`\
   margin-left: 0;
   // margin-right: auto;
   
+`;
+const MyTab = styled.div`
+    font-size: 20px;
 `;
 
 const MyPagePresenter = ({takeNewNickname, submitNewNickname, takeOldPassword, takeNewPassword, submitNewPassword, takeWithdrawPassword, submitWithdraw, myReviews}) => {
@@ -232,26 +248,21 @@ const MyPagePresenter = ({takeNewNickname, submitNewNickname, takeOldPassword, t
           <Row>
             <Col sm={3}>
               <Nav variant="pills" className="flex-column">
-                <Nav.Item>
-                  <Nav.Link eventKey="zero">TEST FOR ME</Nav.Link>
-                </Nav.Item>
-                <Nav.Item>
-                  <Nav.Link eventKey="first">회원정보 수정</Nav.Link>
-                </Nav.Item>
-                <Nav.Item>
-                  <Nav.Link eventKey="second">내가 쓴 리뷰</Nav.Link>
-                </Nav.Item>
+                <MyTab>
+                  <Nav.Item>
+                    <Nav.Link eventKey="first">회원정보 수정</Nav.Link>
+                  </Nav.Item>
+                  <Nav.Item>
+                    <Nav.Link eventKey="second">내가 쓴 리뷰</Nav.Link>
+                  </Nav.Item>
+                </MyTab>
               </Nav>
             </Col>
             <Col sm={9}>
               <Tab.Content>
                 <Tab.Pane eventkey="zero">
                   <HJLayout>
-                    <LeftLayout>
-                      <SubTitle><p>This is test</p></SubTitle>
-                    </LeftLayout>
-                    
-                    
+
                   </HJLayout>
                 </Tab.Pane>
                 <Tab.Pane eventKey="first">
@@ -296,20 +307,24 @@ const MyPagePresenter = ({takeNewNickname, submitNewNickname, takeOldPassword, t
                     
                     
                     {myReviews.map((review) => ( 
-                      <Table key={review.review_id}>
+                      <Review>
+                        <Table key={review.review_id}>
                         
-                        <Info>
-                          날짜 : {review.created}
-                        </Info>
-                        <Contents>
-                          내용 : {review.contents}
-                        </Contents>
-                        
-                        <Rate>
-                          평점 : {review.rate}
-                        </Rate>
-                        
-                      </Table>
+                          <Info>
+                            날짜 : {review.created}
+                          </Info>
+                          <Contents>
+                            내용 : {review.contents}
+                          </Contents>
+                          
+                          <Rate>
+                            평점 : {review.rate}
+                          </Rate>
+                          
+                        </Table>
+
+                      </Review>
+                      
                       ))}
                       
                    

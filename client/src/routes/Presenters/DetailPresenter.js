@@ -42,7 +42,8 @@ const ReviewTitle = styled.div`
 `;
 
 const GrayBackground = styled.div`
-    background: #eaeaea;
+    // background: #eaeaea;
+    // background: linear-gradient( ivory, #c5cae9 )
 `;
 
 const Background = styled.div`
