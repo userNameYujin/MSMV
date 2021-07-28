@@ -119,7 +119,6 @@ const LinkInnerSpan = styled.span`
 
 const AuthPresenter = ({ id, password, onChange, onSubmit }) => {
   return (
-    <Wrapper>
     <Login>
       <LoginForm onSubmit={onSubmit}>
         <LoginTitle>로그인</LoginTitle>
@@ -139,7 +138,6 @@ const AuthPresenter = ({ id, password, onChange, onSubmit }) => {
         </JoinLink>
       </AskJoinDiv>
     </Login>
-    </Wrapper>
   );
 };
 
