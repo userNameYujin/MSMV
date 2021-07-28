@@ -1,196 +1,180 @@
 import React, {optionsState} from "react";
 import {Link} from "react-router-dom";
 import styled from "styled-components";
+import { Tabs, Tab } from 'react-bootstrap';
+import "../../../node_modules/bootswatch/dist/minty/bootstrap.min.css";
 
 const Wrapper = styled.div`
-    padding-top: 105px; 
+  padding-top: 105px;
+  padding-bottom: 40px;
 `;
 
-const SearchTitle = styled.div`
-  text-align: center;
-  width: auto;
-  margin-top: 50px;
+const SearchUpper = styled.div`
+  margin: auto;
+  width: 900px;
+  padding: auto;
+  align: center;
+  display: block;
   margin-bottom: 50px;
-  font-size: 30px;
-  font-weight: 600;
-  padding-left: 500px;
 `;
 
-const Input = styled.input`
-  box-sizing: border-box;
-  width: 500px;
-  height: 40px;
-  margin: 0px 5px 0px 20px;
-  border: 2px solid black;
-  border-radius: 3px;
-  transition: border 0.1s ease-in-out;
-  outline: none;
-  &:hover,
-  &:focus {
-    border: 2px solid #6B66FF;
-  }
-`;
-
-const SearchButton = styled.button`
-  font-weight: 600;
-  width: 60px;
-  color: #6B66FF;
-  border: 1px solid #6B66FF;
-  background-color: lightgray;
-  padding: 0.5rem;
-  padding-bottom: 0.4rem;
-  cursor: pointer;
-  border-radius: 3px;
-  text-decoration: none;
-  transition: .2s all;
-
-  &:hover {
-      background: #6B66FF;
-      color: white;
-  }
-`;
-const Spacer = styled.div`
-    width: 500px;
-    text-align: left;
-
-`;
-
-const SearchAsk = styled.div`
-    margin: 10px 10px 10px 10px;
-    float: left;
-`;
-
-
-const SearchResult = styled.div`
-    margin: 10px 10px 10px 10px;
-`;
-
-const Shape = styled.div`
-    display: inline-block;
-    flex: 1;
-    margin: 0 auto 0 auto;
-    text-align: left;
-    width: 72%;
-    height: 36px;
-    font-size: 8px;
-
-  
-  `;
-
-const MovieDiv = styled.div`
- 
-  margin-left: auto;
-  margin-right: auto;
-  width: 500px;
-  height: 310px;
-  background: #606060;
-  float: right;
-  list-style: none;
-  padding: 10px;
-  margin: 10px 20px 30px 10px;
-  border-radius: 10px;
-  box-shadow: 0 15px 10px #000;
-  font-family: 'Noto Sans KR', sans-serif;
-
-`;
-
-const Image = styled.div`
-  float: left;
-  width: 50%
-  height: 100%;
-  size: cover;
-`;  
-
-const InfoBox = styled.div`
-  float: left;
-  width: 55%;
-  height: 300px;
-  text-align: left;
+const CritSelect = styled.select`
+  text-align: center;
+  width : 80px;
+  height : 50px;
   font-size: 20px;
-  padding-left: 25px;
+  margin-top : 5px;
+  padding-left: 3px;
 `;
 
+const CritOption = styled.option`
+  text-align: center;
+  font-size: 20px;
 
-const InfoName = styled.div`
-  display: inline-block;
-  font-size: 25px;
 `;
 
-const InfoRate = styled.div`
-  font-size: 13px;
-  font color: white;
+const SearchInput = styled.input`
+  height: 50px;
+  margin-left : 10px;
+  width : 810px;
+  margin-top : 5px;
+  font-size: 20px;
+  padding-left: 5px;
 `;
 
+const MovieCard = styled.div`
+  padding : 15px;
+  class: "card bg-primary mb-3";
+  margin: 20px auto 20px auto;
+  width: 700px;
+  height: 245px;
+  display: block;
+  background-color: #C8F6FA;
+  box-shadow: 1px 2px 2px gray;
+  border-radius: 0.3em;
+  
+`;
 
-const SelectType = styled.div`
+const MovieImageLink = styled.div`
+  class: "card-img-top";
   float: left;
-  width: auto;
-  height: 40px;
-  padding: 9px;
-  padding-left: 400px;
+  margin: auto;
 `;
 
-const SearchPresenter = ({searchCritCheck, searchCrit, submitSearch, takeInput, result, currentSearch, inputEnter}) => {
+const MovieImage = styled.img`
+  overflow: hidden;
+  width: 150px;
+  height: 215px;
+`;
+
+const MovieTitleLink = styled(Link)`
+  text-decoration: none;
+  font-size: 20px;
+  color: black;
+  hover {
+    text-decoration: underline;
+  }
+  
+  active {
+    text-decoration: underline;
+  }
+`;
+
+const MovieContent = styled.p`
+  class: "card-body";
+  float:right;
+  margin:auto;
+  width : 500px;
+  text-align: left;
+  size: 20px;
+  dispaly:flex;
+  color: black;
+`;
+
+const MovieSummary = styled.p`
+  margin-top: 2px;
+  text-align: left;
+  color: black;
+  width : 500px;
+  overflow: hidden; text-overflow: ellipsis;
+  display: -webkit-box; 
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical; 
+  word-wrap:break-word;
+  line-height: 1.5em;
+  height: 7.5em;
+  margin-bottom: 0;
+`;
+
+const SummaryLink = styled(Link)`
+  margin-left: 590px;
+  height: 1.5em;
+  text-align: right;
+  
+`;
+
+
+
+const SearchPresenter = ({searchCritCheck, submitSearch, takeInput, result, currentSearch}) => {
 
   for (let i = 0 ; i < result.length; i++) {
     result[i].title = result[i].title.replace(/<b>/igm, '');
     result[i].title = result[i].title.replace(/<\/b>/igm, '');
+    // if (result[i].rate === "0.00")
+    //   result[i].rate = "정보 없음";
+    if (result[i].date === '정보 없음')
+      result[i].date = "개봉일 정보 없음";
+    if (result[i].summary === "")
+      result[i].summary = "";
   }
 
   return (
+    
     <Wrapper>
-    <div>
-    <SearchAsk>
-      <SearchTitle></SearchTitle>
-      <SelectType>
-        <select name="SearchCrit" value={optionsState} onChange={searchCritCheck}>
-        <option value="title">제목</option>
-        <option value="director">감독</option>
-      </select>
-      </SelectType>
+      
+      <SearchUpper>
+        <CritSelect name="SearchCrit" value={optionsState} onChange={searchCritCheck}>
+          <CritOption value="title"> 제목</CritOption>
+          <CritOption value="director"> 감독</CritOption>
+        </CritSelect>
 
-      <Spacer/>
-      <Input onChange={takeInput} onKeyPress={inputEnter} placeholder="검색어 입력"></Input>
-      <Spacer/>
-      <SearchButton onClick={submitSearch}>검색</SearchButton>
-      
-      
-    </SearchAsk>
-    <SearchResult>
-    <Shape>
+        <SearchInput type="text" onChange={takeInput} onKeyPress={submitSearch}
+          placeholder="검색어 입력"></SearchInput>
+      </SearchUpper>
+
       {currentSearch ? (<>
         {/* 무언가가 검색되었을 때의 표시 공간 */}
-        <h1> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '{currentSearch}' 전체 검색결과가 건 발견되었습니다.</h1>
+        <h2>'{currentSearch}' 전체 검색결과가 {result.length}건 발견되었습니다.</h2>
         {result.map((movie) => ( 
-          <MovieDiv key={movie.movieCd}>
-            <Image>
-              <Link to={`/Detail?code=${movie.movieCd}`}><img alt="movie" src={movie.image}></img></Link> 
-            </Image>
-            <InfoBox>
-              <InfoName>
-                <Link to={`/Detail?code=${movie.movieCd}`}>{movie.title}</Link> 
-              </InfoName>
-              <p> </p>
-              <InfoRate>
-                <p>평점 &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;{movie.rate} <br/>
-                   {movie.date} <br/>
-                   {movie.summary}
-                 </p>
-              </InfoRate>
+          
+          <MovieCard key={movie.movieCd}>
+            <MovieImageLink>
+              <Link to={`/Detail?code=${movie.movieCd}`}><MovieImage alt="movie" src={movie.image}></MovieImage></Link>
+            </MovieImageLink>
+            <MovieContent>
+              <MovieTitleLink to={`/Detail?code=${movie.movieCd}`}>{movie.title}</MovieTitleLink> 
+              <p>평점 {movie.rate}<br/>
+              {movie.date}
+              </p>
+              <MovieSummary>
+                {movie.summary} 
+              </MovieSummary>
+              {/* <SummaryLink to={`/Detail?code=${movie.movieCd}`}>더 보기</SummaryLink> */}
               
-              
-            </InfoBox>
-          </MovieDiv>))}</>) : (
+            </MovieContent>
+          </MovieCard>
+          ))}</>) : (
         <>
         {/* 아무것도 검색되지 않았을 때의 표시 공간 */}
-            <p>검색할 키워드를 입력하세요</p>
-
+            <h2>제목 또는 감독으로 영화를 검색하세요.</h2>
+            <div className="container">
+              <blockquote className="blockquote text-center text-success">
+                <p><i>"영화란 지루한 부분이 커트된 인생이다."</i></p>
+                <footer className="blockquote-footer">알프레드 히치콕</footer>
+              </blockquote>
+            </div>
         </>)}
       
-    </Shape>
-    </SearchResult>  
-
-    </div>
     </Wrapper>
   )
 }

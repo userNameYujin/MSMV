@@ -13,6 +13,7 @@ const Header = styled.header`
   
   top: 0px;
   width: 100%;
+
 `;
 
 const Banner = styled(Link)`
@@ -20,6 +21,7 @@ const Banner = styled(Link)`
   letter-spacing:3px;
   color: #6b66ff;
   
+
   font-family: 'Jua', sans-serif;
 `;
 
@@ -93,6 +95,7 @@ const HeaderPresenter = ({user, LogoutClick}) => {
 
 
   return (
+
     <Header>
       <WhiteBackground>
       <Menu>
@@ -113,8 +116,8 @@ const HeaderPresenter = ({user, LogoutClick}) => {
             <LoginJoinButton to="Login">로그인</LoginJoinButton>
             <Spacer2/>
             <LoginJoinButton to="Join">회원가입</LoginJoinButton>
-          </>
 
+          </>
         )}  
             <Spacer2/>
             <Tooltip title="영화검색하러 가기!">
