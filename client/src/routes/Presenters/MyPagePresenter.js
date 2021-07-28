@@ -4,6 +4,7 @@ import store from '../../store';
 import Nav from 'react-bootstrap/Nav'
 import '../../App.css';
 import { Tab, Tabs, Col, Row } from 'react-bootstrap';
+import moment from 'moment';
 
 const Wrapper = styled.div`
   margin-left:100px;
@@ -309,11 +310,12 @@ const MyPagePresenter = ({takeNewNickname, submitNewNickname, takeOldPassword, t
                     
                     
                     {myReviews.map((review) => ( 
+
                       <Review>
                         <Table key={review.review_id}>
                         
                           <Info>
-                            날짜 : {review.created}
+                          날짜 : {moment(review.created).format('MMMM Do YYYY, h:mm:ss a')}
                           </Info>
                           <Contents>
                             내용 : {review.contents}
