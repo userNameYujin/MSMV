@@ -46,9 +46,6 @@
 /* 나눔고딕 */
 @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700&display=swap');
 
-#movieOutline{
-  text-align: justify;
-}
 #myTabContent{
   background-color: whitesmoke;
 }
