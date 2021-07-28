@@ -2,12 +2,14 @@ import React from 'react';
 import styled from 'styled-components';
 import store from '../../store';
 import Nav from 'react-bootstrap/Nav'
+import '../../App.css';
 import { Tab, Tabs, Col, Row } from 'react-bootstrap';
 
 const Wrapper = styled.div`
-  padding-top: 180px; 
-  background: ;
-  background: linear-gradient(135deg , ivory, #c5cae9 )
+  padding-top: 20px;
+  padding-left: 10px;
+  background: none;
+  // background: linear-gradient(135deg , ivory, #c5cae9 )
 `;
 
 const MainTitle = styled.div`
@@ -15,7 +17,8 @@ const MainTitle = styled.div`
   width: 400px;
   padding: 20px 10px 20px 10px;
   font-size: 15px;
-  font-weight: bold;
+  font-family: 'Nanum Gothic', sans-serif;
+  font-weight: 700;
   background: ;
   
   margin-left: auto;
@@ -30,7 +33,6 @@ const SubTitle = styled.div`
   padding-left: 200px;
   font-size: 25px;
   font-weight: bold;
-  
 `;
 
 const LeftLayout = styled.div`
@@ -44,12 +46,12 @@ const LeftLayout = styled.div`
 `;
 
 const SideBySide1 = styled.div`
-  float: right;
-  width: 500px;
+  // float: right;
+  // width: 500px;
   height: 150px;
-  background: ;
-  margin-top: -50px;
-  margin-right: 20px;
+  // background: ;
+  // margin-top: -50px;
+  // margin-right: 20px;
 `;
 
 const SideBySide2 = styled.div`
@@ -70,8 +72,8 @@ const SideBySide3 = styled.div`
 
 const NicknameLayout = styled.div`\
   padding: 75px 20px 20px 20px;
-  height: 400px;
-  width: 65%;
+  height: 350px;
+  width: 90%;
   
   font-weight: 600;
   
@@ -81,43 +83,43 @@ const NicknameLayout = styled.div`\
   text-decoration: none;
   background: white;
   text-align: left;
-  margin-left: auto;
-  margin-right: auto;
+  margin-left: 0;
+  // margin-right: auto;
 `;
 
 const PasswordLayout = styled.div`\
   padding: 72px 20px 20px 20px;
   height: 400px;
-  width: 65%;
+  width: 90%;
   
   font-weight: 600;
   
-  cursor: pointer;
+  // cursor: pointer;
   border-radius: 3px;
   border-top: 2px solid gray;
   text-decoration: none;
   background: white;
   text-align: left;
-  margin-left: auto;
-  margin-right: auto;
+  margin-left: 0;
+  // margin-right: auto;
   
 `;
 
 const MyReviewLayout = styled.div`
   padding: 72px 20px 20px 20px;
   height: 500px;
-  width: 65%;
+  width: 90%;
 
   font-weight: 600;
   
-  cursor: pointer;
+  /* cursor: pointer; */
   border-radius: 3px;
   border-top: 2px solid gray;
   text-decoration: none;
   background: white;
   text-align: left;
-  margin-left: auto;
-  margin-right: auto;
+  margin-left: 0;
+  // margin-right: auto;
 `;
 
 const Table = styled.div`
@@ -148,18 +150,18 @@ const Paging = styled.div`
 const DeleteLayout = styled.div`\
   padding: 100px 20px 20px 20px;
   height: 400px;
-  width: 65%;
+  width: 90%;
   
   font-weight: 600;
   color: #6B66FF;
-  cursor: pointer;
+  /* cursor: pointer;*/
   border-radius: 3px;
   border-top: 2px solid gray;
   text-decoration: none;
   background: white;
   text-align: left;
-  margin-left: auto;
-  margin-right: auto;
+  margin-left: 0;
+  // margin-right: auto;
 
 `;
 
@@ -181,6 +183,7 @@ const AllInput = styled.input`
 `;
 
 const AllButton = styled.button`
+  font-family: 'Nanum Gothic', sans-serif;
   font-size: 16px;
   font-weight: 600;
   width: 60px;
@@ -200,30 +203,57 @@ const AllButton = styled.button`
     color: white;
   }
 `;
+
+const HJLayout = styled.div`\
+  padding: 72px 20px 20px 20px;
+  height: 400px;
+  width: 90%;
+  
+  font-weight: 600;
+  
+  // cursor: pointer;
+  border-radius: 3px;
+  border-top: 2px solid gray;
+  text-decoration: none;
+  background: white;
+  text-align: left;
+  margin-left: 0;
+  // margin-right: auto;
+  
+`;
+
 const MyPagePresenter = ({takeNewNickname, submitNewNickname, takeOldPassword, takeNewPassword, submitNewPassword, takeWithdrawPassword, submitWithdraw, myReviews}) => {
   const user = store.getState().user;
   
   return (
-    <Wrapper>
-      <div>          
+    <Wrapper>        
         <MainTitle><h1>마이페이지</h1></MainTitle>
         <Tab.Container id="left-tabs-example" defaultActiveKey="first">
           <Row>
             <Col sm={3}>
               <Nav variant="pills" className="flex-column">
                 <Nav.Item>
+                  <Nav.Link eventKey="zero">TEST FOR ME</Nav.Link>
+                </Nav.Item>
+                <Nav.Item>
                   <Nav.Link eventKey="first">회원정보 수정</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
                   <Nav.Link eventKey="second">내가 쓴 리뷰</Nav.Link>
                 </Nav.Item>
-                <Nav.Item>
-                  <Nav.Link eventKey="third"></Nav.Link>
-                </Nav.Item>
               </Nav>
             </Col>
             <Col sm={9}>
               <Tab.Content>
+                <Tab.Pane eventkey="zero">
+                  <HJLayout>
+                    <LeftLayout>
+                      <SubTitle><p>This is test</p></SubTitle>
+                    </LeftLayout>
+                    
+                    
+                  </HJLayout>
+                </Tab.Pane>
                 <Tab.Pane eventKey="first">
                   <NicknameLayout>
                     <SubTitle><p>프로필 수정</p></SubTitle>
@@ -292,20 +322,6 @@ const MyPagePresenter = ({takeNewNickname, submitNewNickname, takeOldPassword, t
             </Col>
           </Row>
         </Tab.Container>
-
-
-        
-        
-        
-
-        
-        
-
-
-       
-
-
-      </div>
     </Wrapper>
   )
 }
