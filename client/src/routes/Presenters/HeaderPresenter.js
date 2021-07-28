@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom';
 import styled from "styled-components";
 import { Button, Tooltip } from "antd";
 import { SearchOutlined } from "@ant-design/icons"
+import "../../App.css";
+// import "../../../node_modules/bootswatch/dist/journal/bootstrap.min.css";
+
 
 const Header = styled.header`
   display: flex;
@@ -17,7 +20,7 @@ const Banner = styled(Link)`
   letter-spacing:3px;
   color: #6b66ff;
   
-  font-family: 'Nanum Pen Script', cursive;
+  font-family: 'Jua', sans-serif;
 `;
 
 const Menu = styled.div`
@@ -110,8 +113,6 @@ const HeaderPresenter = ({user, LogoutClick}) => {
             <LoginJoinButton to="Login">로그인</LoginJoinButton>
             <Spacer2/>
             <LoginJoinButton to="Join">회원가입</LoginJoinButton>
-            <Spacer2/>
-            
           </>
 
         )}  
