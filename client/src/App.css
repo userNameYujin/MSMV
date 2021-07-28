@@ -40,4 +40,21 @@
 @import url(http://fonts.googleapis.com/earlyaccess/nanumpenscript.css);
 .nanumpenscript {
   font-family: 'Nanum Pen Script', cursive;
+
+}
+/* 주아체 */
+@import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
+/* 나눔고딕 */
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700&display=swap');
+
+#movieOutline{
+  text-align: justify;
+}
+#myTabContent{
+  background-color: whitesmoke;
+}
+
 } 
+
+@import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap');
+
