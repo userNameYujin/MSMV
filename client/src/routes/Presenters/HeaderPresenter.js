@@ -10,6 +10,7 @@ const Header = styled.header`
   position: fixed;
   top: 0px;
   width: 100%;
+
 `;
 
 const Banner = styled(Link)`
@@ -17,7 +18,7 @@ const Banner = styled(Link)`
   letter-spacing:3px;
   color: #6b66ff;
   
-  font-family: 'Nanum Pen Script', cursive;
+  font-family: "nanum pen script";
 `;
 
 const Menu = styled.div`
@@ -90,6 +91,7 @@ const HeaderPresenter = ({user, LogoutClick}) => {
 
 
   return (
+
     <Header>
       <WhiteBackground>
       <Menu>
@@ -111,9 +113,7 @@ const HeaderPresenter = ({user, LogoutClick}) => {
             <Spacer2/>
             <LoginJoinButton to="Join">회원가입</LoginJoinButton>
             <Spacer2/>
-            
           </>
-
         )}  
             <Spacer2/>
             <Tooltip title="영화검색하러 가기!">

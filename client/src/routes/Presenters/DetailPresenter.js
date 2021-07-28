@@ -9,6 +9,7 @@ import '../../App.css';
 import StarRatingComponent  from 'react-star-rating-component';
 import { Comment, Tooltip, Avatar } from 'antd';
 import moment from 'moment';
+import { Tab, Tabs } from 'react-bootstrap';
 
 
 const Wrapper = styled.div`
@@ -36,7 +37,7 @@ const ReviewTitle = styled.div`
   margin-top: 50px;
   font-size: 30px;
   font-weight: 600;
-  font-family: 'Nanum Pen Script', cursive;
+  font-family: 맑은고딕;
 `;
 
 const GrayBackground = styled.div`
@@ -44,7 +45,7 @@ const GrayBackground = styled.div`
 `;
 
 const Background = styled.div`
-    font-family: 'Nanum Pen Script', cursive;
+    font-family: 맑은고딕;
 `;
 
 const Pad = styled.div`
@@ -57,6 +58,7 @@ const Pad = styled.div`
 const ComLeft = styled.div`
     text-align: left;
 `;
+
 
 const DetailPresenter = ({movieData, movieReviews, peoples, reviewOnChange, writeOnClick, updateClick, submitDeleteReview, starRating, onStarClick}) => {
   const director = [];
@@ -75,6 +77,8 @@ const DetailPresenter = ({movieData, movieReviews, peoples, reviewOnChange, writ
   }
 
   return (
+
+
     <Wrapper>
       <GrayBackground>
       <br />

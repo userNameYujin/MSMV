@@ -188,6 +188,7 @@ const MainPresenter = ({topTenData, boxOfficeData}) => {
               </SwiperSlide>
             </Swiper> 
         <SwipeDiv>
+
         <BoxOfficeTitle>최근 검색 영화 TOP10</BoxOfficeTitle>
           <hr />
           <SwipePad>

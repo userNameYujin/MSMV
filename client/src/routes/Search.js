@@ -12,13 +12,11 @@ const Search = () => {
   // const history = useHistory();
   // const location = useLocation();
 
-  const submitSearch = async () => {
-    setCurrentSearch(searchContent);
-
+  const submitSearch = async (e) => {
     if (searchContent === '') { // 아무것도 입력하지 않을 시
+      setCurrentSearch(searchContent);
       return; // 아무것도 반환하지 않음
     }
-
     if (searchCrit === "title") {
       console.log("search from title");
       const check = 1;
@@ -26,14 +24,12 @@ const Search = () => {
       console.log("start axios");
       await axios.post(`${process.env.REACT_APP_SERVER_URL}/search`, { check, movieNm })
       .then((response) => {
-        console.log(response);
         setResult(response.data.result);
       })
       .catch((error) => {
         window.alert(error.response.data.message);
       });
       console.log("end axios");
-      console.log(result);
     }
     else if (searchCrit === "director") {
       console.log("search from director");
@@ -49,11 +45,12 @@ const Search = () => {
         window.alert(error.response.data.message);
       });
       console.log("end axios");
-      console.log(result);
     }
+    result.sort((a, b) => a.rate < b.rate);
+    console.log(result);
+    setCurrentSearch(searchContent);
   }
   
-
   const takeInput = (e) => {
     setSearchContent(e.target.value);
   }
@@ -62,14 +59,8 @@ const Search = () => {
     setSearchCrit(e.target.value);
   };
 
-  const inputEnter = (e) => {
-    if (e.key === 'Enter') {
-      submitSearch();
-    }
-  }
-
   return ( 
-    <SearchPresenter searchCritCheck={SearchCritCheck} searchCrit={searchCrit} submitSearch={submitSearch} takeInput={takeInput} inputEnter={inputEnter} {...props}/>
+    <SearchPresenter searchCritCheck={SearchCritCheck} searchCrit={searchCrit} submitSearch={submitSearch} takeInput={takeInput} {...props}/>
   )
 }
 
