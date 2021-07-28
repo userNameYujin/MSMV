@@ -85,9 +85,11 @@ const MyPage = () => {
 
   const getMyReviews = async() => {
     const user_id = store.getState().user.id;
-    await axios.get(`${process.env.REACT_APP_SERVER_URL}/mypage/myReview`, { user_id })
+    console.log(user_id);
+    await axios.post(`${process.env.REACT_APP_SERVER_URL}/mypage/myReview`, { user_id, withCredentials:true })
     .then((response) => {
       console.log(response);
+      setMyReviews(response.data.result);
     })
     .catch((err) => {
       console.log(err);
@@ -97,7 +99,7 @@ const MyPage = () => {
   useEffect(() => getMyReviews(), []);
 
   return (
-    <MyPagePresenter takeNewNickname={takeNewNickname} submitNewNickname={submitNewNickname} testNewNickname={testNewNickname} takeNewPassword={takeNewPassword} takeOldPassword={takeOldPassword} submitNewPassword={submitNewPassword} takeWithdrawPassword={takeWithdrawPassword} submitWithdraw={submitWithdraw}/>
+    <MyPagePresenter takeNewNickname={takeNewNickname} submitNewNickname={submitNewNickname} testNewNickname={testNewNickname} takeNewPassword={takeNewPassword} takeOldPassword={takeOldPassword} submitNewPassword={submitNewPassword} takeWithdrawPassword={takeWithdrawPassword} submitWithdraw={submitWithdraw} myReviews={myReviews}/>
   )
 }
 

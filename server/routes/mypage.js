@@ -6,6 +6,7 @@ const { next } = require('cheerio/lib/api/traversing');
 
 //닉네임변경
 router.post('/nickModify/:id', async(req, res, next) => {
+  console.log(req.body.nickname);
   await db.query('SELECT id FROM users where nickname = ?', [req.body.nickname], function(error, result){
     if (error){
       next(error);
@@ -102,9 +103,10 @@ router.post('/withdraw', async(req, res, next) => {
   })
 })
 
-router.get('/myReview', async function(req, res, err){
+router.post('/myReview', async function(req, res, err){
   const user_id = req.body.user_id;
-  await db.query('select review.id as review_id, contents, created, updated, commenter, nickname, rate, movieCd  from review left join users on ? = review.commenter;', [user_id], function(err, review){
+  console.log(req.body.user_id);
+  await db.query('select review.id as review_id, contents, created, updated, commenter, rate, movieCd from review left join users on user_id = review.commenter where review.commenter = ?;', [req.body.user_id], function(err, review){
     if(err){
       next(err);
     }

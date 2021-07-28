@@ -75,6 +75,7 @@ const MovieElement = styled.div`
 const GridContainer = styled.div`
     display: grid;
     grid-template-columns: 1fr 1fr;
+    white-space: pre-line;
 `;
 const MyImage = styled.img`
     margin:auto;

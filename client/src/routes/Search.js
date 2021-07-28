@@ -46,7 +46,7 @@ const Search = () => {
       });
       console.log("end axios");
     }
-    result.sort((a, b) => a.rate < b.rate);
+    //result.sort((a, b) => a.rate < b.rate);
     console.log(result);
     setCurrentSearch(searchContent);
   }

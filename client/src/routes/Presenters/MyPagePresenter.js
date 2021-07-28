@@ -200,7 +200,7 @@ const AllButton = styled.button`
     color: white;
   }
 `;
-const MyPagePresenter = ({takeNewNickname, submitNewNickname, takeOldPassword, takeNewPassword, submitNewPassword, takeWithdrawPassword, submitWithdraw}) => {
+const MyPagePresenter = ({takeNewNickname, submitNewNickname, takeOldPassword, takeNewPassword, submitNewPassword, takeWithdrawPassword, submitWithdraw, myReviews}) => {
   const user = store.getState().user;
   
   return (
@@ -263,22 +263,27 @@ const MyPagePresenter = ({takeNewNickname, submitNewNickname, takeOldPassword, t
                 <Tab.Pane eventKey="second">
                   <MyReviewLayout>
                     <SubTitle><p>내가 쓴 리뷰</p></SubTitle>
-                    <Table>
-                      <Rate>분노의질주 &nbsp; ★★★★★</Rate>
-                      <Info><p> {user.nickname} &nbsp; | &nbsp; 2021.07.28 </p></Info>
-                      <Contents>저는 아주 재미있게 봤습니다!</Contents>
-                    </Table>
-                    <Table>
-                      <Rate>크루엘라 &nbsp; ★★★★★</Rate>
-                      <Info><p> {user.nickname} &nbsp; | &nbsp; 2021.07.28 </p></Info>
-                      <Contents>저는 아주 재미있게 봤습니다!</Contents>
-                    </Table>
-                    <Table>
-                      <Rate>루카 &nbsp; ★★★★★</Rate>
-                      <Info><p> {user.nickname} &nbsp; | &nbsp; 2021.07.28 </p></Info>
-                      <Contents>저는 아주 재미있게 봤습니다!</Contents>
-                    </Table>
-                    <Paging>◀ &nbsp; 1 &nbsp; 2 &nbsp; 3 &nbsp; 4 &nbsp; 5 &nbsp; ▶</Paging>
+                    
+                    
+                    {myReviews.map((review) => ( 
+                      <Table key={review.review_id}>
+                        
+                        <Info>
+                          날짜 : {review.created}
+                        </Info>
+                        <Contents>
+                          내용 : {review.contents}
+                        </Contents>
+                        
+                        <Rate>
+                          평점 : {review.rate}
+                        </Rate>
+                        
+                      </Table>
+                      ))}
+                      
+                   
+                    <Paging></Paging>
 
                   
                   </MyReviewLayout>
