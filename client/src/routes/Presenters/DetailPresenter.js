@@ -10,6 +10,7 @@ import StarRatingComponent  from 'react-star-rating-component';
 import { Comment, Tooltip, Avatar } from 'antd';
 import moment from 'moment';
 import { Tab, Tabs } from 'react-bootstrap';
+import Image from 'react-bootstrap/Image'
 
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
@@ -68,7 +69,16 @@ const ThemovieTitle = styled.div`
 `;
 const MovieElement = styled.div`
     text-align: justify;
+    padding:10px;
     
+`;
+const GridContainer = styled.div`
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+`;
+const MyImage = styled.img`
+    margin:auto;
+    padding:10px;
 `;
 
 const MyPageLink = styled(Link)`
@@ -104,24 +114,34 @@ const DetailPresenter = ({movieData, movieReviews, peoples, reviewOnChange, writ
 
 
       <GrayBackground>
-      <img src={movieData.image} alt="movieData.title"/>
-      <ThemovieTitle>{movieData.title}</ThemovieTitle>
-      <MovieElement>관람등급 : {movieData.grade}</MovieElement>
-      <MovieElement>개봉 날짜 : {movieData.openDt}</MovieElement>
-      <MovieElement>장르 : {movieData.genres}</MovieElement>
-      <MovieElement>국가 : {movieData.country}</MovieElement>
-      <MovieElement>상영시간 : {movieData.runningTime}</MovieElement>
-      <Tabs defaultActiveKey="home" id="uncontrolled-tab-example" className="mb-3">
-        <Tab eventKey="home" title="줄거리">
-          <MovieElement>{movieData.summary}</MovieElement>
-        </Tab>
-        <Tab eventKey="profile" title="제작진">
-          ㅇㅏ직몰라
-        </Tab>
-        <Tab eventKey="contact" title="배우">
-          얘도 몰라
-        </Tab>
-      </Tabs>
+        <GridContainer>
+          <MyImage src={movieData.image} alt="movieData.title" fluid="height:100%"/>
+          
+          <MovieElement>
+            <ThemovieTitle>{movieData.title}</ThemovieTitle>
+            
+            관람등급 : {movieData.grade}<p>
+            개봉 날짜 : {movieData.openDt}<p>
+            장르 : {movieData.genres}<p>
+            국가 : {movieData.country}<p>
+            상영시간 : {movieData.runningTime}
+            </p></p></p></p>
+            </MovieElement>
+        </GridContainer>
+        <Tabs defaultActiveKey="home" id="uncontrolled-tab-example" className="mb-3">
+          <Tab eventKey="home" title="줄거리">
+            <MovieElement>{movieData.summary}</MovieElement>
+          </Tab>
+          <Tab eventKey="profile" title="제작진">
+            ㅇㅏ직몰라
+          </Tab>
+          <Tab eventKey="contact" title="배우">
+            얘도 몰라
+          </Tab>
+        </Tabs>
+
+
+      
 
       {/* <br />
       

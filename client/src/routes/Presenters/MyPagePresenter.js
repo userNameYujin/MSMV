@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import store from '../../store';
+import Nav from 'react-bootstrap/Nav'
+import { Tab, Tabs, Col, Row } from 'react-bootstrap';
 
 const Wrapper = styled.div`
   padding-top: 180px; 
@@ -203,67 +205,98 @@ const MyPagePresenter = ({takeNewNickname, submitNewNickname, takeOldPassword, t
   
   return (
     <Wrapper>
-      <div>
+      <div>          
         <MainTitle><h1>마이페이지</h1></MainTitle>
-        
-        
-        <NicknameLayout>
-        <SubTitle><p>프로필 수정</p></SubTitle>
-          <LeftLayout>
-            <p>현재 닉네임 : {user.nickname}</p>
-            <p>닉네임 변경</p>
-          <SideBySide1>
-            <AllInput input onChange={takeNewNickname} placeholder="새 닉네임 입력"></AllInput>
-            <AllButton button onClick={submitNewNickname}>변경</AllButton>
-          </SideBySide1>
-          </LeftLayout>
-        </NicknameLayout>
-        
-        <PasswordLayout>
-        <SubTitle><p>회원정보 수정</p></SubTitle>
-          <LeftLayout>
-            <p>비밀번호 변경</p>
-          <SideBySide2>
-            <AllInput input onChange={takeOldPassword} placeholder="현재 비밀번호 입력"></AllInput><br/>
-            <AllInput input onChange={takeNewPassword} placeholder="새 비밀번호 입력"></AllInput>
-            <AllButton button onClick={submitNewPassword}>변경</AllButton>
-          </SideBySide2>
-          </LeftLayout>
-        </PasswordLayout>
+        <Tab.Container id="left-tabs-example" defaultActiveKey="first">
+          <Row>
+            <Col sm={3}>
+              <Nav variant="pills" className="flex-column">
+                <Nav.Item>
+                  <Nav.Link eventKey="first">회원정보 수정</Nav.Link>
+                </Nav.Item>
+                <Nav.Item>
+                  <Nav.Link eventKey="second">내가 쓴 리뷰</Nav.Link>
+                </Nav.Item>
+                <Nav.Item>
+                  <Nav.Link eventKey="third"></Nav.Link>
+                </Nav.Item>
+              </Nav>
+            </Col>
+            <Col sm={9}>
+              <Tab.Content>
+                <Tab.Pane eventKey="first">
+                  <NicknameLayout>
+                    <SubTitle><p>프로필 수정</p></SubTitle>
+                      <LeftLayout>
+                        <p>현재 닉네임 : {user.nickname}</p>
+                        <p>닉네임 변경</p>
+                      <SideBySide1>
+                        <AllInput input onChange={takeNewNickname} placeholder="새 닉네임 입력"></AllInput>
+                        <AllButton button onClick={submitNewNickname}>변경</AllButton>
+                      </SideBySide1>
+                      </LeftLayout>
+                    </NicknameLayout>
+                    
+                    <PasswordLayout>
+                    <SubTitle><p>회원정보 수정</p></SubTitle>
+                      <LeftLayout>
+                        <p>비밀번호 변경</p>
+                      <SideBySide2>
+                        <AllInput input onChange={takeOldPassword} placeholder="현재 비밀번호 입력"></AllInput><br/>
+                        <AllInput input onChange={takeNewPassword} placeholder="새 비밀번호 입력"></AllInput>
+                        <AllButton button onClick={submitNewPassword}>변경</AllButton>
+                      </SideBySide2>
+                      </LeftLayout>
+                    </PasswordLayout>
+                    <DeleteLayout>
+                      <SubTitle><p>계정 탈퇴</p></SubTitle>
+                        <LeftLayout>
+                            <p>탈퇴할 경우 사용하고 계신 아이디({user.id})는 재사용 및 복구가 불가능합니다.</p>
+                            <SideBySide3>
+                              <AllInput input onChange={takeWithdrawPassword} placeholder="현재 비밀번호 입력"></AllInput>
+                              <AllButton button onClick={submitWithdraw}><b>탈퇴</b></AllButton>
+                            </SideBySide3>
+                        </LeftLayout>
+                      </DeleteLayout>
 
-        <MyReviewLayout>
-          <SubTitle><p>내가 쓴 리뷰</p></SubTitle>
-          <Table>
-            <Rate>분노의질주 &nbsp; ★★★★★</Rate>
-            <Info><p> {user.nickname} &nbsp; | &nbsp; 2021.07.28 </p></Info>
-            <Contents>저는 아주 재미있게 봤습니다!</Contents>
-          </Table>
-          <Table>
-            <Rate>크루엘라 &nbsp; ★★★★★</Rate>
-            <Info><p> {user.nickname} &nbsp; | &nbsp; 2021.07.28 </p></Info>
-            <Contents>저는 아주 재미있게 봤습니다!</Contents>
-          </Table>
-          <Table>
-            <Rate>루카 &nbsp; ★★★★★</Rate>
-            <Info><p> {user.nickname} &nbsp; | &nbsp; 2021.07.28 </p></Info>
-            <Contents>저는 아주 재미있게 봤습니다!</Contents>
-          </Table>
-          <Paging>◀ &nbsp; 1 &nbsp; 2 &nbsp; 3 &nbsp; 4 &nbsp; 5 &nbsp; ▶</Paging>
+                </Tab.Pane>
+                <Tab.Pane eventKey="second">
+                  <MyReviewLayout>
+                    <SubTitle><p>내가 쓴 리뷰</p></SubTitle>
+                    <Table>
+                      <Rate>분노의질주 &nbsp; ★★★★★</Rate>
+                      <Info><p> {user.nickname} &nbsp; | &nbsp; 2021.07.28 </p></Info>
+                      <Contents>저는 아주 재미있게 봤습니다!</Contents>
+                    </Table>
+                    <Table>
+                      <Rate>크루엘라 &nbsp; ★★★★★</Rate>
+                      <Info><p> {user.nickname} &nbsp; | &nbsp; 2021.07.28 </p></Info>
+                      <Contents>저는 아주 재미있게 봤습니다!</Contents>
+                    </Table>
+                    <Table>
+                      <Rate>루카 &nbsp; ★★★★★</Rate>
+                      <Info><p> {user.nickname} &nbsp; | &nbsp; 2021.07.28 </p></Info>
+                      <Contents>저는 아주 재미있게 봤습니다!</Contents>
+                    </Table>
+                    <Paging>◀ &nbsp; 1 &nbsp; 2 &nbsp; 3 &nbsp; 4 &nbsp; 5 &nbsp; ▶</Paging>
 
-         
-        </MyReviewLayout>
+                  
+                  </MyReviewLayout>
+                </Tab.Pane>
+              </Tab.Content>
+            </Col>
+          </Row>
+        </Tab.Container>
+
+
+        
+        
         
 
-        <DeleteLayout>
-        <SubTitle><p>계정 탈퇴</p></SubTitle>
-          <LeftLayout>
-              <p>탈퇴할 경우 사용하고 계신 아이디({user.id})는 재사용 및 복구가 불가능합니다.</p>
-              <SideBySide3>
-                <AllInput input onChange={takeWithdrawPassword} placeholder="현재 비밀번호 입력"></AllInput>
-                <AllButton button onClick={submitWithdraw}><b>탈퇴</b></AllButton>
-              </SideBySide3>
-          </LeftLayout>
-        </DeleteLayout>
+        
+        
+
+
        
 
 
