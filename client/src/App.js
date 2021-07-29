@@ -63,9 +63,7 @@ function App() {
           <Route exact path="/search">
             <Search />
           </Route>
-          <Route exact path="/detail">
-            <Detail />
-          </Route>
+          <Route exact path="/detail" component={Detail}/>
           <Route exact path="/mypage">
             <MyPage />
           </Route>

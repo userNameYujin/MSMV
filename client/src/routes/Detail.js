@@ -13,6 +13,7 @@ const Detail = () => {
   const [movieReviews, setMovieReviews] = useState([]);
   const [peoples, setPeoples] = useState([]);
   const [starRating, setStarRating] = useState(1);
+  const [recommendedMovies, setRecommendedMovies] = useState([]);
 
   const getMovieData = async () => {
     await axios.get(`${process.env.REACT_APP_SERVER_URL}/post/detail/${movieCd}`)
@@ -25,9 +26,18 @@ const Detail = () => {
     .catch((error) => {
       console.log(error);
     });
+
+    await axios.get(`${process.env.REACT_APP_SERVER_URL}/post/recommend/${movieCd}`)
+    .then((response) => {
+      console.log(response);
+      setRecommendedMovies(response.data.result);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
   }
 
-  
+
   
   // below for review code
 
@@ -91,7 +101,7 @@ const Detail = () => {
 
   return (
 
-    <DetailPresenter movieData={movieData} movieReviews={movieReviews} peoples={peoples} reviewOnChange={reviewOnChange} writeOnClick={writeOnClick} submitDeleteReview={submitDeleteReview} starRating={starRating} onStarClick={onStarClick}/>
+    <DetailPresenter movieData={movieData} movieReviews={movieReviews} peoples={peoples} recommendedMovies={recommendedMovies} reviewOnChange={reviewOnChange} writeOnClick={writeOnClick} submitDeleteReview={submitDeleteReview} starRating={starRating} onStarClick={onStarClick}/>
 
   )
 }

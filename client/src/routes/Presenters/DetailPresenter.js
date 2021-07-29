@@ -44,8 +44,6 @@ const GrayBackground = styled.div`
     // background: linear-gradient(135deg , ivory, #c5cae9 )
     margin-left:40px;
     margin-right:40px;
-
-
 `;
 
 const Background = styled.div`
@@ -107,7 +105,7 @@ const Spacer = styled.div`
     flex-grow: 0.01;
 `;
 
-const DetailPresenter = ({movieData, movieReviews, peoples, reviewOnChange, writeOnClick, updateClick, submitDeleteReview, starRating, onStarClick}) => {
+const DetailPresenter = ({movieData, movieReviews, peoples, recommendedMovies, reviewOnChange, writeOnClick, updateClick, submitDeleteReview, starRating, onStarClick}) => {
   const director = [];
   const actor = [];
 
@@ -170,7 +168,15 @@ const DetailPresenter = ({movieData, movieReviews, peoples, reviewOnChange, writ
                 </div>
               </Tab>
               <Tab eventKey="recommend" title="추천영화">
-                해당 영화와 관련하여 추천하는 영화, 미완성
+              <div label="추천" span={3} contentStyle={{ background: "white" }}>
+                  {director && recommendedMovies.map((movie) => ( 
+                    <React.Fragment key={movie.movieCode}>
+                        <Link to={`/Detail?code=${movie.movieCode}`}> <img src={movie.image} alt={movie.title} width="100px"/> </Link>
+                        <p>{movie.title}<br/>
+                        {movie.genre}</p>
+                    </React.Fragment>
+                  ))}
+                </div>
               </Tab>
             </Tabs>
             </MovieElement>
