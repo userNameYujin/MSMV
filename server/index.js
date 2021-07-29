@@ -50,7 +50,7 @@ app.use('/post',postRouter);
 app.use('/mypage',mypageRouter);
 app.use('/search',searchRouter);
 app.use('/review',reviewRouter);
-
+app.get('/favicon.ico', (req, res) => res.status(204));
 app.use((req, res, next) => {
   const error =  new Error(`${req.method} ${req.url} 라우터가 없습니다.`);
   error.status = 404;

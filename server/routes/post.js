@@ -9,6 +9,7 @@ const naverAPI = require('../lib/boxOffice/naverAPI');
 const crawling = require('../lib/boxOffice/crawling');
 const movieData = require('../lib/boxOffice/movieData');
 
+
 router.get('/detail/:movieCd', async function(req, response, next){
   const movieCd = req.params.movieCd;
   await db.query('SELECT * FROM moviecount WHERE movieCd = ?', [movieCd], async function(error, results){
@@ -342,6 +343,33 @@ router.get('/top10', async function(req, response){
   })
 })
 
+
+router.get('/recommend/:movieCode', async function(req, response){
+  let res = await axios.get(`http://localhost:5000/${encodeURI(req.params.movieCode)}`);
+  const movieList = new Array();
+
+  for(let i=0; i<Object.values(res.data).length; i++) {
+    let movie = new Object();
+    movie.movieCode = Object.values(res.data)[i]
+    movie.rank = i;
+    
+    crawling.parsing(Object.values(res.data)[i],movie,function(result){
+      //console.log(result);
+      movieList.push(result);
+      if(movieList.length === Object.values(res.data).length) {
+        movieList.sort(function(a,b){
+          return parseFloat(a.rank)-parseFloat(b.rank)
+      })
+        if(movieList){
+          response.status(200).send({code : 200, result : movieList});
+        }else{
+          response.status(400).send({code : 400, result : '에러'});
+        }
+      }
+    })
+  }
+
+})
 
 module.exports = router;
 

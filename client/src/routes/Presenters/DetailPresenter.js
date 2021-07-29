@@ -10,6 +10,8 @@ import StarRatingComponent  from 'react-star-rating-component';
 import { Comment, Tooltip, Avatar } from 'antd';
 import moment from 'moment';
 import { Tab, Tabs } from 'react-bootstrap';
+import {UserOutlined} from '@ant-design/icons';
+
 import Image from 'react-bootstrap/Image'
 
 import Nav from 'react-bootstrap/Nav';
@@ -65,6 +67,7 @@ const Pad = styled.div`
  
 `;
 const ComLeft = styled.div`
+    font-size: 15px;
     text-align: left;
 `;
 
@@ -73,7 +76,7 @@ const ComLeft = styled.div`
 const ThemovieTitle = styled.div`
     font-family: 'Nanum Gothic', sans-serif;
     font-weight: 700;
-    font-size:35px;
+    font-size:40px;
 `;
 const MovieOutline = styled.div`
     font-family: 'Nanum Gothic', sans-serif;
@@ -83,26 +86,28 @@ const MovieElement = styled.div`
     font-family: 'Nanum Gothic', sans-serif;
     text-align: justify;
     padding:10px;
-    
+    font-size:15px;
 `;
 const GridContainer = styled.div`
     display: grid;
     grid-template-columns: 1fr 1fr;
     white-space: pre-line;
+    margin-left:60px;
+    margin-right:60px;
 `;
 const MyImage = styled.img`
     margin:auto;
-    padding:10px;
+    margin-top:20px;
+    // padding:10px;
     width:550px;
 `;
 
-const MyPageLink = styled(Link)`
-  &:hover {
-    color: darkred;
-  }
+const MyPageLink = styled.div`
+    font-size:18px;
 `;
 const Font = styled.div`
   font-family: 'Gowun Dodum', sans-serif;
+  font-size:15px;
 `;
 
 const Spacer = styled.div`
@@ -130,10 +135,12 @@ const DetailPresenter = ({movieData, movieReviews, peoples, reviewOnChange, writ
 
       <GrayBackground>
         <GridContainer>
-          <MyImage src={movieData.image} alt="movieData.title" />
+          <MyImage style={{ width:'100%', height:'100%'}} src={movieData.image} alt="movieData.title" />
           
           <MovieElement>
+            <br/>
             <ThemovieTitle>{movieData.title}</ThemovieTitle>
+            <br/>
             <MovieOutline>
               <p>관람등급 : {movieData.grade}<br/>
               개봉 날짜 : {movieData.openDt}<br/>
@@ -141,11 +148,12 @@ const DetailPresenter = ({movieData, movieReviews, peoples, reviewOnChange, writ
               국가 : {movieData.country}<br/>
               상영시간 : {movieData.runningTime}</p>
             </MovieOutline>
+            <br/>
             <Tabs defaultActiveKey="home" id="uncontrolled-tab-example" className="mb-3">
               <Tab eventKey="home" title="줄거리">
                 <MovieElement>{movieData.summary}</MovieElement>
               </Tab>
-              <Tab eventKey="profile" title="제작진">
+              <Tab eventKey="profile" title="감독">
                 <div label="감독" span={3} contentStyle={{ background: "white" }}>
                   {director && director.map((people) => ( 
                     <React.Fragment key={people.peopleName}>
@@ -158,9 +166,9 @@ const DetailPresenter = ({movieData, movieReviews, peoples, reviewOnChange, writ
                 <div label="배우" span={3} contentStyle={{ background: "white" }}>
                   <Row gutter={[16,16]}>
                     {actor && actor.map((people) => ( 
-                    <React.Fragment key={people.peopleName}>
-                      <Col lg={3} md={6} xs={12}>
-                        <img style={{ width:'100%', height:'150px'}} src={people.peopleImage} alt={people.peopleName}/> {people.peopleName}
+                    <React.Fragment key={people.index}>
+                      <Col lg={4} md={6} xs={12}>
+                        <img style={{ width:'100%', height:'auto'}} src={people.peopleImage} alt={people.peopleName}/> {people.peopleName}
                         <p>{people.peopleJob}</p>
                       </Col>
                     </React.Fragment>
@@ -250,50 +258,44 @@ const DetailPresenter = ({movieData, movieReviews, peoples, reviewOnChange, writ
     </div>
     <Pad>
     <Font>
-    {movieReviews && movieReviews.map((review) => ( 
-      <Comment key={review.id} 
-        actions={[
-        <React.Fragment>
-        <div>
-          {store.getState().user ? (
-            (store.getState().user.id === review.commenter) ? (
-              <button type="button" id={review.id} onClick={submitDeleteReview}>리뷰 삭제하기</button>
-              ) : (<p>{review.commenter}, {store.getState().user.id}</p>)
-          ) : (<p></p>)}
-          
-        </div>
-        </React.Fragment>
-        ]}
-        avatar={<Avatar src="https://beslow.co.kr/assets/img/mobile-float-mypage.png" width="25px" alt="image"/>}
-        author={<Tooltip title="마이페이지 가기!"><MyPageLink to="/mypage">{review.nickname}</MyPageLink></Tooltip>}
-      
-        content={
-            <ComLeft>        
-              <br/>    
-              평점: <StarRatingComponent 
-                name="rate2" 
-                editing={false}
-                starCount={5}
-                value={review.rate}
-               />
-               
-               <br/>
-               <br/>
-               
 
-               내용:  {review.contents}
-               
-            </ComLeft>
-            
-        
-        }
-      
-      ><hr/>
-      </Comment>
-      
-      
-      
- ))}
+      {movieReviews && movieReviews.map((review) => ( 
+        <Comment 
+          actions={[
+            <React.Fragment key={review.id}>
+            <div>
+              {store.getState().user ? (
+                (store.getState().user.id === review.commenter) ? (
+                  <button type="button" id={review.id} onClick={submitDeleteReview}>리뷰 삭제하기</button>
+                  ) : (<p>{review.commenter}, {store.getState().user.id}</p>)
+                  ) : (<p></p>)
+              }
+                  
+            </div>
+            </React.Fragment>
+          ]}
+          // avatar={<Avatar src="https://beslow.co.kr/assets/img/mobile-float-mypage.png" width="100%" alt="image"/>}
+          avatar={<UserOutlined style={{ fontSize: '250%'}}/>}
+          author={<Tooltip><MyPageLink>{review.nickname}</MyPageLink></Tooltip>}
+          // author={<Tooltip>{review.nickname}</Tooltip>}
+          content={
+              <ComLeft>        
+                <br/>    
+                평점: <StarRatingComponent 
+                  name="rate2" 
+                  editing={false}
+                  starCount={5}
+                  value={review.rate}
+                />
+                <br/>
+                <br/>
+                내용:  {review.contents}
+              </ComLeft>
+          }
+
+        ><hr/>
+        </Comment>
+      ))}
     </Font>
     </Pad>
     </GrayBackground>
