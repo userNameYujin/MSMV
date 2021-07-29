@@ -24,6 +24,11 @@ const parsing = async(keyword, result, callback) => {
     result.image = $(".mv_info_area").find("img").attr("src")
     result.summary = $(".story_area").find(".con_tx").text()
     result.genre = genre
+    if(!result.title){
+        let title = $(".mv_info_area").find(".h_movie").text()
+        title = title.replace(/(\r\n\t|\n|\r\t|\t)/gm,"")
+        result.title = title
+    }
     if(genre===date){
         result.date = "정보 없음";
         //callback(false)
