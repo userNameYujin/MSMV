@@ -106,7 +106,7 @@ router.post('/withdraw', async(req, res, next) => {
 router.post('/myReview', async function(req, res, err){
   const user_id = req.body.user_id;
   console.log(req.body.user_id);
-  await db.query('select review.id as review_id, contents, created, updated, commenter, rate, movieCd from review left join users on user_id = review.commenter where review.commenter = ?;', [req.body.user_id], function(err, review){
+  await db.query('select review.id as review_id, contents, created, updated, commenter, rate, movieCd, movieTitle from review left join users on user_id = review.commenter where review.commenter = ?;', [req.body.user_id], function(err, review){
     if(err){
       next(err);
     }
