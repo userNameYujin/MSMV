@@ -135,10 +135,12 @@ const DetailPresenter = ({movieData, movieReviews, peoples, reviewOnChange, writ
 
       <GrayBackground>
         <GridContainer>
-          <MyImage src={movieData.image} alt="movieData.title" />
+          <MyImage style={{ width:'100%', height:'100%'}} src={movieData.image} alt="movieData.title" />
           
           <MovieElement>
+            <br/>
             <ThemovieTitle>{movieData.title}</ThemovieTitle>
+            <br/>
             <MovieOutline>
               관람등급 : {movieData.grade}<p>
               개봉 날짜 : {movieData.openDt}<p>
@@ -147,6 +149,7 @@ const DetailPresenter = ({movieData, movieReviews, peoples, reviewOnChange, writ
               상영시간 : {movieData.runningTime}
               </p></p></p></p>
             </MovieOutline>
+            <br/>
             <Tabs defaultActiveKey="home" id="uncontrolled-tab-example" className="mb-3">
               <Tab eventKey="home" title="줄거리">
                 <MovieElement>{movieData.summary}</MovieElement>
@@ -165,8 +168,8 @@ const DetailPresenter = ({movieData, movieReviews, peoples, reviewOnChange, writ
                   <Row gutter={[16,16]}>
                     {actor && actor.map((people) => ( 
                     <React.Fragment key={people.index}>
-                      <Col lg={3} md={6} xs={12}>
-                        <img style={{ width:'100%', height:'150px'}} src={people.peopleImage} alt={people.peopleName}/> {people.peopleName}
+                      <Col lg={4} md={6} xs={12}>
+                        <img style={{ width:'100%', height:'auto'}} src={people.peopleImage} alt={people.peopleName}/> {people.peopleName}
                         <p>{people.peopleJob}</p>
                       </Col>
                     </React.Fragment>
