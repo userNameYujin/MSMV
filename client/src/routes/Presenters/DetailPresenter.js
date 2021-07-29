@@ -12,31 +12,24 @@ import moment from 'moment';
 import { Tab, Tabs } from 'react-bootstrap';
 import {UserOutlined} from '@ant-design/icons';
 
-import Image from 'react-bootstrap/Image'
-
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-
-
-
 const ReviewButton = styled.button`
-font-weight: 600;
-color: white;
-border: 1px solid #6799FF;
-padding: 0.5rem;
-padding-bottom: 0.4rem;
-margin-left:5px;
-cursor: pointer;
-border-radius: 4px;
-text-decoration: none;
-font-size:18px;
-transition: .2s all;
-background:#6B66FF;
+  font-weight: 600;
+  color: white;
+  border: 1px solid #6799FF;
+  padding: 0.5rem;
+  padding-bottom: 0.4rem;
+  margin-left:5px;
+  cursor: pointer;
+  border-radius: 4px;
+  text-decoration: none;
+  font-size:18px;
+  transition: .2s all;
+  background:#6B66FF;
 
-&:hover {
-    background-color: white;
-    color: #6799FF;
-}
+  &:hover {
+      background-color: white;
+      color: #6799FF;
+  }
 `;
 const ReviewTitle = styled.div`
   margin-top: 50px;
@@ -142,12 +135,11 @@ const DetailPresenter = ({movieData, movieReviews, peoples, reviewOnChange, writ
             <ThemovieTitle>{movieData.title}</ThemovieTitle>
             <br/>
             <MovieOutline>
-              관람등급 : {movieData.grade}<p>
-              개봉 날짜 : {movieData.openDt}<p>
-              장르 : {movieData.genres}<p>
-              국가 : {movieData.country}<p>
-              상영시간 : {movieData.runningTime}
-              </p></p></p></p>
+              <p>관람등급 : {movieData.grade}<br/>
+              개봉 날짜 : {movieData.openDt}<br/>
+              장르 : {movieData.genres}<br/>
+              국가 : {movieData.country}<br/>
+              상영시간 : {movieData.runningTime}</p>
             </MovieOutline>
             <br/>
             <Tabs defaultActiveKey="home" id="uncontrolled-tab-example" className="mb-3">
@@ -157,7 +149,7 @@ const DetailPresenter = ({movieData, movieReviews, peoples, reviewOnChange, writ
               <Tab eventKey="profile" title="감독">
                 <div label="감독" span={3} contentStyle={{ background: "white" }}>
                   {director && director.map((people) => ( 
-                    <React.Fragment key={people.index}>
+                    <React.Fragment key={people.peopleName}>
                         <img src={people.peopleImage} alt={people.peopleName}/><br/>{people.peopleName}
                         <p>{people.peopleJob}</p>
                     </React.Fragment>
@@ -259,6 +251,7 @@ const DetailPresenter = ({movieData, movieReviews, peoples, reviewOnChange, writ
     </div>
     <Pad>
     <Font>
+
       {movieReviews && movieReviews.map((review) => ( 
         <Comment 
           actions={[
@@ -292,12 +285,9 @@ const DetailPresenter = ({movieData, movieReviews, peoples, reviewOnChange, writ
                 내용:  {review.contents}
               </ComLeft>
           }
-        
+
         ><hr/>
         </Comment>
-            
-            
-            
       ))}
     </Font>
     </Pad>

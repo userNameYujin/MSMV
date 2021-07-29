@@ -15,7 +15,13 @@ import axios from 'axios';
 
 import { useEffect, useState } from 'react';
 import { HashRouter as Router, Route } from 'react-router-dom'; 
+import { Footer } from 'antd/lib/layout/layout';
+import styled from 'styled-components';
 
+const FooterDesign = styled(Footer)`
+  background-color: #6B66FF;
+  color: white;
+`;
 
 function App() {
   const [isLoginChecked, setIsLoginChecked] = useState(false);
@@ -65,6 +71,7 @@ function App() {
           </Route>
         </Router>
       )}
+      <FooterDesign>this is footer</FooterDesign>
     </div>
     
   );
