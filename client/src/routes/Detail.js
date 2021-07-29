@@ -15,7 +15,7 @@ const Detail = () => {
   const [starRating, setStarRating] = useState(1);
 
   const getMovieData = async () => {
-    await axios.get(`${process.env.REACT_APP_SERVER_URL}/post/detail/${movieCd}`, { movieCd })
+    await axios.get(`${process.env.REACT_APP_SERVER_URL}/post/detail/${movieCd}`)
     .then((response) => {
       setMovieData(response.data.result);
       setMovieReviews(response.data.result.review);
@@ -46,7 +46,7 @@ const Detail = () => {
       window.alert("별점을 매겨주세요.");
       return;
     }
-    await axios.post(`${process.env.REACT_APP_SERVER_URL}/review/review/write`, { contents, commenter, rate, movieCd })
+    await axios.post(`${process.env.REACT_APP_SERVER_URL}/review/write`, { contents, commenter, rate, movieCd })
     .then((response) => {
      console.log(response);
      window.alert("리뷰 작성 완료")
@@ -71,7 +71,7 @@ const Detail = () => {
   const submitDeleteReview = async (e) => {
     setId(e.target.id);
     setUser_Id(store.getState().user.id);
-    await axios.post(`${process.env.REACT_APP_SERVER_URL}/review/review/delete`, { id, user_id })
+    await axios.delete(`${process.env.REACT_APP_SERVER_URL}/review/delete/${id}/${user_id}`)
     .then((response) => {
      console.log(response);
      window.alert("리뷰 삭제 완료")
