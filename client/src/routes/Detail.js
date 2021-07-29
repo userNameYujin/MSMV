@@ -69,10 +69,8 @@ const Detail = () => {
   const [id, setId] = useState(''); // id value for Delete Review
   const [user_id, setUser_Id] = useState('');
   const submitDeleteReview = async (e) => {
-    setId(await e.target.id);
-    setUser_Id(await store.getState().user.id);
-    console.log(id);
-    console.log(user_id);
+    setId(e.target.id);
+    setUser_Id(store.getState().user.id);
     await axios.delete(`${process.env.REACT_APP_SERVER_URL}/review/${id}/${user_id}`)
     .then((response) => {
      console.log(response);
