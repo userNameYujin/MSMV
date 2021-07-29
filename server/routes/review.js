@@ -62,7 +62,8 @@ router.post('/', async(req,res,next)=> {
       if(error){
         next(error);
       }
-      if(req.params.user_id===result[0].commenter){
+      
+      if(Number(req.params.user_id)===result[0].commenter){
         await db.query('DELETE FROM review WHERE id = ?', [req.params.id]);
         res.status(200).send({code:200, message : "리뷰가 삭제되었습니다."});
       } else{
