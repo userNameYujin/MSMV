@@ -7,7 +7,7 @@ import { Tabs, Tab } from 'react-bootstrap';
 const Search = styled.div`
   padding-top: 40px;
   padding-bottom: 40px;
-  height: 800px;
+
 `;
 
 const SearchUpper = styled.div`
@@ -52,6 +52,7 @@ const MovieCard = styled.div`
   background-color: #E2E1FF;
   box-shadow: 1px 2px 2px gray;
   border-radius: 0.3em;
+  font-family: 나눔고딕;
 `;
 
 const MovieImageLink = styled.div`
@@ -106,10 +107,9 @@ const MovieSummary = styled.p`
 `;
 
 const SummaryLink = styled(Link)`
-  margin-left: 590px;
   height: 1.5em;
-  text-align: right;
-  
+  position: relative;
+  left:450px;
 `;
 
 
@@ -152,12 +152,12 @@ const SearchPresenter = ({searchCritCheck, submitSearch, takeInput, result, curr
             </MovieImageLink>
             <MovieContent>
               <MovieTitleLink to={`/Detail?code=${movie.movieCd}`}>{movie.title}</MovieTitleLink> 
-              <p>평점 {movie.rate}</p>
-              <p>{movie.date}</p>
+              <p>평점 {movie.rate}<br/>
+              {movie.date}</p>
               <MovieSummary>
                 {movie.summary} 
               </MovieSummary>
-              {/* <SummaryLink to={`/Detail?code=${movie.movieCd}`}>더 보기</SummaryLink> */}
+              <SummaryLink to={`/Detail?code=${movie.movieCd}`}>더 보기</SummaryLink>
               
             </MovieContent>
           </MovieCard>
