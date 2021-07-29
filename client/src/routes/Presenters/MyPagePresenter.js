@@ -12,7 +12,7 @@ const Wrapper = styled.div`
   padding-top: 20px;
   padding-left: 10px;
   font-family: 'Nanum Gothic', sans-serif;
-  // background: linear-gradient(135deg , ivory, #c5cae9 )
+  // background: linear-gradient(135deg , #eaeaea, #c5cae9 )
 `;
 
 const MainTitle = styled.div`
@@ -221,6 +221,29 @@ const AllButton = styled.button`
   }
 `;
 
+const WarningButton = styled.button`
+  font-family: 'Nanum Gothic', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  width: 60px;
+  height: auto;
+  // color: #6B66FF;
+  color:white;
+  border: 1px solid #6B66FF;
+  background-color: #6B66FF;
+  padding: 0.5rem;
+  padding-bottom: 0.4rem;
+  cursor: pointer;
+  border-radius: 3px;
+  text-decoration: none;
+  transition: .2s all;
+
+  &:hover {
+    background: #ff6b66;
+    color: white;
+  }
+`;
+
 const HJLayout = styled.div`
   padding: 75px 20px 20px 20px;
   height: 350px;
@@ -241,11 +264,19 @@ const HJLayout = styled.div`
 const MyTab = styled.div`
     font-size: 20px;
 `;
+const AllThing = styled.div`
+  background: linear-gradient(135deg , #eaeaea, #c5cae9 );
+`;
+const Pointword = styled.div`
+  font-size:18px;
+  font-weight:bold;
+`;
 
 const MyPagePresenter = ({takeNewNickname, submitNewNickname, takeOldPassword, takeNewPassword, submitNewPassword, takeWithdrawPassword, submitWithdraw, myReviews}) => {
   const user = store.getState().user;
   
   return (
+    <AllThing>
     <Wrapper>        
         <MainTitle><h1>마이페이지</h1></MainTitle>
         <Tab.Container id="left-tabs-example" defaultActiveKey="first">
@@ -273,8 +304,8 @@ const MyPagePresenter = ({takeNewNickname, submitNewNickname, takeOldPassword, t
                   <NicknameLayout>
                     <SubTitle><p>프로필 수정</p></SubTitle>
                       <LeftLayout>
+                        <Pointword><p>닉네임 변경</p></Pointword>
                         <p>현재 닉네임 : {user.nickname}</p>
-                        <p>닉네임 변경</p>
                       <SideBySide1>
                         <AllInput input onChange={takeNewNickname} placeholder="새 닉네임 입력"></AllInput>
                         <AllButton button onClick={submitNewNickname}>변경</AllButton>
@@ -296,10 +327,10 @@ const MyPagePresenter = ({takeNewNickname, submitNewNickname, takeOldPassword, t
                     <DeleteLayout>
                       <SubTitle><p>계정 탈퇴</p></SubTitle>
                         <LeftLayout>
-                            <p>탈퇴할 경우 사용하고 계신 아이디({user.id})는 재사용 및 복구가 불가능합니다.</p>
+                            <p>탈퇴할 경우 사용하고 계신 아이디({user.user_id})는 재사용 및 복구가 불가능합니다.</p>
                             <SideBySide3>
                               <AllInput input onChange={takeWithdrawPassword} placeholder="현재 비밀번호 입력"></AllInput>
-                              <AllButton button onClick={submitWithdraw}><b>탈퇴</b></AllButton>
+                              <WarningButton button onClick={submitWithdraw}><b>탈퇴</b></WarningButton>
                             </SideBySide3>
                         </LeftLayout>
                       </DeleteLayout>
@@ -344,6 +375,7 @@ const MyPagePresenter = ({takeNewNickname, submitNewNickname, takeOldPassword, t
           </Row>
         </Tab.Container>
     </Wrapper>
+    </AllThing>
   )
 }
 
