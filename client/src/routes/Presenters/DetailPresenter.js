@@ -168,8 +168,8 @@ const DetailPresenter = ({movieData, movieReviews, peoples, recommendedMovies, r
                 </div>
               </Tab>
               <Tab eventKey="recommend" title="추천영화">
-              <div label="추천" span={3} contentStyle={{ background: "white" }}>
-                  {director && recommendedMovies.map((movie) => ( 
+                <div label="추천" span={3} contentStyle={{ background: "white" }}>
+                  {recommendedMovies && recommendedMovies.map((movie) => ( 
                     <React.Fragment key={movie.movieCode}>
                         <Link to={`/Detail?code=${movie.movieCode}`}> <img src={movie.image} alt={movie.title} width="100px"/> </Link>
                         <p>{movie.title}<br/>
