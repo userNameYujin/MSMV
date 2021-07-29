@@ -89,10 +89,13 @@ const GridContainer = styled.div`
     display: grid;
     grid-template-columns: 1fr 1fr;
     white-space: pre-line;
+    margin-left:60px;
+    margin-right:60px;
 `;
 const MyImage = styled.img`
     margin:auto;
-    padding:10px;
+    margin-top:20px;
+    // padding:10px;
     width:550px;
 `;
 
@@ -146,7 +149,7 @@ const DetailPresenter = ({movieData, movieReviews, peoples, reviewOnChange, writ
               <Tab eventKey="home" title="줄거리">
                 <MovieElement>{movieData.summary}</MovieElement>
               </Tab>
-              <Tab eventKey="profile" title="제작진">
+              <Tab eventKey="profile" title="감독">
                 <div label="감독" span={3} contentStyle={{ background: "white" }}>
                   {director && director.map((people) => ( 
                     <React.Fragment key={people.index}>
