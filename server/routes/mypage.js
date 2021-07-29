@@ -103,7 +103,7 @@ router.post('/withdraw', async(req, res, next) => {
   })
 })
 
-router.get('/:user_id', async function(req, res, err){
+router.get('/myReview/:user_id', async function(req, res, err){
   await db.query('select review.id as review_id, contents, created, updated, commenter, rate, movieCd, movieTitle from review left join users on user_id = review.commenter where review.commenter = ?;', [req.params.user_id], function(err, review){
     if(err){
       next(err);
