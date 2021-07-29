@@ -12,6 +12,7 @@
     "bootswatch": "^5.0.2",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
+    "moment": "^2.29.1",
     "react": "^17.0.2",
     "react-bootstrap": "^2.0.0-beta.4",
     "react-daum-postcode": "^2.0.6",

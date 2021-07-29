@@ -18,7 +18,7 @@ const MyPage = () => {
   const submitNewNickname = async () => {
     const nickname = newNickname;
     const id = store.getState().user.id;
-    await axios.post(`${process.env.REACT_APP_SERVER_URL}/mypage/nickModify/${id}`, { nickname, id })
+    await axios.patch(`${process.env.REACT_APP_SERVER_URL}/mypage/nickname/${id}`, { nickname, id })
     .then((response) => {
       console.log(response);
       if (response.data.code === 400) {
@@ -51,7 +51,7 @@ const MyPage = () => {
 
   const submitNewPassword = async () => {
     const id = store.getState().user.id;
-    await axios.post(`${process.env.REACT_APP_SERVER_URL}/mypage/passwordModify`, { oldPassword, newPassword, id })
+    await axios.patch(`${process.env.REACT_APP_SERVER_URL}/mypage/password`, { oldPassword, newPassword, id })
     .then((response) => {
         console.log("비밀번호 변경 완료");
         window.alert("비밀번호가 정상적으로 변경되었습니다.");
@@ -86,7 +86,7 @@ const MyPage = () => {
   const getMyReviews = async() => {
     const user_id = store.getState().user.id;
     console.log(user_id);
-    await axios.post(`${process.env.REACT_APP_SERVER_URL}/mypage/myReview`, { user_id, withCredentials:true })
+    await axios.get(`${process.env.REACT_APP_SERVER_URL}/mypage/myReview/${user_id}`, { withCredentials:true })
     .then((response) => {
       console.log(response);
       setMyReviews(response.data.result);
