@@ -7,7 +7,7 @@ import { Tabs, Tab } from 'react-bootstrap';
 const Wrapper = styled.div`
   padding-top: 40px;
   padding-bottom: 40px;
-  height: 100%;
+  height: 800px;
 `;
 
 const SearchUpper = styled.div`

@@ -11,8 +11,9 @@ const Login = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  
   font-family: inter;
+  height:800px;
 `;
 
 const LoginForm = styled.form`
