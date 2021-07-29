@@ -251,7 +251,7 @@ const DetailPresenter = ({movieData, movieReviews, peoples, reviewOnChange, writ
     </div>
     <Pad>
     <Font>
-    {movieReviews && movieReviews.map((review, index) => ( 
+    {movieReviews && movieReviews.map((review) => ( 
       <Comment 
         actions={[
         <React.Fragment key={review.id}>

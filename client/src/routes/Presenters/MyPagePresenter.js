@@ -318,6 +318,7 @@ const MyPagePresenter = ({takeNewNickname, submitNewNickname, takeOldPassword, t
                           날짜 : {moment(review.created).format('MMMM Do YYYY, h:mm:ss a')}
                           </Info>
                           <Contents>
+                            제목 : {review.movieTitle}<br/>
                             내용 : {review.contents}
                           </Contents>
                           

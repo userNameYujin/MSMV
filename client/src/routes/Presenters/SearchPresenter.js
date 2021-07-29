@@ -154,9 +154,8 @@ const SearchPresenter = ({searchCritCheck, submitSearch, takeInput, result, curr
             </MovieImageLink>
             <MovieContent>
               <MovieTitleLink to={`/Detail?code=${movie.movieCd}`}>{movie.title}</MovieTitleLink> 
-              <p>평점 {movie.rate}<br/>
-              {movie.date}
-              </p>
+              <p>평점 {movie.rate}</p>
+              <p>{movie.date}</p>
               <MovieSummary>
                 {movie.summary} 
               </MovieSummary>
