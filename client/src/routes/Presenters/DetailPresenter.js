@@ -135,12 +135,11 @@ const DetailPresenter = ({movieData, movieReviews, peoples, reviewOnChange, writ
           <MovieElement>
             <ThemovieTitle>{movieData.title}</ThemovieTitle>
             <MovieOutline>
-              관람등급 : {movieData.grade}<p>
-              개봉 날짜 : {movieData.openDt}<p>
-              장르 : {movieData.genres}<p>
-              국가 : {movieData.country}<p>
-              상영시간 : {movieData.runningTime}
-              </p></p></p></p>
+              <p>관람등급 : {movieData.grade}<br/>
+              개봉 날짜 : {movieData.openDt}<br/>
+              장르 : {movieData.genres}<br/>
+              국가 : {movieData.country}<br/>
+              상영시간 : {movieData.runningTime}</p>
             </MovieOutline>
             <Tabs defaultActiveKey="home" id="uncontrolled-tab-example" className="mb-3">
               <Tab eventKey="home" title="줄거리">
@@ -149,7 +148,7 @@ const DetailPresenter = ({movieData, movieReviews, peoples, reviewOnChange, writ
               <Tab eventKey="profile" title="제작진">
                 <div label="감독" span={3} contentStyle={{ background: "white" }}>
                   {director && director.map((people) => ( 
-                    <React.Fragment key={people.index}>
+                    <React.Fragment key={people.peopleName}>
                         <img src={people.peopleImage} alt={people.peopleName}/><br/>{people.peopleName}
                         <p>{people.peopleJob}</p>
                     </React.Fragment>
@@ -159,7 +158,7 @@ const DetailPresenter = ({movieData, movieReviews, peoples, reviewOnChange, writ
                 <div label="배우" span={3} contentStyle={{ background: "white" }}>
                   <Row gutter={[16,16]}>
                     {actor && actor.map((people) => ( 
-                    <React.Fragment key={people.index}>
+                    <React.Fragment key={people.peopleName}>
                       <Col lg={3} md={6} xs={12}>
                         <img style={{ width:'100%', height:'150px'}} src={people.peopleImage} alt={people.peopleName}/> {people.peopleName}
                         <p>{people.peopleJob}</p>
@@ -252,9 +251,9 @@ const DetailPresenter = ({movieData, movieReviews, peoples, reviewOnChange, writ
     <Pad>
     <Font>
     {movieReviews && movieReviews.map((review) => ( 
-      <Comment 
+      <Comment key={review.id} 
         actions={[
-        <React.Fragment key={review.id}>
+        <React.Fragment>
         <div>
           {store.getState().user ? (
             (store.getState().user.id === review.commenter) ? (
