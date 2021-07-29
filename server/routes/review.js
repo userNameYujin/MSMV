@@ -67,6 +67,7 @@ router.post('/', async(req,res,next)=> {
         res.status(200).send({code:200, message : "리뷰가 삭제되었습니다."});
       } else{
         res.status(400).send({code:400, message : "내가 쓴 리뷰가 아닙니다."});
+        console.log(400);
       }
     })
   })

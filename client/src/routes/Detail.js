@@ -41,12 +41,12 @@ const Detail = () => {
     const commenter = store.getState().user.id;
     const rate = starRating.rating;
     console.log(starRating);
-
+    const movieTitle = movieData.title;
     if (starRating.rating === 0) {
       window.alert("별점을 매겨주세요.");
       return;
     }
-    await axios.post(`${process.env.REACT_APP_SERVER_URL}/review`, { contents, commenter, rate, movieCd })
+    await axios.post(`${process.env.REACT_APP_SERVER_URL}/review`, { contents, commenter, rate, movieCd, movieTitle })
     .then((response) => {
      console.log(response);
      window.alert("리뷰 작성 완료")
@@ -69,16 +69,18 @@ const Detail = () => {
   const [id, setId] = useState(''); // id value for Delete Review
   const [user_id, setUser_Id] = useState('');
   const submitDeleteReview = async (e) => {
-    setId(e.target.id);
-    setUser_Id(store.getState().user.id);
-    await axios.delete(`${process.env.REACT_APP_SERVER_URL}/review/${id}&${user_id}`)
+    setId(await e.target.id);
+    setUser_Id(await store.getState().user.id);
+    console.log(id);
+    console.log(user_id);
+    await axios.delete(`${process.env.REACT_APP_SERVER_URL}/review/${id}/${user_id}`)
     .then((response) => {
      console.log(response);
      window.alert("리뷰 삭제 완료")
     })
     .catch((error)=> {
       console.log(error);
-      window.alert(error.message);
+      window.alert("에러코드");
     }) 
   }
 
