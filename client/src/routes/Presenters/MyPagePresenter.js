@@ -51,6 +51,7 @@ const SideBySide1 = styled.div`
   // float: right;
   // width: 500px;
   height: 150px;
+  margin-left:-20px;
   // background: ;
   // margin-top: -50px;
   // margin-right: 20px;
@@ -59,10 +60,10 @@ const SideBySide1 = styled.div`
 const SideBySide2 = styled.div`
   // float: right;
   // width: 500px;
-  margin-left : 90px;
+  margin-left :-20px;
   height: 150px;
   background: ;
-  margin-top: -50px
+  margin-top: 0;
 `;
 
 const SideBySide3 = styled.div`
@@ -73,7 +74,7 @@ const SideBySide3 = styled.div`
   margin-left: -20px;
 `;
 
-const NicknameLayout = styled.div`\
+const NicknameLayout = styled.div`
   padding: 75px 20px 20px 20px;
   height: 350px;
   width: 90%;
@@ -281,9 +282,9 @@ const MyPagePresenter = ({takeNewNickname, submitNewNickname, takeOldPassword, t
                     </NicknameLayout>
                     
                     <PasswordLayout>
-                    <SubTitle><p>회원정보 수정</p></SubTitle>
+                    <SubTitle><p>비밀번호 변경</p></SubTitle>
                       <LeftLayout>
-                        <p>비밀번호 변경</p>
+                        {/* <p>비밀번호 변경</p> */}
                       <SideBySide2>
                         <AllInput input onChange={takeOldPassword} placeholder="현재 비밀번호 입력"></AllInput><br/>
                         <AllInput input onChange={takeNewPassword} placeholder="새 비밀번호 입력"></AllInput>
