@@ -19,7 +19,8 @@ import { Footer } from 'antd/lib/layout/layout';
 import styled from 'styled-components';
 
 const FooterDesign = styled(Footer)`
-  background-color: skyblue;
+  background-color: #6B66FF;
+  color: white;
 `;
 
 function App() {

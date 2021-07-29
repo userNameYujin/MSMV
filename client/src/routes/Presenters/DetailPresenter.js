@@ -12,31 +12,24 @@ import moment from 'moment';
 import { Tab, Tabs } from 'react-bootstrap';
 import {UserOutlined} from '@ant-design/icons';
 
-import Image from 'react-bootstrap/Image'
-
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-
-
-
 const ReviewButton = styled.button`
-font-weight: 600;
-color: white;
-border: 1px solid #6799FF;
-padding: 0.5rem;
-padding-bottom: 0.4rem;
-margin-left:5px;
-cursor: pointer;
-border-radius: 4px;
-text-decoration: none;
-font-size:18px;
-transition: .2s all;
-background:#6B66FF;
+  font-weight: 600;
+  color: white;
+  border: 1px solid #6799FF;
+  padding: 0.5rem;
+  padding-bottom: 0.4rem;
+  margin-left:5px;
+  cursor: pointer;
+  border-radius: 4px;
+  text-decoration: none;
+  font-size:18px;
+  transition: .2s all;
+  background:#6B66FF;
 
-&:hover {
-    background-color: white;
-    color: #6799FF;
-}
+  &:hover {
+      background-color: white;
+      color: #6799FF;
+  }
 `;
 const ReviewTitle = styled.div`
   margin-top: 50px;
@@ -135,7 +128,7 @@ const DetailPresenter = ({movieData, movieReviews, peoples, reviewOnChange, writ
 
       <GrayBackground>
         <GridContainer>
-          <MyImage style={{ width:'100%', height:'100%'}} src={movieData.image} alt="movieData.title" />
+          <MyImage src={movieData.image} alt="movieData.title" />
           
           <MovieElement>
             <br/>

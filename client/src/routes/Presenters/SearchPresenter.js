@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { Tabs, Tab } from 'react-bootstrap';
 //import "../../../node_modules/bootswatch/dist/minty/bootstrap.min.css";
 
-const Wrapper = styled.div`
+const Search = styled.div`
   padding-top: 40px;
   padding-bottom: 40px;
   height: 800px;
@@ -16,7 +16,7 @@ const SearchUpper = styled.div`
   padding: auto;
   align: center;
   display: block;
-  margin-bottom: 50px;
+  margin-bottom: 23px;
 `;
 
 const CritSelect = styled.select`
@@ -31,7 +31,6 @@ const CritSelect = styled.select`
 const CritOption = styled.option`
   text-align: center;
   font-size: 20px;
-
 `;
 
 const SearchInput = styled.input`
@@ -50,10 +49,9 @@ const MovieCard = styled.div`
   width: 700px;
   height: 245px;
   display: block;
-  background-color: #C8F6FA;
+  background-color: #E2E1FF;
   box-shadow: 1px 2px 2px gray;
   border-radius: 0.3em;
-  
 `;
 
 const MovieImageLink = styled.div`
@@ -131,7 +129,7 @@ const SearchPresenter = ({searchCritCheck, submitSearch, takeInput, result, curr
 
   return (
     
-    <Wrapper>
+    <Search>
       
       <SearchUpper>
         <CritSelect name="SearchCrit" value={optionsState} onChange={searchCritCheck}>
@@ -175,7 +173,7 @@ const SearchPresenter = ({searchCritCheck, submitSearch, takeInput, result, curr
             </div>
         </>)}
       
-    </Wrapper>
+    </Search>
   )
 }
 

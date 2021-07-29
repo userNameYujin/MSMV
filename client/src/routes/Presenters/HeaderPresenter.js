@@ -7,22 +7,24 @@ import "../../App.css";
 
 
 const Header = styled.header`
+  position:relative; 
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  padding-top: 10px;
+  padding-top: 13px;
   width: 100%;
-  height: 70px;
+  height: 90px;
   background-color:#6b66ff;
+  overflow: hidden;
 `;
 
 const Banner = styled(Link)`
-  font-size: 2.5rem;
+  font-size: 3.1rem;
   letter-spacing:3px;
   color: white;
   text-decoration: none;
   font-family: 'Jua', sans-serif;
   &:hover {
-    color: #E8EFF8;
+    color: #C3D2E5;
   }
 `;
 
@@ -41,15 +43,15 @@ const StyledLink = styled(Link)`
   padding-bottom: 10px;
   margin:0 5px 5px 0;
   position: relative;
-  top: 15px;
+  top: 20px;
   cursor: pointer;
   text-decoration: none;
-  font-size: 17px;
+  font-size: 20px;
   transition: .2s all;
   font-family: 'Jua', sans-serif;
   border-radius: 5px;
   &:hover {
-      background: #6b66ff;
+      background: #7D79FF;
       color: white;
   }
 `;
@@ -61,8 +63,9 @@ const MenuLeft = styled(Menu)`
 `;
 
 const IntroMent = styled(StyledLink)`
+  font-size: 20px;
   color: white;
-  background: #6b66ff;
+  background: transparent;
   &:hover {
     color: #E8EFF8;
   }
@@ -96,7 +99,6 @@ const HeaderPresenter = ({user, LogoutClick}) => {
             </Tooltip>
       </Menu>
     </Header>
-
   )
 }
 
