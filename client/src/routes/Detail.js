@@ -46,7 +46,7 @@ const Detail = () => {
       window.alert("별점을 매겨주세요.");
       return;
     }
-    await axios.post(`${process.env.REACT_APP_SERVER_URL}/review/write`, { contents, commenter, rate, movieCd })
+    await axios.post(`${process.env.REACT_APP_SERVER_URL}/review`, { contents, commenter, rate, movieCd })
     .then((response) => {
      console.log(response);
      window.alert("리뷰 작성 완료")
