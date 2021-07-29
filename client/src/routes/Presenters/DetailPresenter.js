@@ -135,7 +135,7 @@ const DetailPresenter = ({movieData, movieReviews, peoples, reviewOnChange, writ
 
       <GrayBackground>
         <GridContainer>
-          <MyImage style={{ width:'100%', height:'100%'}} src={movieData.image} alt="movieData.title" />
+          <MyImage src={movieData.image} alt="movieData.title" />
           
           <MovieElement>
             <br/>
