@@ -1,7 +1,7 @@
-CREATE TABLE `weeklymovie` (
-	`movieCd` int(20) not null,
-    `count` int(10),
-    primary key (`movieCd`)
+CREATE TABLE weeklymovie (
+	movieCd int(20) not null,
+    count int(10),
+    primary key (movieCd)
 );
   
 SET GLOBAL event_scheduler = ON; 
