@@ -90,7 +90,7 @@ const HeaderPresenter = ({user, LogoutClick}) => {
       <Banner to='/'>무슨무비</Banner>
       <Menu>
         {user ? (
-            <StyledLink onClick={LogoutClick}>로그아웃</StyledLink>
+            <StyledLink to="/" onClick={LogoutClick}>로그아웃</StyledLink>
         ) : (
           <>
             <StyledLink to="Login">로그인</StyledLink>
