@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import DetailPresenter from "./Presenters/DetailPresenter.js";
-import {useLocation} from "react-router";
+import {useHistory, useLocation} from "react-router";
 import axios from "axios";
 import store from "../store";
 
@@ -41,7 +41,7 @@ const Detail = () => {
   
   // below for review code
 
-
+  const history = useHistory();
 
   const [reviewContent, setReviewContent] = useState('');
   //const [rating, setRate] = useState(0);
@@ -59,18 +59,19 @@ const Detail = () => {
     await axios.post(`${process.env.REACT_APP_SERVER_URL}/review`, { contents, commenter, rate, movieCd, movieTitle })
     .then((response) => {
      console.log(response);
-     window.alert("리뷰 작성 완료")
+     window.alert("리뷰 작성 완료");
+     history.replace();
     })
     .catch((error)=> {
       console.log(error);
       window.alert("리뷰 작성 중 오류 발생")
-    }) 
+    })
+    history.push("/Detail?code=179406");
   }
 
   const reviewOnChange = (e) => {
     setReviewContent(e.target.value);
   }
-
 
   const writeOnClick = () => {
     submitWriteReview();
@@ -88,7 +89,7 @@ const Detail = () => {
     })
     .catch((error)=> {
       console.log(error);
-      window.alert("에러코드");
+      window.alert(error.message);
     }) 
   }
 

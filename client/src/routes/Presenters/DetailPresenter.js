@@ -227,57 +227,50 @@ const DetailPresenter = ({movieData, movieReviews, peoples, recommendedMovies, r
       
       
     
+    
     <div>
-    <br />
-    <ReviewTitle>○영화 리뷰○</ReviewTitle>
-    <hr />
+      <ReviewTitle>영화 리뷰</ReviewTitle>
+      {store.getState().user ? (<Pad>
+        <Font>
+          <StarRatingComponent 
+              name="rate1" 
+              starCount={5}
+              size={20}
+              value={starRating.rating}
+              onStarClick={onStarClick}
+          />
+          <form style={{ display: 'flex' }}>
+            <textarea style={{ width: '80%', borderRadius: '2px' }}
+              onChange={reviewOnChange}
+              placeholder="리뷰를 입력해주세요">
+            </textarea>
+            <ReviewButton style={{ width: '20%', height: '52px' }} onClick={writeOnClick}>작성</ReviewButton>
+          </form>
+        </Font>
+      </Pad>):(<div>리뷰를 작성하려면 로그인하세요.</div>)} 
+    </div>
+    
     <Pad>
       <Font>
-      <StarRatingComponent 
-          name="rate1" 
-          starCount={5}
-          size={20}
-          value={starRating.rating}
-          onStarClick={onStarClick}
-      />
-
-      <form style={{ display: 'flex' }}>
-        <textarea style={{ width: '80%', borderRadius: '2px' }}
-          onChange={reviewOnChange}
-          placeholder="리뷰를 입력해주세요">
-        </textarea>
-        <br />
-        <ReviewButton style={{ width: '20%', height: '52px' }} onClick={writeOnClick}>작성</ReviewButton>
-      </form>
-      </Font>
-      </Pad>
-    
-      
-      
-    </div>
-    <Pad>
-    <Font>
-
-      {movieReviews && movieReviews.map((review) => ( 
-        <Comment 
-          actions={[
-            <React.Fragment key={review.id}>
-            <div>
-              {store.getState().user ? (
-                (store.getState().user.id === review.commenter) ? (
-                  <button type="button" id={review.id} onClick={submitDeleteReview}>리뷰 삭제하기</button>
-                  ) : (<p>{review.commenter}, {store.getState().user.id}</p>)
-                  ) : (<p></p>)
-              }
-                  
-            </div>
-            </React.Fragment>
-          ]}
-          // avatar={<Avatar src="https://beslow.co.kr/assets/img/mobile-float-mypage.png" width="100%" alt="image"/>}
-          avatar={<UserOutlined style={{ fontSize: '250%'}}/>}
-          author={<Tooltip><MyPageLink>{review.nickname}</MyPageLink></Tooltip>}
-          // author={<Tooltip>{review.nickname}</Tooltip>}
-          content={
+      {movieReviews.length !== 0 ? (
+        <>
+        {movieReviews.map((review) => ( 
+          <Comment 
+            actions={[
+              <React.Fragment key={review.id}>
+              <div>
+                {store.getState().user ? (
+                  (store.getState().user.id === review.commenter) ? (
+                    <button type="button" id={review.id} onClick={submitDeleteReview}>리뷰 삭제하기</button>
+                    ) : (<p>{review.commenter}, {store.getState().user.id}</p>)
+                    ) : (<p></p>)
+                }
+              </div>
+              </React.Fragment>
+            ]}
+            avatar={<UserOutlined style={{ fontSize: '250%'}}/>}
+            author={<Tooltip><MyPageLink>{review.nickname}</MyPageLink></Tooltip>}
+            content={
               <ComLeft>        
                 <br/>    
                 평점: <StarRatingComponent 
@@ -288,20 +281,19 @@ const DetailPresenter = ({movieData, movieReviews, peoples, recommendedMovies, r
                 />
                 <br/>
                 <br/>
-                내용:  {review.contents}
+                내용: {review.contents}
               </ComLeft>
-          }
-
-        ><hr/>
-        </Comment>
-      ))}
-    </Font>
+            }>
+            <hr/>
+          </Comment>
+        ))}
+        </>
+      ):(
+        <div>리뷰가 없습니다.</div>
+      )}
+      </Font>
     </Pad>
     </GrayBackground>
-  
-
-  
-    
   )
 }
 
