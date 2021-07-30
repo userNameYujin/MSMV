@@ -97,12 +97,10 @@ const Detail = () => {
     console.log(starRating);
   };
 
-  useEffect(() => getMovieData(), []);
+  useEffect(() => getMovieData(), [window.location.href]);
 
   return (
-
     <DetailPresenter movieData={movieData} movieReviews={movieReviews} peoples={peoples} recommendedMovies={recommendedMovies} reviewOnChange={reviewOnChange} writeOnClick={writeOnClick} submitDeleteReview={submitDeleteReview} starRating={starRating} onStarClick={onStarClick}/>
-
   )
 }
 
