@@ -123,7 +123,7 @@ const MainPresenter = ({topTenData, boxOfficeData}) => {
                 <SwiperSlide key={movie.movieCd}> 
                 
                   <Link to={`/Detail?code=${movie.movieCd}`}>
-                    <img style={{ width:'100%', height:'100%'}} src={movie.image} alt={movie.title}></img>
+                    <img style={{ width:'auto', height:'100%'}} src={movie.image} alt={movie.title}></img>
                   </Link>
                   
                 </SwiperSlide>
@@ -152,7 +152,7 @@ const MainPresenter = ({topTenData, boxOfficeData}) => {
               {boxOfficeData && boxOfficeData.map((movie) => ( 
                   <SwiperSlide key={movie.movieCd}>
                     <Link to={`/Detail?code=${movie.movieCd}`}>
-                      <img style={{ width:'100%', height:'100%'}} src={movie.image} alt={movie.name}></img>
+                      <img style={{ width:'auto', height:'100%'}} src={movie.image} alt={movie.name}></img>
                     </Link>
                   </SwiperSlide>
               ))}
