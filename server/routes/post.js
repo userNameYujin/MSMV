@@ -280,16 +280,16 @@ router.get('/boxOffice', async function(req, response,next){
 
 router.get('/top10', async function(req, response){
   //console.log('탑텐 시작')
-  await db.query('SELECT * FROM todaymovie ORDER BY count DESC LIMIT 10', function(error, result){
+  await db.query('SELECT * FROM weeklymovie ORDER BY count DESC LIMIT 10', function(error, result){
     if(error){
       throw(error);
     }
-    //console.log('result',result);
+
     let movieCd = [];
     for(let i=0; i<result.length; i++){
       movieCd.push(result[i].movieCd)
     }
-    //console.log('movieCd',movieCd);
+
     const getHTML = async(keyword) => {
       try{
           return await axios.get("https://movie.naver.com/movie/bi/mi/basic.nhn?code="+keyword)
@@ -334,12 +334,9 @@ router.get('/top10', async function(req, response){
               }else{
                 response.status(400).send({code : 400, result : '에러'});
               }
-              
-
           }
       })
   }
-    
   })
 })
 
