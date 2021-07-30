@@ -22,7 +22,7 @@ const Auth = () => {
   }
   
   const onSubmit = async (e) => {
-    await axios.post(`${process.env.REACT_APP_SERVER_URL}/auth/login`, {id, password, withCredentials: true })
+    await axios.post(`${process.env.REACT_APP_SERVER_URL}/auth/login`, {id, password}, { withCredentials: true })
     .then((response) => {
       store.dispatch({ type : 'LOGIN', user: response.data.result});
       history.push({pathname : '/'})
