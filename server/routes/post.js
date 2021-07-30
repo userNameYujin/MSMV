@@ -345,7 +345,7 @@ router.get('/top10', async function(req, response){
 
 
 router.get('/recommend/:movieCode', async function(req, response){
-  let res = await axios.get(`http://localhost:5000/${encodeURI(req.params.movieCode)}`);
+  let res = await axios.get(`${process.env.FLASK_SERVER_URL}/${encodeURI(req.params.movieCode)}`);
   const movieList = new Array();
 
   for(let i=0; i<Object.values(res.data).length; i++) {

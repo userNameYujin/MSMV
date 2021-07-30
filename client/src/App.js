@@ -19,8 +19,15 @@ import { Footer } from 'antd/lib/layout/layout';
 import styled from 'styled-components';
 
 const FooterDesign = styled(Footer)`
+  font-family:  system-ui;
+  font-size: 12px;
   background-color: #6B66FF;
   color: white;
+  height: 70px;
+  border-width : 3px 0 0 0;
+  border-style : solid ;
+  border-color: #595959;
+  padding-top: 17px;
 `;
 
 function App() {
@@ -63,15 +70,13 @@ function App() {
           <Route exact path="/search">
             <Search />
           </Route>
-          <Route exact path="/detail">
-            <Detail />
-          </Route>
+          <Route exact path="/detail" component={Detail}/>
           <Route exact path="/mypage">
             <MyPage />
           </Route>
         </Router>
       )}
-      <FooterDesign>this is footer</FooterDesign>
+      <FooterDesign>Made by SangMyung University<br/>CS GladOS Team</FooterDesign>
     </div>
     
   );

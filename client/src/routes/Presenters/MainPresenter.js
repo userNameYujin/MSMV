@@ -68,7 +68,7 @@ const BoxOfficeTitle = styled.div`
   // margin-top: 50px;
   font-size: 30px;
   font-weight: 600;
-  font-family: 'Nanum Pen Script', cursive;
+  font-family: 나눔고딕;
 `;
 
 

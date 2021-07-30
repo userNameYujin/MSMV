@@ -4,7 +4,12 @@ from flask import Flask, jsonify, request
 
 import pandas as pd
 import numpy as np
-df = pd.read_csv('./flaskserver/movieDataSet.csv')
+import os
+from dotenv import load_dotenv
+load_dotenv(verbose=True)
+csvPath = os.getenv('CSV_PATH')
+
+df = pd.read_csv(csvPath+'/movieDataSet.csv')
 
 tfidf = TfidfVectorizer()
 df['summary'] = df['summary'].fillna('')
