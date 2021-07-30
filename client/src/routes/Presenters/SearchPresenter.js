@@ -7,7 +7,7 @@ import { Tabs, Tab } from 'react-bootstrap';
 const Search = styled.div`
   padding-top: 40px;
   padding-bottom: 40px;
-
+  min-height: 900px;
 `;
 
 const SearchUpper = styled.div`

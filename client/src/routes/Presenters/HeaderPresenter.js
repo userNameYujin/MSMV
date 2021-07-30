@@ -15,6 +15,9 @@ const Header = styled.header`
   height: 90px;
   background-color:#6b66ff;
   overflow: hidden;
+  border-width : 0 0 3px 0;
+  border-style : solid ;
+  border-color: #595959;
 `;
 
 const Banner = styled(Link)`
