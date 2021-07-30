@@ -12,7 +12,7 @@ const Detail = () => {
   const [movieData, setMovieData] = useState([]);
   const [movieReviews, setMovieReviews] = useState([]);
   const [peoples, setPeoples] = useState([]);
-  const [starRating, setStarRating] = useState(1);
+  const [starRating, setStarRating] = useState(0);
   const [recommendedMovies, setRecommendedMovies] = useState([]);
 
   const getMovieData = async () => {
@@ -52,7 +52,7 @@ const Detail = () => {
     const rate = starRating.rating;
     console.log(starRating);
     const movieTitle = movieData.title;
-    if (starRating.rating === 0) {
+    if (starRating === 0) {
       window.alert("별점을 매겨주세요.");
       return;
     }
@@ -60,13 +60,13 @@ const Detail = () => {
     .then((response) => {
      console.log(response);
      window.alert("리뷰 작성 완료");
-     history.replace();
+     window.location.reload();
     })
     .catch((error)=> {
       console.log(error);
       window.alert("리뷰 작성 중 오류 발생")
     })
-    history.push("/Detail?code=179406");
+    
   }
 
   const reviewOnChange = (e) => {
@@ -79,6 +79,7 @@ const Detail = () => {
 
   const [id, setId] = useState(''); // id value for Delete Review
   const [user_id, setUser_Id] = useState('');
+  
   const submitDeleteReview = async (e) => {
     setId(e.target.id);
     setUser_Id(store.getState().user.id);
@@ -86,10 +87,11 @@ const Detail = () => {
     .then((response) => {
      console.log(response);
      window.alert("리뷰 삭제 완료")
+     window.location.reload();
     })
     .catch((error)=> {
       console.log(error);
-      window.alert(error.message);
+      //window.alert(error.message);
     }) 
   }
 
