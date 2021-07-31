@@ -101,9 +101,14 @@ const Font = styled.div`
   font-size:15px;
 `;
 
-const Spacer = styled.div`
-    flex-grow: 0.01;
+// const Spacer = styled.div`
+//     flex-grow: 0.01;
+// `;
+
+const PeopleWord = styled.div`
+  font-size : 13px;
 `;
+
 
 const DetailPresenter = ({movieData, movieReviews, peoples, recommendedMovies, reviewOnChange, writeOnClick, updateClick, submitDeleteReview, starRating, onStarClick}) => {
   const director = [];
@@ -145,15 +150,18 @@ const DetailPresenter = ({movieData, movieReviews, peoples, recommendedMovies, r
                 <MovieElement>{movieData.summary}</MovieElement>
               </Tab>
               <Tab eventKey="profile" title="감독">
+                <PeopleWord>
                 <div label="감독" span={3} contentStyle={{ background: "white" }}>
                   {director && director.map((people) => ( 
                     <React.Fragment key={people.peopleName}>
-                        <img src={people.peopleImage} alt={people.peopleName}/><br/>{people.peopleName}
+                        <img style={{width:'90px', height:'auto'}} src={people.peopleImage} alt={people.peopleName}/><br/>{people.peopleName}
                         <p>{people.peopleJob}</p>
                     </React.Fragment>
                 ))}</div>
+                </PeopleWord>
               </Tab>
               <Tab eventKey="contact" title="배우">
+                <PeopleWord>
                 <div label="배우" span={3} contentStyle={{ background: "white" }}>
                   <Row gutter={[16,16]}>
                     {actor && actor.map((people) => ( 
@@ -166,6 +174,7 @@ const DetailPresenter = ({movieData, movieReviews, peoples, recommendedMovies, r
                   ))}
                   </Row>
                 </div>
+                </PeopleWord>
               </Tab>
               <Tab eventKey="recommend" title="추천영화">
                 <div label="추천" span={3} contentStyle={{ background: "white" }}>
