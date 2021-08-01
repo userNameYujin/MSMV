@@ -27,45 +27,45 @@ const MainTitle = styled.div`
 const SubTitle = styled.div`
   background: ;
   width: 500px;
-  padding-left: 200px;
+  padding-left: 80px;
   font-size: 25px;
   font-weight: bold;
   
 `;
 
 const LeftLayout = styled.div`
-  margin: 50px 0px 0px 270px;
+  margin: 50px 0px 0px 80px;
   background: ;
   font-size: 16px;
   background: ;
-  width: 65%;
+  width: 75%;
   height: 200px;
   color: black;
 `;
 
 const SideBySide1 = styled.div`
   float: right;
-  width: 500px;
+  width: 400px;
   height: 150px;
   background: ;
-  margin-top: -50px;
+  margin-top: -45px;
   margin-right: 20px;
 `;
 
 const SideBySide2 = styled.div`
   float: right;
-  width: 500px;
+  width: 410px;
   height: 150px;
   background: ;
-  margin-top: -50px
+  margin-top: -45px
 `;
 
 const SideBySide3 = styled.div`
   float: left;
-  width: 500px;
+  width: 400px;
   height: 150px;
   background: ;
-  margin-left: -20px;
+  margin: 10px 0px 0px 100px;
 `;
 
 const NicknameLayout = styled.div`\
@@ -120,38 +120,14 @@ const MyReviewLayout = styled.div`
   margin-right: auto;
 `;
 
-const Table = styled.div`
-  border: 1px solid black;
-  width: 65%;
-  height: auto;
-  padding: 5px 10px 5px 10px;
-  margin: 0 auto;
-`;
 
-const Rate = styled.div`
-  font-size: 15px;
-`;
-
-const Info = styled.div`
-  font-size: 12px;
-`;
-
-const Contents = styled.div`
-  font-size: 12px;
-`;
-
-const Paging = styled.div`
-  fonst-size: 12px;
-  width: 150px;
-  margin: 30px auto;
-`;
 const DeleteLayout = styled.div`\
   padding: 100px 20px 20px 20px;
   height: 400px;
   width: 65%;
   
   font-weight: 600;
-  color: #6B66FF;
+  color: ;
   cursor: pointer;
   border-radius: 3px;
   border-top: 2px solid gray;
@@ -168,8 +144,8 @@ const AllInput = styled.input`
   font-size: 15px;
   box-sizing: border-box;
   width: 260px;
-  height: 40px;
-  margin: 0px 5px 0px 20px;
+  height: 38px;
+  margin: 0px 5px 5px 20px;
   border: 1px solid black;
   border-radius: 3px;
   transition: border 0.1s ease-in-out;
@@ -181,10 +157,10 @@ const AllInput = styled.input`
 `;
 
 const AllButton = styled.button`
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 600;
   width: 60px;
-  height: auto;
+  height: 40px;
   color: #6B66FF;
   border: 1px solid #6B66FF;
   background-color: lightgray;
@@ -200,6 +176,31 @@ const AllButton = styled.button`
     color: white;
   }
 `;
+
+const Table = styled.div`
+  border: 1px solid black;
+  
+`;
+
+const Rate = styled.div`
+  font-size: 15px;
+  background: pink;
+`;
+
+const Info = styled.div`
+  font-size: 12px;
+`;
+
+const Contents = styled.div`
+  font-size: 12px;
+`;
+
+const Paging = styled.div`
+  fonst-size: 12px;
+  width: 150px;
+  margin: 30px auto;
+`;
+
 const MyPagePresenter = ({takeNewNickname, submitNewNickname, takeOldPassword, takeNewPassword, submitNewPassword, takeWithdrawPassword, submitWithdraw, myReviews}) => {
   const user = store.getState().user;
   
@@ -269,7 +270,7 @@ const MyPagePresenter = ({takeNewNickname, submitNewNickname, takeOldPassword, t
                       <Table key={review.review_id}>
                         
                         <Info>
-                          날짜 : {review.created}
+                          <p>날짜 : {review.created}</p>
                         </Info>
                         <Contents>
                           내용 : {review.contents}
