@@ -1,12 +1,12 @@
 import React, {optionsState} from "react";
 import {Link} from "react-router-dom";
 import styled from "styled-components";
-import { Tabs, Tab } from 'react-bootstrap';
 //import "../../../node_modules/bootswatch/dist/minty/bootstrap.min.css";
 
-const Wrapper = styled.div`
+const Search = styled.div`
   padding-top: 40px;
   padding-bottom: 40px;
+  min-height: 900px;
 `;
 
 const SearchUpper = styled.div`
@@ -15,7 +15,7 @@ const SearchUpper = styled.div`
   padding: auto;
   align: center;
   display: block;
-  margin-bottom: 50px;
+  margin-bottom: 23px;
 `;
 
 const CritSelect = styled.select`
@@ -30,7 +30,6 @@ const CritSelect = styled.select`
 const CritOption = styled.option`
   text-align: center;
   font-size: 20px;
-
 `;
 
 const SearchInput = styled.input`
@@ -49,10 +48,10 @@ const MovieCard = styled.div`
   width: 700px;
   height: 245px;
   display: block;
-  background-color: #C8F6FA;
+  background-color: #E2E1FF;
   box-shadow: 1px 2px 2px gray;
   border-radius: 0.3em;
-  
+  font-family: 나눔고딕;
 `;
 
 const MovieImageLink = styled.div`
@@ -107,10 +106,9 @@ const MovieSummary = styled.p`
 `;
 
 const SummaryLink = styled(Link)`
-  margin-left: 590px;
   height: 1.5em;
-  text-align: right;
-  
+  position: relative;
+  left:450px;
 `;
 
 
@@ -130,7 +128,7 @@ const SearchPresenter = ({searchCritCheck, submitSearch, takeInput, result, curr
 
   return (
     
-    <Wrapper>
+    <Search>
       
       <SearchUpper>
         <CritSelect name="SearchCrit" value={optionsState} onChange={searchCritCheck}>
@@ -154,12 +152,11 @@ const SearchPresenter = ({searchCritCheck, submitSearch, takeInput, result, curr
             <MovieContent>
               <MovieTitleLink to={`/Detail?code=${movie.movieCd}`}>{movie.title}</MovieTitleLink> 
               <p>평점 {movie.rate}<br/>
-              {movie.date}
-              </p>
+              {movie.date}</p>
               <MovieSummary>
                 {movie.summary} 
               </MovieSummary>
-              {/* <SummaryLink to={`/Detail?code=${movie.movieCd}`}>더 보기</SummaryLink> */}
+              <SummaryLink to={`/Detail?code=${movie.movieCd}`}>더 보기</SummaryLink>
               
             </MovieContent>
           </MovieCard>
@@ -175,7 +172,7 @@ const SearchPresenter = ({searchCritCheck, submitSearch, takeInput, result, curr
             </div>
         </>)}
       
-    </Wrapper>
+    </Search>
   )
 }
 
