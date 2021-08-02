@@ -26,29 +26,18 @@ const MainTitle = styled.div`
   
   margin-left: auto;
   margin-right: auto;
-
 `;
 
 
 const SubTitle = styled.div`
-<<<<<<< HEAD
-  background: ;
-  width: 500px;
-  padding-left: 80px;
-=======
   // width: 500px;
   padding-left: 30px;
->>>>>>> 6be029514b5e0121130f849c1c60d2a810619d8b
   font-size: 25px;
   font-weight: bold;
 `;
 
 const LeftLayout = styled.div`
-<<<<<<< HEAD
-  margin: 50px 0px 0px 80px;
-=======
   margin: 30px 0px 0px 50px;
->>>>>>> 6be029514b5e0121130f849c1c60d2a810619d8b
   background: ;
   font-size: 16px;
   background: ;
@@ -59,22 +48,6 @@ const LeftLayout = styled.div`
 `;
 
 const SideBySide1 = styled.div`
-<<<<<<< HEAD
-  float: right;
-  width: 400px;
-  height: 150px;
-  background: ;
-  margin-top: -45px;
-  margin-right: 20px;
-`;
-
-const SideBySide2 = styled.div`
-  float: right;
-  width: 410px;
-  height: 150px;
-  background: ;
-  margin-top: -45px
-=======
   // float: right;
   // width: 500px;
   height: 150px;
@@ -91,7 +64,6 @@ const SideBySide2 = styled.div`
   height: 150px;
   background: ;
   margin-top: 0;
->>>>>>> 6be029514b5e0121130f849c1c60d2a810619d8b
 `;
 
 const SideBySide3 = styled.div`
@@ -141,7 +113,6 @@ const MyReviewLayout = styled.div`
   padding: 72px 20px 20px 20px;
   height: auto;
   width: 90%;
-
   font-weight: 600;
   
   /* cursor: pointer; */
@@ -154,10 +125,6 @@ const MyReviewLayout = styled.div`
   // margin-right: auto;
 `;
 
-<<<<<<< HEAD
-
-const DeleteLayout = styled.div`\
-=======
 // const Table = styled.div`
 //   border: 1px solid black;
 //   border-radius:2px;
@@ -173,7 +140,6 @@ const Table = styled.div`
   height: auto;
   padding: 20px 10px 15px 10px;
   margin: 0;
-
 `;
 const Review = styled.div`
   padding-left:40px;
@@ -196,19 +162,13 @@ const Paging = styled.div`
   margin: 30px auto;
 `;
 const DeleteLayout = styled.div`
->>>>>>> 6be029514b5e0121130f849c1c60d2a810619d8b
   padding: 100px 20px 20px 20px;
   height: 400px;
   width: 90%;
   
   font-weight: 600;
-<<<<<<< HEAD
-  color: ;
-  cursor: pointer;
-=======
   color: #6B66FF;
   /* cursor: pointer;*/
->>>>>>> 6be029514b5e0121130f849c1c60d2a810619d8b
   border-radius: 3px;
   border-top: 2px solid gray;
   text-decoration: none;
@@ -216,11 +176,9 @@ const DeleteLayout = styled.div`
   text-align: left;
   margin-left: 0;
   // margin-right: auto;
-
 `;
 
 const AllInput = styled.input`
-
   font-size: 15px;
   box-sizing: border-box;
   width: 260px;
@@ -237,12 +195,8 @@ const AllInput = styled.input`
 `;
 
 const AllButton = styled.button`
-<<<<<<< HEAD
-  font-size: 15px;
-=======
   font-family: 'Nanum Gothic', sans-serif;
   font-size: 16px;
->>>>>>> 6be029514b5e0121130f849c1c60d2a810619d8b
   font-weight: 600;
   width: 60px;
   height: 40px;
@@ -255,37 +209,12 @@ const AllButton = styled.button`
   border-radius: 3px;
   text-decoration: none;
   transition: .2s all;
-
   &:hover {
     background: #6B66FF;
     color: white;
   }
 `;
 
-<<<<<<< HEAD
-const Table = styled.div`
-  border: 1px solid black;
-  
-`;
-
-const Rate = styled.div`
-  font-size: 15px;
-  background: pink;
-`;
-
-const Info = styled.div`
-  font-size: 12px;
-`;
-
-const Contents = styled.div`
-  font-size: 12px;
-`;
-
-const Paging = styled.div`
-  fonst-size: 12px;
-  width: 150px;
-  margin: 30px auto;
-=======
 const WarningButton = styled.button`
   font-family: 'Nanum Gothic', sans-serif;
   font-size: 16px;
@@ -302,7 +231,6 @@ const WarningButton = styled.button`
   border-radius: 3px;
   text-decoration: none;
   transition: .2s all;
-
   &:hover {
     background: #ff6b66;
     color: white;
@@ -335,7 +263,6 @@ const AllThing = styled.div`
 const Pointword = styled.div`
   font-size:18px;
   font-weight:bold;
->>>>>>> 6be029514b5e0121130f849c1c60d2a810619d8b
 `;
 
 const MyPagePresenter = ({takeNewNickname, submitNewNickname, takeOldPassword, takeNewPassword, submitNewPassword, takeWithdrawPassword, submitWithdraw, myReviews}) => {
@@ -408,24 +335,9 @@ const MyPagePresenter = ({takeNewNickname, submitNewNickname, takeOldPassword, t
                     
                     
                     {myReviews.map((review) => ( 
-<<<<<<< HEAD
-                      <Table key={review.review_id}>
-                        
-                        <Info>
-                          <p>날짜 : {review.created}</p>
-                        </Info>
-                        <Contents>
-                          내용 : {review.contents}
-                        </Contents>
-                        
-                        <Rate>
-                          평점 : {review.rate}
-                        </Rate>
-=======
 
                       <Review>
                         <Table key={review.review_id}>
->>>>>>> 6be029514b5e0121130f849c1c60d2a810619d8b
                         
                           <Info>
                           날짜 : {moment(review.created).format('MMMM Do YYYY, h:mm:ss a')}
