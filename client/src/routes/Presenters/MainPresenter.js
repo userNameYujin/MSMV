@@ -69,7 +69,7 @@ const BoxOfficeTitle = styled.div`
   // margin-top: 50px;
   font-size: 30px;
   font-weight: 600;
-  font-family: 나눔고딕;
+  font-family: 'Nanum Gothic', sans-serif;
 `;
 
 
@@ -139,9 +139,8 @@ const MainPresenter = ({topTenData, boxOfficeData}) => {
                 <br/>
               </Swiper>   
             </SwipePad>
-
         </SwipeDiv>
-        <SwipeDiv>
+      <SwipeDiv>
         <BoxOfficeTitle>최근 박스오피스 개봉영화</BoxOfficeTitle>
           <hr />
           <SwipePad>
@@ -192,14 +191,14 @@ const MainPresenter = ({topTenData, boxOfficeData}) => {
                         position: 'relative',
                         marginTop: '50px'
                       }}>
-                    <Textbox>
-                      <div style={{ position: 'absolute', maxWidth: '800px', bottom: '9rem', marginLeft: '20rem' }}>
-                        <h2 style={{fontStyle: 'italic', fontSize:'30px', fontWeight: 'bold',color: 'white'}}> 무더운 여름 공기를 시원하게 해줄 공포영화를 원한다면? </h2>
+                    <div>
+                      <div style={{ position: 'absolute', maxWidth: '800px', top: '50%', left: '50%', transform: 'translate( -50%, -50% )' }}>
+                        <h2 style={{fontStyle: 'italic', fontSize:'30px', fontWeight: 'bold',color: 'white'}}> 무더운 여름 공기를 시원하게 해줄<br/> 공포영화를 원한다면? </h2>
                         <br/>
                         <p style={{ color: 'white', fontSize: '1rem' }}> 지금 바로 검색하러가기</p>
                         <SearchButton to="Search"><img src="https://beslow.co.kr/assets/img/arrow-foward.png" width="25px"/></SearchButton>
                       </div>
-                    </Textbox>
+                    </div>
                   </div>
                 </SwiperSlide>
                 <SwiperSlide> 
@@ -217,8 +216,8 @@ const MainPresenter = ({topTenData, boxOfficeData}) => {
                       marginTop: '50px'
                     }}>
                     <div>
-                        <div style={{ position: 'absolute', maxWidth: '800px', bottom: '9rem', marginLeft: '20rem' }}>
-                            <h2 style={{  fontStyle: 'italic', fontSize:'30px', fontWeight: 'bold',color: 'white' }}> 장마를 잠시나마 잊게해줄 힐링영화를 원한다면? </h2>
+                        <div style={{ position: 'absolute', maxWidth: '800px',  top: '50%', left: '50%', transform: 'translate( -50%, -50% )'  }}>
+                            <h2 style={{  fontStyle: 'italic', fontSize:'30px', fontWeight: 'bold',color: 'white' }}> 장마를 잠시나마 잊게해줄<br/>  힐링영화를 원한다면? </h2>
                             <br/>
                             <p style={{ color: 'white', fontSize: '1rem' }}> 지금 바로 검색하러가기</p>
                             <SearchButton to="Search"><img src="https://beslow.co.kr/assets/img/arrow-foward.png" width="25px"/></SearchButton>
@@ -241,8 +240,8 @@ const MainPresenter = ({topTenData, boxOfficeData}) => {
                           marginTop: '50px'
                       }}>
                     <div>
-                      <div style={{ position: 'absolute', maxWidth: '800px', bottom: '9rem', marginLeft: '20rem' }}>
-                        <h2 style={{ fontStyle: 'italic', fontSize:'30px', fontWeight: 'bold', color: 'white' }}> 계속되는 폭염을 시원하게 날려줄 격투영화가 보고싶다면? </h2>
+                      <div style={{ position: 'absolute', maxWidth: '800px', top: '50%', left: '50%', transform: 'translate( -50%, -50% )' }}>
+                        <h2 style={{ fontStyle: 'italic', fontSize:'30px', fontWeight: 'bold', color: 'white' }}> 계속되는 폭염을 시원하게 날려줄<br/>  격투영화가 보고싶다면? </h2>
                         <br/>
                         <p style={{ color: 'white', fontSize: '1rem' }}> 지금 바로 검색하러가기</p>
                         <SearchButton to="Search"><img src="https://beslow.co.kr/assets/img/arrow-foward.png" width="25px"/></SearchButton>
