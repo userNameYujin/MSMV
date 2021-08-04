@@ -12,6 +12,17 @@ import moment from 'moment';
 import { Tab, Tabs } from 'react-bootstrap';
 import {UserOutlined} from '@ant-design/icons';
 
+
+const DetailContainer=styled.div`
+  overflow-y: scroll;
+  overflow-x: hidden;
+  height: 450px;
+  border: 1px #F6F6F6;
+`;
+
+const DetPad=styled.div`
+  padding: 20px;
+`
 const ReviewButton = styled.button`
   font-weight: 600;
   color: white;
@@ -76,7 +87,7 @@ const MovieOutline = styled.div`
 const MovieElement = styled.div`
     font-family: 'Nanum Gothic', sans-serif;
     text-align: justify;
-    padding:10px;
+    padding-top:10px;
     font-size:15px;
 `;
 const GridContainer = styled.div`
@@ -85,6 +96,7 @@ const GridContainer = styled.div`
     white-space: pre-line;
     margin-left:60px;
     margin-right:60px;
+    column-gap: 15px;
 `;
 const MyImage = styled.img`
     margin:auto;
@@ -93,7 +105,7 @@ const MyImage = styled.img`
     width:550px;
 `;
 
-const MyPageLink = styled.div`
+const MyPageLink = styled(Link)`
     font-size:18px;
 `;
 const Font = styled.div`
@@ -107,6 +119,16 @@ const Font = styled.div`
 
 const PeopleWord = styled.div`
   font-size : 13px;
+
+`;
+const TitleWord = styled.div`
+  font-size : 13px;
+  font-weight: 600;
+  
+`;
+
+const NameWord = styled.div`
+  font-size : 11px;
 `;
 
 
@@ -147,7 +169,7 @@ const DetailPresenter = ({movieData, movieReviews, peoples, recommendedMovies, r
             <br/>
             <Tabs defaultActiveKey="home" id="uncontrolled-tab-example" className="mb-3">
               <Tab eventKey="home" title="줄거리">
-                <MovieElement>{movieData.summary}</MovieElement>
+                <DetailContainer><DetPad>{movieData.summary}</DetPad></DetailContainer>
               </Tab>
               <Tab eventKey="profile" title="감독">
                 <PeopleWord>
@@ -163,6 +185,7 @@ const DetailPresenter = ({movieData, movieReviews, peoples, recommendedMovies, r
               <Tab eventKey="contact" title="배우">
                 <PeopleWord>
                 <div label="배우" span={3} contentStyle={{ background: "white" }}>
+                  
                   <Row gutter={[16,16]}>
                     {actor && actor.map((people) => ( 
                     <React.Fragment key={people.index}>
@@ -178,13 +201,21 @@ const DetailPresenter = ({movieData, movieReviews, peoples, recommendedMovies, r
               </Tab>
               <Tab eventKey="recommend" title="추천영화">
                 <div label="추천" span={3} contentStyle={{ background: "white" }}>
+                <DetailContainer><DetPad>
+                <Row gutter={[16,16]}>
                   {recommendedMovies && recommendedMovies.map((movie) => ( 
                     <React.Fragment key={movie.movieCode}>
-                        <Link to={`/Detail?code=${movie.movieCode}`}> <img src={movie.image} alt={movie.title} width="100px"/> </Link>
-                        <p>{movie.title}<br/>
-                        {movie.genre}</p>
+                      <Col lg={6} md={6} xs={12}>
+                        <Link to={`/Detail?code=${movie.movieCode}`}> <img src={movie.image} alt={movie.title} width="100%" height="auto"/> </Link>
+                        
+                        <p><TitleWord>{movie.title}</TitleWord>
+                        <NameWord>{movie.genre}</NameWord></p>
+                        
+                        </Col>
                     </React.Fragment>
                   ))}
+                </Row>
+                </DetPad></DetailContainer>
                 </div>
               </Tab>
             </Tabs>
@@ -278,7 +309,7 @@ const DetailPresenter = ({movieData, movieReviews, peoples, recommendedMovies, r
               </React.Fragment>
             ]}
             avatar={<UserOutlined style={{ fontSize: '250%'}}/>}
-            author={<Tooltip><MyPageLink>{review.nickname}</MyPageLink></Tooltip>}
+            author={<MyPageLink to="/Mypage">{review.nickname}</MyPageLink>}
             content={
               <ComLeft>        
                 <br/>    
