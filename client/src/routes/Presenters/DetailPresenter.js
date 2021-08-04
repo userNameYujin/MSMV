@@ -177,7 +177,8 @@ const DetailPresenter = ({movieData, movieReviews, peoples, recommendedMovies, r
                 <div label="감독" span={3} contentStyle={{ background: "white" }}>
                   {director && director.map((people) => ( 
                     <React.Fragment key={people.peopleName}>
-                        <img style={{width:'90px', height:'auto'}} src={people.peopleImage} alt={people.peopleName}/><br/>{people.peopleName}
+                        <img style={{width:'90px', height:'auto'}} src={people.peopleImage} alt={people.peopleName}/><br/>
+                        <TitleWord>{people.peopleName}</TitleWord>
                         <p>{people.peopleJob}</p>
                     </React.Fragment>
                 ))}</div>
@@ -191,7 +192,8 @@ const DetailPresenter = ({movieData, movieReviews, peoples, recommendedMovies, r
                     {actor && actor.map((people) => ( 
                     <React.Fragment key={people.index}>
                       <Col lg={4} md={6} xs={12}>
-                        <img style={{ width:'100%', height:'auto'}} src={people.peopleImage} alt={people.peopleName}/> {people.peopleName}
+                        <img style={{ width:'100%', height:'auto'}} src={people.peopleImage} alt={people.peopleName}/> 
+                        <TitleWord>{people.peopleName}</TitleWord>
                         <p>{people.peopleJob}</p>
                       </Col>
                     </React.Fragment>
