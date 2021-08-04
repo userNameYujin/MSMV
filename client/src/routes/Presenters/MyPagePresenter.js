@@ -115,12 +115,14 @@ const MyReviewLayout = styled.div`
   padding: 72px 20px 20px 20px;
   height: auto;
   width: 90%;
+  margin-bottom:20px;
 
   font-weight: 600;
   
   /* cursor: pointer; */
   border-radius: 3px;
   border-top: 2px solid gray;
+  border-bottom: 2px solid gray;
   text-decoration: none;
   background: white;
   text-align: left;
@@ -169,12 +171,13 @@ const DeleteLayout = styled.div`
   padding: 100px 20px 20px 20px;
   height: 400px;
   width: 90%;
-  
+  margin-bottom:20px;
   font-weight: 600;
   color: #6B66FF;
   /* cursor: pointer;*/
   border-radius: 3px;
   border-top: 2px solid gray;
+  border-bottom: 2px solid gray;
   text-decoration: none;
   background: white;
   text-align: left;
