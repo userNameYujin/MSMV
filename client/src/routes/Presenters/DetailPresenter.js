@@ -44,6 +44,7 @@ const GrayBackground = styled.div`
     // background: linear-gradient(135deg , ivory, #c5cae9 )
     margin-left:40px;
     margin-right:40px;
+    min-width:1190px;
 `;
 
 const Background = styled.div`
@@ -76,7 +77,7 @@ const MovieOutline = styled.div`
 const MovieElement = styled.div`
     font-family: 'Nanum Gothic', sans-serif;
     text-align: justify;
-    padding:10px;
+    padding-top:10px;
     font-size:15px;
 `;
 const GridContainer = styled.div`

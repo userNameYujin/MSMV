@@ -16,6 +16,7 @@ import '../../App.css';
 
 const MainPage = styled.div`
   background-color: white;
+  min-width:1190px;
 `;
 // origin background-color: #eaeaea;
 
@@ -98,6 +99,10 @@ const SearchButton = styled(Link)`
   &:hover {
       background: lightblue;
   }
+`;
+
+const Textbox = styled.div`
+  text-align:center;
 `;
 
 SwiperCore.use([Navigation, Pagination, Autoplay, Scrollbar])
@@ -187,14 +192,14 @@ const MainPresenter = ({topTenData, boxOfficeData}) => {
                         position: 'relative',
                         marginTop: '50px'
                       }}>
-                    <div>
+                    <Textbox>
                       <div style={{ position: 'absolute', maxWidth: '800px', bottom: '9rem', marginLeft: '20rem' }}>
                         <h2 style={{fontStyle: 'italic', fontSize:'30px', fontWeight: 'bold',color: 'white'}}> 무더운 여름 공기를 시원하게 해줄 공포영화를 원한다면? </h2>
                         <br/>
                         <p style={{ color: 'white', fontSize: '1rem' }}> 지금 바로 검색하러가기</p>
                         <SearchButton to="Search"><img src="https://beslow.co.kr/assets/img/arrow-foward.png" width="25px"/></SearchButton>
                       </div>
-                    </div>
+                    </Textbox>
                   </div>
                 </SwiperSlide>
                 <SwiperSlide> 

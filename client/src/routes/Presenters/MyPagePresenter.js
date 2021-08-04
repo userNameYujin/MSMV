@@ -12,6 +12,7 @@ const Wrapper = styled.div`
   padding-top: 20px;
   padding-left: 10px;
   font-family: 'Nanum Gothic', sans-serif;
+  min-width:1190px;
   // background: linear-gradient(135deg , #eaeaea, #c5cae9 )
 `;
 
