@@ -55,6 +55,7 @@ const GrayBackground = styled.div`
     // background: linear-gradient(135deg , ivory, #c5cae9 )
     margin-left:40px;
     margin-right:40px;
+    min-width:1190px;
 `;
 
 const Background = styled.div`

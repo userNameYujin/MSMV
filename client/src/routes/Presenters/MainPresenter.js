@@ -101,6 +101,10 @@ const SearchButton = styled(Link)`
   }
 `;
 
+const Textbox = styled.div`
+  text-align:center;
+`;
+
 SwiperCore.use([Navigation, Pagination, Autoplay, Scrollbar])
 
 const MainPresenter = ({topTenData, boxOfficeData}) => {
@@ -135,9 +139,8 @@ const MainPresenter = ({topTenData, boxOfficeData}) => {
                 <br/>
               </Swiper>   
             </SwipePad>
-
         </SwipeDiv>
-        <SwipeDiv>
+      <SwipeDiv>
         <BoxOfficeTitle>최근 박스오피스 개봉영화</BoxOfficeTitle>
           <hr />
           <SwipePad>
@@ -153,7 +156,7 @@ const MainPresenter = ({topTenData, boxOfficeData}) => {
               {boxOfficeData && boxOfficeData.map((movie) => ( 
                   <SwiperSlide key={movie.movieCd}>
                     <Link to={`/Detail?code=${movie.movieCd}`}>
-                      <img style={{ width:'100%', height:'250px'}} src={movie.image} alt={movie.name}></img>
+                      <img style={{ width:'auto', height:'100%'}} src={movie.image} alt={movie.name}></img>
                     </Link>
                   </SwiperSlide>
               ))}
