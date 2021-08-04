@@ -5,7 +5,7 @@ const bcrypt = require('bcrypt');
 const { next } = require('cheerio/lib/api/traversing');
 
 //닉네임변경
-router.post('/nickModify/:id', async(req, res, next) => {
+router.patch('/nickname/:id', async(req, res, next) => {
   console.log(req.body.nickname);
   await db.query('SELECT id FROM users where nickname = ?', [req.body.nickname], function(error, result){
     if (error){
@@ -27,7 +27,7 @@ router.post('/nickModify/:id', async(req, res, next) => {
 })
 
 
-router.post('/passwordModify', async (req, res, next) => {
+router.patch('/password', async (req, res, next) => {
   const old_pw = req.body.oldPassword;
   const new_pw = req.body.newPassword;
 
@@ -103,10 +103,8 @@ router.post('/withdraw', async(req, res, next) => {
   })
 })
 
-router.post('/myReview', async function(req, res, err){
-  const user_id = req.body.user_id;
-  console.log(req.body.user_id);
-  await db.query('select review.id as review_id, contents, created, updated, commenter, rate, movieCd from review left join users on user_id = review.commenter where review.commenter = ?;', [req.body.user_id], function(err, review){
+router.get('/myReview/:user_id', async function(req, res, err){
+  await db.query('select review.id as review_id, contents, created, updated, commenter, rate, movieCd, movieTitle from review left join users on user_id = review.commenter where review.commenter = ?;', [req.params.user_id], function(err, review){
     if(err){
       next(err);
     }

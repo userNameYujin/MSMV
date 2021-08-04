@@ -6,5 +6,6 @@ updated timestamp default NOW(),
 commenter int(11) NOT NULL,
 rate float(2,1),
 movieCd int(20) NOT NULL,
+movieTitle varchar(100),
 primary key(id),
 foreign key(commenter) references users(id));
