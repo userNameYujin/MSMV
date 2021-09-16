@@ -115,8 +115,6 @@ const MyReviewLayout = styled.div`
   padding: 72px 20px 20px 20px;
   height: auto;
   width: 90%;
-  margin-bottom:20px;
-
   font-weight: 600;
   
   /* cursor: pointer; */
@@ -270,8 +268,6 @@ const Pointword = styled.div`
   font-size:18px;
   font-weight:bold;
 `;
-
-
 
 const MyPagePresenter = ({takeNewNickname, submitNewNickname, takeOldPassword, takeNewPassword, submitNewPassword, takeWithdrawPassword, submitWithdraw, myReviews}) => {
   const user = store.getState().user;
